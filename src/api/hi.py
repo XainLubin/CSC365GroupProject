@@ -12,4 +12,3 @@ router = APIRouter(
 @router.post("/")
 def hello():
     return {"message": "Hello, World!"}
-

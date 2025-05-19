@@ -41,7 +41,6 @@ app.include_router(courses.router)
 app.include_router(majors.router)
 app.include_router(planner.router)
 
-
 @app.get("/")
 async def root():
     return {"message": "Welcome to Course Finder!"}

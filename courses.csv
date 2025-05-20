@@ -1,0 +1,234 @@
+department_code,course_number,title,units,term,GE_area,GWR,USCP,prerequisite,corequisite,crosslisted,notes
+AERO,310,Air and Space,4,"F,W,SP,SU",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B1)>=4) && ((B4)>=4),None,None,Note: Junior standing
+AG,315,Principles of Organic Crop Production,4,TBD,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B1)>=4) && ((B2)>=4) && ((B4)>=8),None,None,Note: Junior standing; Sustainability Focused
+ANT,201,Cultural Anthropology,4,"F, W, SP",13,FALSE,FALSE,None,None,None,
+ANT,250,Biological Anthropology,4,"F, W",5,FALSE,FALSE,None,None,None,
+ANT,330,Indigenous South Americans,4,TBD,14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((units >= 8) && (GE_area_id == 12 || GE_area_id == 13)),None,None,Note: Junior standing
+ARCE,260,History of Structures,4,"W, SU",8,FALSE,FALSE,None,None,None,
+ARCE,360,Equilibrium Without Statics,4,"F, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4),None,None,Note: Junior standing.
+ARCH,201,Architecture Design Studio for Non-Majors,4,"F, W, SP",8,FALSE,FALSE,None,None,None,
+ART,101,Fundamentals of Drawing,4,"F, W, SP",8,FALSE,FALSE,None,None,None,
+ART,182,Foundation in Digital Art I,4,F,0,FALSE,FALSE,None,None,None,
+ART,183,Foundation in Digital Art II,4,"F, SP",0,FALSE,FALSE,None,None,None,
+ART,376,The Art of Mixed Reality,4,W,0,FALSE,FALSE,CSC 123,None,None,
+ART,384,Digital 3D Modeling and Design,4,W,0,FALSE,FALSE,None,None,None,
+ART,388,Interaction Design II,4,F,0,FALSE,FALSE,ART 182,None,None,
+ASCI,112,Principles of Animal Science,4,"F, W, SP",5,FALSE,FALSE,None,None,None,Note: Sustainability Related; Sustainability Related
+BIO,111,General Biology,4,"F,W,SP,SU",5,FALSE,FALSE,None,None,BIO 161,
+BIO,114,Plant Diversity and Ecology,4,"W, SP",5,FALSE,FALSE,None,None,None,
+BIO,123,Biology of Sex,4,W,5,FALSE,FALSE,None,None,None,
+BIO,150,Diversity and History of Life,4,"F, W",5,FALSE,FALSE,None,None,None,
+BIO,161,Introduction to Cell and Molecular Biology,4,"F,W,SP,SU",5,FALSE,FALSE,CHEM 124,None,None,
+BIO,213,Life Science for Engineers,2,"F, W, SP",5,FALSE,FALSE,None,CHEM 124.,None,
+BIO,222,Biodiversity of California,4,"F, W, SP",5,FALSE,FALSE,(A1)>=4 && (A2)>=4 && (A3)>=4.,None,None,
+BIO,227,Wildlife Conservation Biology,4,"F, W, SP",5,FALSE,FALSE,(A2)>=4.,None,None,Note: Sustainability Focused; Sustainability Focused
+BIO,302,Human Genetics,4,"F, W, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && (ASCI 112 || BIO 111 || BIO 123 || BIO 161 || BIO 213 || BOT 121) && (STAT 312 || STAT 350),None,None,Note: Junior standing
+BIO,305,Biology of Cancer,4,F,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && (BIO>=4) && ((B4)>=8),None,None,Note: Junior standing
+BIO,308,Genetic Engineering Technology,4,W,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B1)>=4 && (B2)>=4 && (B4)>=8) && (CHEM 124),None,CHEM 308,Note: Junior standing
+BRAE,340,Irrigation Water Management,4,"F, W, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4),None,None,Note: Sustainability Focused; Sustainability Focused
+BRAE,348,Energy for a Sustainable Society,4,"F, W, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4),None,None,Note: Junior standing; Sustainability Focused; Sustainability Focused
+BRAE,349,Water for a Sustainable Society,4,"F, W, SP",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((units >= 8) && (GE_area_id == 12 || GE_area_id == 13)).,None,None,Note: Junior standing; Course offered online only.
+BOT,121,General Botany,4,"F, W, SP",5,FALSE,FALSE,None,None,None,
+BOT,311,"Plants, People and Civilization",4,F,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && (BIO 114 || BIO 150 || BOT 121),None,None,Note: Sustainability Focused; Junior standing; Sustainability Focused
+BUS,204,Financial Literacy,4,"F, W, SP",6,FALSE,FALSE,None,None,None,
+BUS,311,Managing Technology in the International Legal Environment,4,"W, SP",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((D1)>=4) && ((D2)>=4),None,None,
+CHEM,110,World of Chemistry,4,"F,W,SP,SU",4,FALSE,FALSE,None,None,"CHEM 111, CHEM 124, CHEM 127",
+CHEM,124,General Chemistry for Physical Science and Engineering I,4,"F,W,SP,SU",4,FALSE,FALSE,None,None,"CHEM 110, CHEM 127",
+CHEM,125,General Chemistry for Physical Science and Engineering II,4,"F, W, SP",4,FALSE,FALSE,CHEM 124,None,CHEM 128,
+CHEM,126,General Chemistry for Physical Science and Engineering III,4,SP,0,FALSE,FALSE,CHEM 125,None,CHEM 129,
+CHEM,308,Genetic Engineering Technology,4,W,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B1)>=4 && (B2)>=4 && (B4)>=8) && ((B4)>=4) && (CHEM 124),None,BIO 308,Note: Junior standing
+CHEM,349,Chemical and Biological Warfare,4,"F, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && (CHEM && B1) && (BIO && B2) && ((B4)>=8),None,None,Note: Junior standing
+CM,317,Sustainability and the Built Environment,4,"F,W,SP,SU",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4),None,None,Note: Junior standing; Sustainability Focused; Sustainability Focused
+CM,318,Housing and Communities,4,"F,W,SP,SU",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((GE_area_id == 12 || GE_area_id == 13)),None,None,Note: Junior standing; Sustainability Related; Sustainability Related
+COMS,101,Public Speaking,4,"F,W,SP,SU",1,FALSE,FALSE,None,None,None,
+COMS,126,Argument and Advocacy,4,"W, SP",3,FALSE,FALSE,((A2)>=4) && ((A1)>=4),None,None,
+COMS,208,"Performance, Literature, and Culture",4,"F, W, SP",8,FALSE,FALSE,((A1)>=4) && ((A2)>=4),None,None,
+COMS,211,Interpersonal Communication,4,"F, W, SP",15,FALSE,FALSE,((A1)>=4) && ((A2)>=4),None,None,
+COMS,308,Group Performance of Literature,4,W,11,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((C1)>=4),None,None,Note: Junior standing
+COMS,316,Intercultural Communication,4,"F,W,SP,SU",14,FALSE,TRUE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((GE_area_id == 12 || GE_area_id == 13)),None,None,Note: Junior standing
+COMS,404,Video Games & Society,4,SP,0,FALSE,FALSE,(A1)>=4 && (A2)>=4 && (A3)>=4,,,Note: Junior standing
+CPE,100,Computer Engineering Orientation,1,F,0,FALSE,FALSE,None,None,None,
+CPE,101,Fundamentals of Computer Science,4,"F, W, SP",0,FALSE,FALSE,None,None,None,
+CPE,123,Introduction to Computing (Crosslisted as CSC 123),4,"F, W",0,FALSE,FALSE,None,None,None,
+CPE,133,Digital Design,4,"F, W, SP, SU",0,FALSE,FALSE,CPE 100 && (CPE 101 || CSC 101),None,None,
+CPE,200,Special Problems for Undergraduates,2,"F, W, SP, SU",0,FALSE,FALSE,None,None,None,"Note: Consent of instructor; Note: Total credit limited to 4 units, with a maximum of 2 units per quarter."
+CPE,202,Data Structures,4,"F, W, SP",0,FALSE,FALSE,CPE 101 || CSC 101,None,CSC 202,
+CPE,203,Project-Based Object-Oriented Programming and Design,4,"F, W, SP",0,FALSE,FALSE,CPE 202 || CSC 202,None,CSC 203,
+CPE,225,Introduction to Computer Organization,4,"F, W, SP",0,FALSE,FALSE,CPE 202 || CSC 202,None,CSC 225,
+CPE,233,Computer Design and Assembly Language Programming,4,"F, W, SP",0,FALSE,FALSE,CPE 133,None,None,
+CPE,290,Selected Topics,4,TBD,0,FALSE,FALSE,None,None,None,Note: Open to undergraduate students and consent of instructor; Total credit limited to 8 units.
+CPE,315,Computer Architecture,4,"F, W, SP",0,FALSE,FALSE,((CPE 202 || CSC 202) && (CPE 203 || CSC 203)) && (CSC 225 || CPE 233 || EE 233),None,None,
+CPE,316,Microcontrollers and Embedded Applications,4,"F, W, SP",0,FALSE,FALSE,CPE 357 || CSC 357,EE 215,None,
+CPE,321,Introduction to Computer Security (Crosslisted as CSC 321),4,"F, W",0,FALSE,FALSE,CPE 357 || CSC 357,None,CSC 321,
+CPE,327,Digital Signals and Systems,4,"F, W",0,FALSE,FALSE,EE 215 && MATH 244,CPE 367,EE 327,
+CPE,336,Microprocessor System Design,4,"F, SP",0,FALSE,FALSE,CPE 233 || EE 233,None,"EE 336, CPE 316",
+CPE,345,Quantum Computing (Crosslisted PHYS 345),4,SP,0,FALSE,FALSE,MATH 244 && PHYS 211,None,None,
+CPE,350,Capstone I,4,F,0,FALSE,FALSE,CPE 316,None,None,
+CPE,357,Systems Programming,4,"F, W, SP",0,FALSE,FALSE,((CSC 202 || CPE 202) && (CSC 203 || CPE 203)) && (CSC 225 || CPE 233 || EE 233),None,CSC 357,Course may be offered in classroom-based or online format.
+CPE,367,Digital Signals and Systems Laboratory,4,"F, W",0,FALSE,FALSE,EE 245,CPE 327,None,
+CPE,400,Special Problems for Undergraduates,2,"F, W, SP, SU",0,FALSE,FALSE,None,None,None,
+CPE,414,Robotic Systems Integration,4,TBD,0,FALSE,FALSE,CPE 357 || CSC 357,None,EE 414,
+CPE,416,Autonomous Mobile Robotics,4,TBD,0,FALSE,FALSE,(CPE 316) || (CPE 315 && (CPE 357 || CSC 357)),None,None,
+CPE,419,Applied Parallel Computing,4,"F, SP",0,FALSE,FALSE,CPE 357 || CSC 357,(CSC 248 || CSC 348) && CSC 315,None,
+CPE,422,Network Security (Crosslisted as CSC 422),4,"F, W, SP",0,FALSE,FALSE,CSC 364 || CPE 464,None,CSC 422,
+CPE,425,Wireless Security,4,TBD,0,FALSE,FALSE,(CPE 321 || CSC 321) && (CSC 300 || PHIL 323) && (CSC 364 || CPE 464),None,CSC 425,
+CPE,426,Introduction to Hardware Security,4,SP,0,FALSE,FALSE,CPE 315 || && CPE 233,None,None,
+CPE,428,Computer Vision (Crosslisted EE 428),4,"F, W",0,FALSE,FALSE,CPE 327 || CPE 357 || CSC 357,None,EE 428,
+CPE,431,Compiler Construction,4,"F, W, SP",0,FALSE,FALSE,CSC 430,None,CSC 431,
+CPE,439,Introduction to Real-Time Operating Systems,4,TBD,0,FALSE,FALSE,CPE 316,None,EE 439,
+CPE,442,Real Time Embedded Systems (Crosslisted EE 442),4,F,0,FALSE,FALSE,CPE 336 || EE 336 || CPE 316,None,EE 442,
+CPE,446,Design of Fault-Tolerant Digital Systems,4,F,0,FALSE,FALSE,(CPE 336 || EE 336 || CPE 316) && STAT 350,None,EE 446,
+CPE,447,"Stringed Musical Instrument Acoustics, Mechanics, and Transducer Design",4,TBD,0,FALSE,FALSE,EE 336 || CPE 336 || CPE 316,None,EE 447,
+CPE,450,Capstone II,3,W,0,FALSE,FALSE,CPE 350,None,None,
+CPE,453,Introduction to Operating Systems (Crosslisted as CSC 453),4,"F, W, SP",0,FALSE,FALSE,(CPE 357 || CSC 357) && (CSC 225 || CPE 233 || EE 233),None,CSC 453,
+CPE,454,Implementation of Operating Systems,4,TBD,0,FALSE,FALSE,CSC 453 || CPE 453,None,CSC 454,
+CPE,458,Current Topics in Computer Systems,4,TBD,0,FALSE,FALSE,CSC 357 || CPE 357,None,CSC 458,Total credit limited to 8 units.
+CPE,461,Senior Project I,2,"F, W, SP, SU",0,FALSE,FALSE,CPE 350,None,None,
+CPE,462,Senior Project II,2,"F, W, SP, SU",0,FALSE,FALSE,CPE 450,None,None,
+CPE,464,Introduction to Computer Networks,4,"F, W, SP",0,FALSE,FALSE,(CPE 357 || CSC 357) && (STAT 312 || STAT 350),None,None,
+CPE,465,Advanced Computer Networks,4,TBD,0,FALSE,FALSE,(CPE 453 || CSC 453) && (CSC 364 || CPE 464),None,None,
+CPE,469,Distributed Systems,4,SP,0,FALSE,FALSE,CPE 357 || CSC 357,None,CSC 469,
+CPE,470,Selected Advanced Topics,1-4,TBD,0,FALSE,FALSE,None,None,None,Total credit limited to 8 units.
+CPE,471,Introduction to Computer Graphics,4,"F, W, SP",0,FALSE,FALSE,CPE 357 || CSC 357,None,CSC 471,
+CPE,472,Digital Control Systems Laboratory,1,F,0,FALSE,FALSE,None,None,EE 472,
+CPE,476,Real-Time 3D Computer Graphics Software,4,TBD,0,FALSE,FALSE,CSC 471 || CPE 471,None,CSC 476,
+CPE,479,Selected Advanced Laboratory,1-4,TBD,0,FALSE,FALSE,None,None,None,Note: Consent of instructor; Total credit limited to 8 units.
+CPE,493,Cooperative Education Experience,2,"F, W, SP, SU",0,FALSE,FALSE,None,None,None,Note: Sophomore standing and consent of instructor; Credit/No Credit grading only; No major credit allowed; Total credit limited to 6 units.
+CPE,494,Cooperative Education Experience,6,"F, W, SP, SU",0,FALSE,FALSE,None,None,None,Note: Sophomore standing and consent of instructor; Credit/No Credit grading only; No major credit allowed; Total credit limited to 18 units.
+CPE,495,Cooperative Education Experience,12,"F, W, SP, SU",0,FALSE,FALSE,None,None,None,Note: Sophomore standing and consent of instructor; Credit/No Credit grading only; No major credit allowed; Total credit limited to 24 units.
+CRP,215,Planning for and with Multiple Publics,4,SP,0,FALSE,TRUE,((D1)>=4) && ES 112,None,None,
+CSC,101,Fundamentals of Computer Science,4,"F, W, SP",0,FALSE,FALSE,,None,None,
+CSC,123,Introduction to Computing,4,"F, W",0,FALSE,FALSE,None,None,CPE 123,
+CSC,202,Data Structures,4,"F, W, SP",0,FALSE,FALSE,CPE 101 || CSC 101.,None,CPE 202,
+CSC,203,Project-Based Object-Oriented Programming and Design,4,"F, W, SP",0,FALSE,FALSE,CPE 202 || CSC 202,None,"CPE 203, CSC 123, CPE 123",
+CSC,225,Introduction to Computer Organization,4,"F, W, SP",0,FALSE,FALSE,CPE 202 || CSC 202.,None,CPE 225,
+CSC,248,Discrete Structures,4,"F, W, SP",0,FALSE,FALSE,(CSC 202 || CPE 202) && (CSC 203 || CPE 203),None,None,
+CSC,300,Professional Responsibilities,4,TBD,0,FALSE,FALSE,((A3)>=4) && (CSC 357 || CPE 357),None,None,Note: Junior standing.
+CSC,305,Individual Software Design and Development,4,"F, W, SP",0,FALSE,FALSE,CSC 203 || CPE 203.,None,None,
+CSC,307,Introduction to Software Engineering,4,"F, W, SP",0,FALSE,FALSE,(CSC 248 || CSC 348) && (CPE 357 || CSC 357),None,None,
+CSC,308,Software Engineering I,4,"F, W, SP",0,FALSE,FALSE,CSC 248 || CSC 348.,None,CSC 307,
+CSC,309,Software Engineering II,4,"F, W, SP",0,FALSE,FALSE,CSC 308 && (CSC 357 || CPE 357),None,None,
+CSC,313,Teaching Computing,4,"F, W, SP",0,FALSE,FALSE,CPE 202 || CSC 202 || CSC 314.,None,None,
+CSC,321,Introduction to Computer Security,4,"F, W, SP",0,FALSE,FALSE,CPE 357 || CSC 357.,None,CPE 321,
+CSC,323,Cryptography Engineering,4,"F, W, SP",0,FALSE,FALSE,CPE 357 || CSC 357.,None,None,
+CSC,325,Introduction to Privacy: Policy and Technology,4,"F, W, SP",0,FALSE,FALSE,((A3)>=4) && (CPE 203 || CSC 203) && (CSC 300 || PHIL 323),None,None,
+CSC,344,Music Programming,4,"F, W, SP",0,FALSE,FALSE,(CSC 248 || CSC 348) && (CPE 357 || CSC 357),None,None,
+CSC,349,Design and Analysis of Algorithms,4,"F, W, SP",0,FALSE,FALSE,((CPE 102 || CSC 102) && (CPE 103 || CSC 103)) || ((CPE 202 || CSC 202) && (CPE 203 || CSC 203)) && MATH 142 && (CSC 248 || CSC 348 || MATH 248),None,None,
+CSC,350,Computing for Interactive Arts Capstone I,2,"F, W, SP",0,FALSE,FALSE, && ((CSC 103 || CPE 103) || (CSC 202 || CPE 202)),None,None,Note: Junior standing.
+CSC,357,Systems Programming,4,"F, W, SP",0,FALSE,FALSE,((CPE 102 || CSC 102) && (CPE 103 || CSC 103)) || ((CPE 202 || CSC 202) && (CPE 203 || CSC 203)) && (CSC 225 || CPE 233 || EE 233),None,CPE 357,
+CSC,364,"Introduction to Networked, Distributed, and Parallel Computing",4,"F, W, SP",0,FALSE,FALSE,CPE 203 || CSC 203.,None,None,
+CSC,365,Introduction to Database Systems,4,"F, W, SP",0,FALSE,FALSE,(CSC 248 || CSC 348) || ((CPE 102 || CSC 102) && (CPE 103 || CSC 103) && MATH 248) || ((CPE 202 || CSC 202) && (CPE 203 || CSC 203) && MATH 248).,None,None,
+CSC,366,"Database Modeling, Design and Implementation",4,"F, W, SP",0,FALSE,FALSE,CSC 365.,None,None,
+CSC,371,Game Design,4,"F, W, SP",0,FALSE,FALSE,((CPE 102 || CSC 102) && (CPE 103 || CSC 103)); or (CPE 202 || CSC 202),None,None,
+CSC,377,Introduction to Mixed Reality,4,"F, W, SP",0,FALSE,FALSE,(CPE 202 || CSC 202) && ART 376,None,None,
+CSC,378,Interactive Entertainment Engineering,4,"F, W, SP",0,FALSE,FALSE,((CPE 102 || CSC 102) && (CPE 103 || CSC 103)); or (CPE 202 || CSC 202),None,None,
+CSC,402,Software Requirements Engineering,4,F,0,FALSE,FALSE,CSC 307 or CSC 309,None,None,
+CSC,405,Software Construction,4,W,0,FALSE,FALSE,CSC 305 and CSC 402,None,None,
+CSC,406,Senior Project - Software Deployment,4,SP,0,FALSE,FALSE,CSC 405,None,None,
+CSC,421,Binary Exploitation: Tools and Techniques,4,W,0,FALSE,FALSE,CSC 321 && (CSC 300 || PHIL 323),None,None,
+CSC,422,Network Security,4,SP,0,FALSE,FALSE,CSC 364 || CPE 464.,None,CPE 422,
+CSC,424,Software Security,4,"F, W, SP",0,FALSE,FALSE,(CSC 307 || CSC 309) && (CPE 321 || CSC 321),None,None,
+CSC,425,Wireless Security,4,"F, W, SP",0,FALSE,FALSE,(CPE 321 || CSC 321) && (CSC 300 || PHIL 323) && (CSC 364 || CPE 464),None,CPE 425,
+CSC,429,Current Topics in Computer Security,4,"F, W, SP",0,FALSE,FALSE,(CPE 321 || CSC 321) && (CPE 357 || CSC 357),None,None,Note: Total credit limited to 8 units
+CSC,430,Programming Languages,4,"F, W, SP",0,FALSE,FALSE,CSC 349,None,None,
+CSC,436,Mobile Application Development,4,"F, W, SP",0,FALSE,FALSE,CSC 357 || CPE 357.,None,None,
+CSC,437,Dynamic Web Development,4,"F, W, SP",0,FALSE,FALSE,CPE 203 || CSC 203.,None,None,
+CSC,445,Theory of Computation I,4,"F, W, SP",0,FALSE,FALSE,CSC 248 || CSC 348.,None,None,
+CSC,453,Introduction to Operating Systems,4,"F, W, SP",0,FALSE,FALSE,(CSC 357 || CPE 357) && (CSC 225 || CPE 233 || EE 233),None,CPE 453,
+CSC,466,Knowledge Discovery from Data,4,"F, W, SP",0,FALSE,FALSE,CSC 349 && (STAT 252 || STAT 302 || STAT 312 || STAT 321 || STAT 350),None,None,
+CSC,468,Database Management Systems Implementation,4,"F, W, SP",0,FALSE,FALSE,CSC 365,None,None,
+CSC,469,Distributed Systems,4,"F, W, SP",0,FALSE,FALSE,CSC 357 || CPE 357.,None,CPE 469,
+CSC,471,Introduction to Computer Graphics,4,"F, W, SP",0,FALSE,FALSE,CPE 357 || CSC 357.,None,CPE 471,
+CSC,473,Advanced Rendering Techniques,4,"F, W, SP",0,FALSE,FALSE,CSC 471 || CPE 471,None,None,
+CSC,474,Computer Animation,4,"F, W, SP",0,FALSE,FALSE,CSC 471 || CPE 471,None,None,
+CSC,476,Real-Time 3D Computer Graphics Software,4,"F, W, SP",0,FALSE,FALSE,CSC 471 || CPE 471,None,CPE 476,
+CSC,480,Artificial Intelligence,4,"F, W, SP",0,FALSE,FALSE,((CSC 102 || CPE 102) && (CSC 103 || CPE 103)) || (CSC 202 || CPE 202),None,None,
+CSC,481,Knowledge Based Systems,4,"F, W, SP",0,FALSE,FALSE,CSC 480.,None,None,
+CSC,482,Speech and Language Processing,4,"F, W, SP",0,FALSE,FALSE,CSC 349 && (CSC 466 || CSC 480),None,None,
+CSC,484,User-Centered Interface Design and Development,4,"F, W, SP",0,FALSE,FALSE,CSC 307 || CSC 308,None,None,
+CSC,487,Deep Learning,4,"F, W, SP",0,FALSE,FALSE,CSC 349 && (MATH 244) && (CSC 466 || CSC 480),None,None,
+CSC,490,Selected Advanced Topics,4,"F, W, SP",0,FALSE,FALSE,None,None,None,Note: Consent of instructor.; Note: Total credit limited to 8 units
+CSC,491,Senior Project I,2,"F, W, SP",0,FALSE,FALSE,CSC 307 || CSC 309,None,None,Note: Consent of instructor.
+CSC,492,Senior Project II,2,"F, W, SP",0,FALSE,FALSE,CSC 491,None,None,Note: Consent of instructor.
+CSC,497,Research Senior Project I,2,"F, W, SP",0,FALSE,FALSE,CSC 307 || CSC 309,None,None,Note: Consent of instructor.
+CSC,498,Research Senior Project II,2,"F, W, SP",0,FALSE,FALSE,CSC 497,None,None,Note: Consent of instructor.
+DANC,210,Active Wellness,4,TBD,15,FALSE,FALSE,None,None,None,
+DANC,221,Dance Appreciation,4,SP,8,FALSE,FALSE,None,None,None,Course may be offered in classroom-based or online format.
+DANC,321,Cultural Influence on Dance in America,4,TBD,11,FALSE,TRUE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((C1)>=4),None,None,Note: Junior standing
+DATA,100,Data Science for All I,4,"F, W, SP",6,FALSE,FALSE,,None,None,
+DSCI,229,General Dairy Manufacturing,4,"F, W, SP",5,FALSE,FALSE,None,None,None,
+ECON,201,Survey of Economics,4,"F, W, SP",13,FALSE,FALSE,None,None,None,
+ECON,222,Macroeconomics,4,"F, W, SP",13,FALSE,FALSE,None,None,None,
+ECON,303,"Economics of Poverty, Discrimination and Immigration",4,"F, W, SP, SU",14,FALSE,TRUE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && (ECON 201 || ECON 222),None,None,Note: Junior standing
+ECON,304,Comparative Economic Systems,4,"F, W, SP",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && (ECON 201 || ECON 222),None,None,Note: Junior standing
+EDES,123,Principles of Environmental Design,4,"F, W, SP",15,FALSE,FALSE,None,None,None,Note: Sustainability Related
+EE,115,Electrical and Electronic Circuits I,3,"F, W",0,FALSE,FALSE,,CHEM 124 && (PHYS 133 || PHYS 143) && EE 145,None,
+EE,133,Digital Design,4,"F, W, SP, SU",0,FALSE,FALSE,(EE 111 && EE 151) || (CPE 100 && (CPE 101 || CSC 101)),None,CPE 133,
+EE,145,Electrical and Electronic Circuits I Laboratory,1,"F, W",0,FALSE,FALSE,None,EE 115,None,
+EE,215,Electrical and Electronic Circuits II,3,"F, W, SP",0,FALSE,FALSE,EE 115,EE 245,None,
+EE,233,Computer Design and Assembly Language Programming,4,"F, W, SP",0,FALSE,FALSE,CPE 133 ,None,CPE 233,
+EE,245,Electrical and Electronic Circuits II Laboratory,1,"F, W, SP",0,FALSE,FALSE,None,EE 215,None,
+EE,327,Digital Signals and Systems,3,"F, W",0,FALSE,FALSE,(EE 212 || EE 215) && MATH 244,CPE 367,CPE 327,
+EE,336,Microprocessor System Design,4,TBD,0,FALSE,FALSE,CPE 233 || EE 233.,None,CPE 336,
+EE,367,Digital Signals and Systems Laboratory,1,"F, W",0,FALSE,FALSE,EE 245,CPE 327,CPE 367,
+EE,414,Robotic Systems Integration,4,W,0,FALSE,FALSE,CPE 357 || CSC 357,None,CPE 414,
+EE,428,Computer Vision,4,"F, W",0,FALSE,FALSE,CPE 327 || CPE 357 || CSC 357,None,CPE 428,
+EE,431,Computer-Aided Design of VLSI Devices,4,F,0,FALSE,FALSE,EE 307 && EE 347 && EE 308 && EE 348,None,CPE 441,
+EE,439,Introduction to Real-Time Operating Systems,4,TBD,0,FALSE,FALSE,CPE 316.,None,CPE 439,
+EE,442,Real Time Embedded Systems,4,F,0,FALSE,FALSE,CPE 336 || EE 336 || CPE 316,None,CPE 442,
+EE,446,Design of Fault-Tolerant Digital Systems,4,F,0,FALSE,FALSE,(CPE 336 || EE 336 || CPE 316) && STAT 350,None,CPE 446,
+EE,447,"Stringed Musical Instrument Acoustics, Mechanics, and Transducer Design",4,W,0,FALSE,FALSE,CPE 336 || EE 336 || CPE 316,None,CPE 447,
+EE,472,Digital Control Systems Laboratory,1,F,0,FALSE,FALSE,None,None,CPE 472,
+ENGL,133,Multilingual Writing and Rhetoric,4,"F, W, SP",2,FALSE,FALSE,,,,
+ENGL,134,Writing and Rhetoric,4,"F, W, SP",2,FALSE,FALSE,,,,
+ES,112,"Race, Culture, and Politics in the United States",4,"F, W, SP, SU",12,FALSE,TRUE,None,None,None,
+ES,134,Writing & Rhetoric,4,F,2,FALSE,FALSE,None,None,None,
+ES,145,"Reasoning, Argumentation, & Writing",4,TBD,3,FALSE,FALSE,((A2)>=4) && ((A1)>=4),None,None,
+ES,252,Global Origins of Race in the U.S.,4,"F, W, SP",16,FALSE,FALSE,None,None,None,
+ES,308,Fire and Society,4,"F, W, SP",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((GE_area_id == 12 || GE_area_id == 13)),None,None,Note: Junior standing
+ES,324,Chicana/o Film,4,SP,11,FALSE,TRUE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((GE_area_id == 8 || GE_area_id == 9 || GE_area_id == 10)),None,None,Note: Junior standing.
+ES,350,"Gender, Race, Culture, Science & Technology",4,"F, W, SP",7,FALSE,TRUE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B2)>=4) && ((B4)>=4) && STAT 312,None,None,Note: Junior standing
+FSN,250,Food and Nutrition: Culture and Customs,4,"F, W, SP, SU",15,FALSE,TRUE,None,None,None,Note: Sustainability Related
+FSN,305,Nutrition & Exercise for Health & Disease Prevention,4,"F, W, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4),None,None,Note: Junior standing
+GEOG,150,Human Geography,4,"F, W, SP",13,FALSE,FALSE,None,None,None,Note: Sustainability Related
+GEOG,308,Global Geography,4,"F, W, SP",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((D1)>=4),None,None,Note: Junior standing
+GEOL,203,The Geologic Record: Fossils and the History of Life,4,W,4,FALSE,FALSE,None,None,None,
+GEOL,305,Seismology and Earth Structure,4,SP,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && PHYS 142 && (MATH 242 || MATH 244)),None,None,Note: Junior standing
+HIST,201,United States History to 1865,4,"F, W, SP",12,FALSE,TRUE,None,None,None,
+HIST,210,World History to 1800,4,"F, W, SP",13,FALSE,FALSE,None,None,None,
+HIST,350,"The Scientific Revolution, c. 1500-1800",4,SP,14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((GE_area_id == 12 || GE_area_id == 13)) && ((B1)>=4 || (B2)>=4 || B4>=4 || (Upper-Div GE Area B)>=4),None,None,Note: Junior standing or History major
+HLTH,260,Women's Health Issues,4,"F, W, SP",15,FALSE,TRUE,None,None,None,
+IME,320,Human Factors and Technology,4,W,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && (STAT 312),None,None,Note: Junior standing
+ISLA,123,Introduction to Arts and Humanities,4,"F, W, SP",8,FALSE,FALSE,None,None,None,Note: Sustainability Focused
+ISLA,320,"Topics in Values, Media, and Culture",4,"F, W",11,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((C2)>=4),None,None,Note: Junior standing
+ISLA,350,The Global Environment,4,"F, W, SP",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((D1)>=4),None,None,Note: Junior standing; Sustainability Focused
+KINE,323,Sport and Gender,4,"F, W, SP",14,FALSE,TRUE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((GE_area_id == 12 || GE_area_id == 13)),None,None,Note: Junior standing
+MATH,141,Calculus I,4,"F,W,SP,SU",6,FALSE,FALSE,None,None,None,
+MATH,142,Calculus II,4,"F,W,SP,SU",6,FALSE,FALSE,MATH 141,None,None,
+MATH,143,Calculus III,4,"F,W,SP,SU",6,FALSE,FALSE,MATH 142,None,None,
+MATH,241,Calculus IV,4,"F,W,SP,SU",0,FALSE,FALSE,MATH 143,None,None,
+MATH,242,Differential Equations I,4,"W, SP",0,FALSE,FALSE,MATH 241,None,None,
+MATH,244,Linear Analysis I,4,"F,W,SP,SU",0,FALSE,FALSE,MATH 143,None,MATH 242,
+MATH,248,Methods of Proof in Mathematics,4,"F,W,SP,SU",0,FALSE,FALSE,MATH 143,None,None,
+MATH,334,Combinatorial Math,4,"F, W",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && (CSC 248 || MATH 248),None,None,Note: Junior standing or Mathematics major.
+MATH,335,Graph Theory,4,F,0,FALSE,FALSE,MATH 248,None,None,Note: Junior standing
+PHIL,230,Philosophical Classics: Knowledge and Reality,4,"F, W, SP, SU",9,FALSE,FALSE,(A1)>=4 && (A2)>=4 && (A3)>=4,None,None,
+PHIL,323,"Ethics, Science and Technology",4,"F, W",11,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((C2)>=4),None,None,Note: Junior standing; Sustainability Focused
+PHYS,141,General Physics I,4,"F,W,SP,SU",4,FALSE,FALSE,MATH 141,MATH 142,None,
+PHYS,142,General Physics II,4,"F,W,SP,SU",4,FALSE,FALSE,PHYS 141 && MATH 142,None,None,
+PHYS,143,General Physics III,4,"F,W,SP,SU",4,FALSE,FALSE,MATH 142 && PHYS 141 && MATH 241,None,None,
+PHYS,211,Modern Physics I,4,"F, W, SP",0,FALSE,FALSE,PHYS 142 && PHYS 143 && MATH 241 && (MATH 242 || MATH 244),None,None,
+PHYS,305,Classical Mechanics I,4,F,7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && PHYS 141 && MATH 241 && (MATH 242 || MATH 244),None,None,Note: Junior standing
+PSY,202,General Psychology,4,"F, W",15,FALSE,FALSE,None,None,None,
+PSY,311,Environmental Psychology,4,"F, W",14,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && ((E)>=4),None,None,Note: Junior standing; Sustainability Focused
+PSY,340,Biopsychology,4,"F, W, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && PSY 202,None,None,Note: Junior standing
+SPAN,101,Elementary Spanish I,4,"F, W, SP",0,FALSE,FALSE,None,None,None,
+SPAN,102,Elementary Spanish II,4,"F, W, SP",0,FALSE,FALSE,SPAN 101,None,None,
+SPAN,103,Elementary Spanish III,4,"F, W, SP",0,FALSE,FALSE,SPAN 102,None,None,
+SPAN,201,Intermediate Spanish I,4,"F, W, SP",10,FALSE,FALSE,SPAN 103,None,None,
+SPAN,202,Intermediate Spanish II,4,"F, W, SP",10,FALSE,FALSE,SPAN 201,None,None,
+SPAN,203,Intermediate Spanish III,4,"F, W, SP",10,FALSE,FALSE,SPAN 202,None,None,
+STAT,312,Statistical Methods for Engineers,4,"F,W,SP,SU",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && MATH 142,None,DATA 100,"Note: Junior standing or one of the following majors: CPE, CSC, EE, GENE, IE, MATE, MFGE, or SE."
+STAT,334,Applied Linear Models,4,"W, SP",0,FALSE,FALSE,STAT 312 && MATH 244,None,None,
+STAT,350,Probability and Random Processes for Engineers,4,"F, W, SP",7,FALSE,FALSE,((A1)>=4 && (A2)>=4 && (A3)>=4) && ((B4)>=4) && MATH 241 && CPE 327,None,None,Note: Junior standing
+UNIV,401,Graduation Writing Requirement Portfolio,0,"F,W,SP,SU",0,TRUE,FALSE,(A1)>=4 && (A2)>=4 && (A3)>=4,None,None,Note: Junior standing

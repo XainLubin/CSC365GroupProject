@@ -1,0 +1,98 @@
+id,description,prerequisite
+0,This course has no prerequisites,None
+1,Completion of GE Areas A1 and A2,(A1)>=4 && (A2)>=4
+2,Completion of GE Area A2,(A2)>=4
+3,Completion of GE Area A3,(A3)>=4
+4,Completion of GE Area A,(A1)>=4 && (A2)>=4 && (A3)>=4
+5,Completion of GE Area B1 and at least one course in GE Area B4,(B1)>=4 && (B4)>=4
+6,Completion of GE Area B,(B1)>=4 && (B2)>=4 && (B4)>=8
+7,Completion of at least one course in GE Area B,(B1|| B2 || B4 || Upper-Div GE Area B)>=4
+8,Completion of at least one CHEM course in GE Area B1,(CHEM && B1)>=4
+9,Completion of at least one course in GE Areas B2 and B4,((B2)>=4) && ((B4)>=4)
+10,Completion of a BIO course in GE Area B2,(BIO && B2)>=4
+11,Completion of at least one course in GE Area B4,(B4)>=4
+12,Completion of GE Area B4,(B4)>=8
+13,Completion of GE Area C1,(C1)>=4
+14,Completion of GE Area C2,(C2)>=4
+15,Completion of at least one course in GE Area C,(C1 || C2 || C - Elective)
+16,Completion of GE Area D1,(D1)>=4
+17,Completion of one course in either GE Area D1 or D2,(D1 || D2)>=4
+18,Completion of at least two courses in either GE Area D1 or D2,(D1 || D2)>=8
+19,Completion of GE Areas D1 and D2,((D1)>=4) && ((D2)>=4)
+20,Completion of GE Area E,(E)>=4
+21,Completion of ART 118,ART 182
+22,Completion of ART 376,ART 376
+23,Completion of at least one BIO course,BIO>=4
+24,Completion of one of the following courses: ASCI 112/BIO 111/BIO 123/BIO 161/BIO 213/BOT 121,(ASCI 112 || BIO 111 || BIO 123 || BIO 161 || BIO 213 || BOT 121)>=4
+25,Completion of one of the following: BIO 114/BIO 150/BOT 121,(BIO 114 || BIO 150 || BOT 121)>=4
+26,Completion of CHEM 124,CHEM 124
+27,Completion of CHEM 125,CHEM 125
+28,Completion of CPE 100,CPE 100
+29,Completion of CPE 101 or CSC 101,CPE 101 || CSC 101
+30,Completion of CPE 123 or CSC 123,(CPE 123) || (CSC 123)
+31,Completion of CPE 133,CPE 133
+32,Completion of CPE 202 or CSC 202,CPE 202 || CSC 202
+33,Completion of CPE 203 or CSC 203,CPE 203 || CSC 203
+34,Completion of one of the following: CPE 225/CSC 225/CPE 233/EE 233,(CPE 225 || CSC 225 || CPE 233 || EE 233)
+35,Completion of CPE 233 or EE 233,CPE 233 || EE 233
+36,Completion of CPE 315,CPE 315
+37,Completion of CPE 316,CPE 316
+38,Completion of CPE 321 or CSC 321,CPE 321 || CSC 321
+39,Completion of CPE 327 or EE 327,CPE 327 || EE 327
+40,Completion of one of the following: CPE 327/EE 327/CPE 357/CSC 357,CPE 327 || EE 327 || CPE 357 || CSC 357
+41,Completion of one of the following: CPE 316/CPE 336/EE 336,CPE 336 || EE 336 || CPE 316
+42,Completion of CPE 336 or EE 336,CPE 336 || EE 336
+43,Completion of CPE 357 or CSC 357,CPE 357 || CSC 357
+44,Completion of CPE 464 or CSC 364,CSC 364 || CPE 464
+45,Completion of CPE 350,CPE 350
+46,Completion of CPE 450,CPE 450
+47,Completion of CPE 453 or CSC 453,CPE 453 || CSC 453
+48,Completion of CPE 471 or CSC 471,CPE 471 || CSC 471
+49,Completion of CPE 316 or (CPE 315 and (CPE 357 or CSC 357)),CPE 316 || (CPE 315 && (CPE 357 || CSC 357))
+50,Completion of CSC 248,CSC 248
+51,Completion of CSC 248 or MATH 248,CSC 248 || MATH 248
+52,Completion of CSC 248 or ((CPE 202 or CSC 202) and (CPE 203 or CSC 203) and MATH 248),CSC 248 || ((CPE 202 || CSC 202) && (CPE 203 || CSC 203) && MATH 248)
+53,Completion of CSC 300 or PHIL 323,CSC 300 || PHIL 323
+54,Completion of CSC 315,CPE 315
+55,Completion of CSC 305,CSC 305
+56,Completion of CSC 307 or CSC 308,CSC 307 || CSC 308
+57,Completion of CSC 307 or CSC 309,CSC 307 || CSC 309
+58,Completion of CSC 349,CSC 349
+59,Completion of CSC 365,CSC 365
+60,Completion of CSC 402,CSC 402
+61,Completion of CSC 405,CSC 405
+62,Completion of CSC 466 or CSC 480,CSC 466 || CSC 480
+63,Completion of CSC 480,CSC 480
+64,Completion of CSC 491,CSC 491
+65,Completion of CSC 497,CSC 497
+66,Completion of CSC 430,CSC 430
+67,Completion of ECON 201 or ECON 222,ECON 201 || ECON 222
+68,Completion of EE 115,EE 115
+69,Completion of EE 215,EE 215
+70,Completion of EE 367 or CPE 367,CPE 367 || EE 367
+71,"Completion of EE 307, EE 347, EE 308, and EE 348",EE 307 && EE 347 && EE 308 && EE 348
+72,Completion of EE 245,EE 245
+73,Completion of CSC 308,CSC 308
+74,Completion of EE 145,EE 145
+75,Completion of ES 112,ES 112
+76,Completion of MATH 141,MATH 141
+77,Completion of MATH 142,MATH 142
+78,Completion of MATH 143,MATH 143
+79,Completion of MATH 241,MATH 241
+80,Completion of MATH 242,MATH 242
+81,Completion of MATH 242 or MATH 244,MATH 242 || MATH 244
+82,Completion of MATH 244,MATH 244
+83,Completion of MATH 248,MATH 248
+84,Completion of PHYS 141,PHYS 141
+85,Completion of PHYS 142,PHYS 142
+86,Completion of PHYS 143,PHYS 143
+87,Completion of PHYS 211,PHYS 211
+88,Completion of PSY 202,PSY 202
+89,Completion of SPAN 101,SPAN 101
+90,Completion of SPAN 102,SPAN 102
+91,Completion of SPAN 103,SPAN 103
+92,Completion of SPAN 201,SPAN 201
+93,Completion of SPAN 202,SPAN 202
+94,Completion of STAT 312,STAT 312
+95,Completion of STAT 312 or STAT 350,STAT 312 || STAT 350
+96,Completion of STAT 350,STAT 350

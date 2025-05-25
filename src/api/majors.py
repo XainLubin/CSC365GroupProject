@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from src.api import auth
+from src.api import auth, courses
 from src.database import engine
 import sqlalchemy
 from sqlalchemy import text
@@ -9,7 +9,7 @@ from sqlalchemy import text
 router = APIRouter(
     prefix="/majors",
     tags=["majors"],
-    dependencies=[Depends(auth.get_api_key)],
+    dependencies=[],
 )
 
 class MajorBase(BaseModel):
@@ -93,3 +93,46 @@ def get_major_students(major_id: int) -> List[Major]:
         ).fetchall()
         
     return major_list_from_rows(students)
+
+@router.get("/{major_id}/courses", response_model=List[courses.Course])
+def get_major_courses(major_id: int) -> List[courses.Course]:
+    """
+    Get all courses required for a specific major.
+    """
+    with engine.begin() as connection:
+        major = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT id FROM majors WHERE id = :major_id
+                """
+            ),
+            {"major_id": major_id}
+        ).first()
+        
+        if not major:
+            raise HTTPException(status_code=404, detail="Major not found")
+        
+        courses = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT c.id, c.department_code, c.course_number, c.units, c.title, c.description, mr.is_required
+                FROM major_requirements mr
+                JOIN courses c ON mr.course_id = c.id
+                WHERE mr.major_id = :major_id
+                """
+            ),
+            {"major_id": major_id}
+        ).fetchall()
+        
+        return [
+            courses.Course(
+                id=course.id,
+                department_code=course.department_code,
+                course_number=course.course_number,
+                units=course.units,
+                title=course.title,
+                description=course.description
+            ) 
+            for course in courses
+        ]
+

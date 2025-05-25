@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from src.api import auth, courses
+from src.api import auth, courses, students
 from src.database import engine
 import sqlalchemy
 from sqlalchemy import text
@@ -9,16 +9,20 @@ from sqlalchemy import text
 router = APIRouter(
     prefix="/students/{student_id}/planner",
     tags=["planner"],
-    dependencies=[Depends(auth.get_api_key)],
+    dependencies=[],
 )
 
+class PlannedCourse(BaseModel):
+    course_id: int
+    planned_quarter: students.YearQuarterStr
+
 class QuarterPlan(BaseModel):
-    quarter_name: str
+    quarter_name: students.YearQuarterStr
     courses: List[courses.Course]
 
 
 @router.get("/create_course_plan", response_model=List[QuarterPlan])
-def create_course_plan(student_id: int = 1) -> List[QuarterPlan]:
+def create_course_plan(student_id: int = Depends(auth.validate_key)) -> List[QuarterPlan]:
     with engine.begin() as connection:
         student = connection.execute(
             sqlalchemy.text(
@@ -104,7 +108,7 @@ def create_course_plan(student_id: int = 1) -> List[QuarterPlan]:
         return quarter_plans
 
 @router.get("/requirements", response_model=List[courses.Course])
-def get_requirements(student_id: int = 1):
+def get_requirements(student_id: int = Depends(auth.validate_key)):
     with engine.begin() as connection:
         student = connection.execute(
             sqlalchemy.text(
@@ -153,3 +157,74 @@ def get_requirements(student_id: int = 1):
         ]
         
         return remaining_courses
+
+@router.post("/plan_course", status_code=status.HTTP_204_NO_CONTENT)
+def plan_course(course: PlannedCourse, student_id: int = Depends(auth.validate_key)):
+    """
+    Plan a course for a future quarter.
+    """
+    with engine.begin() as connection:
+        course_exists = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT id FROM courses WHERE id = :course_id
+                """
+            ),
+            {"course_id": course.course_id}
+        ).first()
+        
+        if not course_exists:
+            raise HTTPException(status_code=404, detail="Course not found")
+        
+        student_exists = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT id FROM students WHERE id = :student_id
+                """
+            ),
+            {"student_id": student_id}
+        ).first()
+        
+        if not student_exists:
+            raise HTTPException(status_code=404, detail="Student not found")
+        
+        existing = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT id FROM planned_courses 
+                WHERE student_id = :student_id AND course_id = :course_id
+                """
+            ),
+            {"student_id": student_id, "course_id": course.course_id}
+        ).first()
+        
+        if existing:
+            connection.execute(
+                sqlalchemy.text(
+                    """
+                    UPDATE planned_courses 
+                    SET planned_quarter = :planned_quarter
+                    WHERE student_id = :student_id AND course_id = :course_id
+                    """
+                ),
+                {
+                    "student_id": student_id,
+                    "course_id": course.course_id,
+                    "planned_quarter": course.planned_quarter
+                }
+            )
+        else:
+            connection.execute(
+                sqlalchemy.text(
+                    """
+                    INSERT INTO planned_courses (student_id, course_id, planned_quarter)
+                    VALUES (:student_id, :course_id, :planned_quarter)
+                    """
+                ),
+                {
+                    "student_id": student_id,
+                    "course_id": course.course_id,
+                    "planned_quarter": course.planned_quarter
+                }
+            )
+

@@ -9,7 +9,7 @@ from sqlalchemy import text
 router = APIRouter(
     prefix="/courses",
     tags=["courses"],
-    dependencies=[Depends(auth.get_api_key)],
+    dependencies=[],
 )
 
 class CourseBase(BaseModel):
@@ -129,44 +129,3 @@ def get_course_by_code(department_code: str, course_number: int) -> Course:
             description=course.description
         )
 
-@router.get("/by_major_id/{major_id}", response_model=List[Course])
-def get_major_courses(major_id: int) -> List[Course]:
-    """
-    Get all courses required for a specific major.
-    """
-    with engine.begin() as connection:
-        major = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT id FROM majors WHERE id = :major_id
-                """
-            ),
-            {"major_id": major_id}
-        ).first()
-        
-        if not major:
-            raise HTTPException(status_code=404, detail="Major not found")
-        
-        courses = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT c.id, c.department_code, c.course_number, c.units, c.title, c.description, mr.is_required
-                FROM major_requirements mr
-                JOIN courses c ON mr.course_id = c.id
-                WHERE mr.major_id = :major_id
-                """
-            ),
-            {"major_id": major_id}
-        ).fetchall()
-        
-        return [
-            Course(
-                id=course.id,
-                department_code=course.department_code,
-                course_number=course.course_number,
-                units=course.units,
-                title=course.title,
-                description=course.description
-            ) 
-            for course in courses
-        ]

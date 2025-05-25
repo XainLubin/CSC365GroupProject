@@ -6,7 +6,8 @@ copy_to_docker:
    docker cp backup.sql mypostgres:/backup.sql
 
 run:
-   find /home/spenc/calPoly/class/db/potions/src/api/ -type f | entr -r uv run main.py
+   find /home/spenc/calPoly/class/db/CSC365GroupProject/src/api/ -type f | entr -r uv run main.py
+
 
 freeze_packages:
    uv pip compile pyproject.toml -o requirements.txt

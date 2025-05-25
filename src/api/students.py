@@ -1,15 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Form, Body
-from pydantic import BaseModel, Field, EmailStr
-from typing import List, Optional
+from pydantic import BaseModel, Field, EmailStr, constr
+from enum import Enum
+from typing import List, Optional, Annotated
 from src.api import auth, courses
 from src.database import engine
 import sqlalchemy
 from sqlalchemy import text
+import bcrypt
 
 router = APIRouter(
-    prefix="",
+    prefix="/students",
     tags=["students"],
-    dependencies=[Depends(auth.get_api_key)],
+    dependencies=[],
 )
 
 class StudentBase(BaseModel):
@@ -35,85 +37,118 @@ def student_from_row(row) -> Student:
         major_id=row.major_id
     )
 
+
+GradeStr = Annotated[str, Field(pattern=r"^(A|A-|B\+|B|B-|C\+|C|C-|D|F|P|NP)$")]
+PASSING_GRADES = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-","P"}
+FAILING_GRADES = {"D", "F", "NP"}
+
+
+YearQuarterStr = Annotated[str, Field(pattern=r"^\d{4}-(FALL|WINTER|SPRING|SUMMER)$")]
+
 class CompletedCourse(BaseModel):
     course_id: int
-    grade: Optional[str] = None
-    quarter_taken: Optional[str] = None
+    grade: GradeStr
+    quarter_taken: YearQuarterStr
+    
+    def passed(self) -> bool:
+        """ See if the course was passed based on the grade."""
+        return self.grade in PASSING_GRADES
 
-class PlannedCourse(BaseModel):
-    course_id: int
-    planned_quarter: Optional[str] = None
+
+def hash_password(plain_password: str) -> str:
+    hashed = bcrypt.hashpw(plain_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed.decode('utf-8')  
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return bcrypt.checkpw(
+        plain_password.encode('utf-8'),
+        hashed_password.encode('utf-8')
+    )
 
 
-
-@router.post("/students", response_model=Student)
+@router.post("/create", response_model=Student)
 def create_student(student: StudentCreate) -> Student:
     """
     Create a new student.
     """
-    with engine.begin() as connection:
-        existing = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT id FROM students WHERE email = :email
-                """
-            ),
-            {"email": student.email}
-        ).first()
-        
-        if existing:
-            raise HTTPException(
-                status_code=400,
-                detail="Email already registered"
-            )
-        
+    # Hash the password before storing it
+    hashed_password = hash_password(student.password)
+    with engine.begin() as connection: 
         result = connection.execute(
             sqlalchemy.text(
                 """
                 INSERT INTO students (first_name, last_name, email, password, major_id) 
                 VALUES (:first_name, :last_name, :email, :password, :major_id) 
-                RETURNING id
+                ON CONFLICT (email) DO NOTHING
+                RETURNING id, first_name, last_name, email, major_id
                 """
             ),
             {
                 "first_name": student.first_name,
                 "last_name": student.last_name,
                 "email": student.email,
-                "password": student.password,
+                "password": hashed_password,
                 "major_id": student.major_id
             }
         ).first()
         
         return student_from_row(result)
 
-@router.post("/login/{email}", response_model=Student)
-def login(email: str, password: str) -> Student:
+
+
+@router.post("/login/{email}", response_model=str)
+def login(email: str, password: str):
     """
     Login a student with username and password.
-    """
+    Returns a access token if successful.
+    """ 
     with engine.begin() as connection:
         # For simplicity, we're using email as username
         result = connection.execute(
             sqlalchemy.text(
                 """
-                SELECT id, first_name, last_name, email, major_id 
+                SELECT id, password
                 FROM students 
-                WHERE email = :email AND password = :password
+                WHERE email = :email;
                 """
             ),
             {"email": email, "password": password}
-        ).first()
-        
+        ).one_or_none()
         if not result:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Incorrect username or password"
             )
-         
-        return student_from_row(result)
+        
+        if not verify_password(password, result.password):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Incorrect username or password"
+            )
+        student_id = result.id
 
-@router.get("/students/{student_id}", response_model=Student)
-def get_student(student_id: int) -> Student:
+        result = connection.execute(
+            sqlalchemy.text(
+                """
+                INSERT INTO api_keys (student_id)
+                VALUES (:student_id)
+                RETURNING api_key
+                """
+            ),
+            {"student_id": student_id}
+        ).first()
+        if not result:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Failed to generate API key"
+            )
+        api_key = str(result.api_key)
+ 
+    return api_key
+
+
+@router.get("/get", response_model=Student)
+def get_student(student_id: int = Depends(auth.validate_key)) -> Student:
     """
     Get student details by ID.
     """
@@ -137,7 +172,7 @@ def get_student(student_id: int) -> Student:
         
 
 @router.post("/mark_course_completed", status_code=status.HTTP_204_NO_CONTENT)
-def mark_course_completed(course: CompletedCourse, student_id: int):
+def mark_course_completed(course: CompletedCourse, student_id: int = Depends(auth.validate_key)):
     """
     Mark a course as completed with a grade.
     """
@@ -208,72 +243,3 @@ def mark_course_completed(course: CompletedCourse, student_id: int):
                 }
             )
 
-@router.post("/plan_course", status_code=status.HTTP_204_NO_CONTENT)
-def plan_course(course: PlannedCourse, student_id: int):
-    """
-    Plan a course for a future quarter.
-    """
-    with engine.begin() as connection:
-        course_exists = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT id FROM courses WHERE id = :course_id
-                """
-            ),
-            {"course_id": course.course_id}
-        ).first()
-        
-        if not course_exists:
-            raise HTTPException(status_code=404, detail="Course not found")
-        
-        student_exists = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT id FROM students WHERE id = :student_id
-                """
-            ),
-            {"student_id": student_id}
-        ).first()
-        
-        if not student_exists:
-            raise HTTPException(status_code=404, detail="Student not found")
-        
-        existing = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT id FROM planned_courses 
-                WHERE student_id = :student_id AND course_id = :course_id
-                """
-            ),
-            {"student_id": student_id, "course_id": course.course_id}
-        ).first()
-        
-        if existing:
-            connection.execute(
-                sqlalchemy.text(
-                    """
-                    UPDATE planned_courses 
-                    SET planned_quarter = :planned_quarter
-                    WHERE student_id = :student_id AND course_id = :course_id
-                    """
-                ),
-                {
-                    "student_id": student_id,
-                    "course_id": course.course_id,
-                    "planned_quarter": course.planned_quarter
-                }
-            )
-        else:
-            connection.execute(
-                sqlalchemy.text(
-                    """
-                    INSERT INTO planned_courses (student_id, course_id, planned_quarter)
-                    VALUES (:student_id, :course_id, :planned_quarter)
-                    """
-                ),
-                {
-                    "student_id": student_id,
-                    "course_id": course.course_id,
-                    "planned_quarter": course.planned_quarter
-                }
-            )

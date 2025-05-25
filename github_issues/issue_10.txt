@@ -1,0 +1,27 @@
+Title: Schema/API Design comments (Uriel)
+State: open
+Created: 2025-05-20T02:44:05Z
+Updated: 2025-05-20T03:07:17Z
+Author: RmaUriel
+
+_students.py_
+1.  In /login/{username} description change username for email. In your code it mentions that login is with email, so same comment should apply here.
+2.  You could add {student_id} in /mark_course_completed since a student_id is used as a parameter. Also adds clarity that marking course complete for that student. 
+3. You can also do the above  in /plan_course
+4. In get_student you can change router to only return vital student info. name, last, email, major
+> @router.get("/students/{student_id}", response_model = Student)
+5. If get_student is separated, you can return a list of planned and completed courses. 
+>  @router/"students/{student_id}, response_model = List[CompletedCourses] ) 
+6. Change post to patch ion mark-course_completed since a previous course  can be updated
+
+_majors.py_
+7.   In get_majors as a response model return  List[Major]. Rerturns a cleaner list
+
+_courses.py_
+8.  @router.get("/", response_model =List(Course).  Ensures all return values are a valid course
+9.  Returning a course in most functions. Add the response-model depending on function for clarity and proper check. 
+
+_planner.py_
+10. Change get to post in /planner/create-course_plan. You're creating a planner not getting an active one, according to description given.
+11.  in get_requirement add {student_id} to match parameter in function. Also helps clarify that it's requirements for that student.
+12. Remove hi. Not useful 

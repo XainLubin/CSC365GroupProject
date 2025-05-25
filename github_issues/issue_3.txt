@@ -1,0 +1,112 @@
+Title: Test Results (Briana Lonappan)
+State: open
+Created: 2025-05-19T05:46:33Z
+Updated: 2025-05-19T05:46:33Z
+Author: brianalona
+
+1. POST/students
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "first_name": "Bri",
+    "last_name": "Lona",
+    "email": "brilona@calpoly.edu",
+    "major_id": 1,
+    "password": "securepassword123"
+}'
+
+**Response:**
+{
+  "first_name": "Bri",
+  "last_name": "Lona",
+  "email": "brilona@calpoly.edu",
+  "major_id": 1,
+  "id": 8
+}
+
+Status Code: 200 OK
+
+2. POST /plan_course
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=1' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "course_id": 101,
+    "planned_quarter": "Fall 2025"
+}'
+
+**Response:**
+{
+  "detail": "Course not found"
+}
+
+Status Code: 404 Not Found
+
+3. GET /courses/code/{department_code}/{course_number}
+**Request:**
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/courses/code/CSC/365' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+**Response:**
+{
+  "detail": "Course not found"
+}
+
+Status Code: 404 Not Found
+
+4.  POST /plan_course
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=1' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 101,
+  "planned_quarter": "Fall 2025"
+}
+'
+**Response:**
+{
+  "detail": "Course not found"
+}
+
+Status Code: 404 Not Found
+
+5. POST /login/{username} (with wrong password)
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/login/brilona%40calpoly.edu?password=wrongpass' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -d ''
+
+**Response:**
+{
+  "detail": "Incorrect username or password"
+}
+
+Status Code: 401 Unauthorized
+
+6. GET /courses/major/{major_id} (invalid major)
+**Request:**
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/courses/major/9999' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+**Response:**
+{
+  "detail": "Major not found"
+}
+
+Status Code: 404 Not Found

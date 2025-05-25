@@ -1,0 +1,1358 @@
+Issue #16: Product ideas (Uriel)
+State: open | Created: 2025-05-20T06:14:48Z | Author: RmaUriel
+--------------------------------------------------------------------------------
+## 1.  Add a graduation audit  GET/students/{student_id}/grad_status
+As major courses are being completed, a student should be able to check their graduation status. A student ready to graduate should have completed all their major courses with a grade of "C" or higher.  At any point a student can check on their progress by calling the API above. 
+
+## 2.  Students should be able to change major PATCH/students/{student_id}/new_major/{major_id}
+A student should be able to switch their major. If they switch their major, their info should update to the new major courses. If they switch back, their courses taken should still be there. 
+====================================================================================================
+
+Issue #15: Test Results (Uriel)
+State: open | Created: 2025-05-20T06:00:34Z | Author: RmaUriel
+--------------------------------------------------------------------------------
+## Jack is an incoming CS student. post/students.   He want to see all the major courses he has to take as a CS student.  He calls  courses/major/{major_id}. As he sees them, he wants to plan out his future schedule. He calls Get/planner/create_course_plan
+Create a student named Jack: 
+<pre> 
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "first_name": "Jack",
+  "last_name": "Stan",
+  "email": "JS@calpoly.edu",
+  "major_id": 1,
+  "password": "BOB"
+}'
+ </pre>
+Response: 
+<pre> 
+{
+  "first_name": "Jack",
+  "last_name": "Stan",
+  "email": "JS@calpoly.edu",
+  "major_id": 1,
+  "id": 13
+}
+</pre>
+
+Get CS courses: 
+ <pre>
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/courses/major/1' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+Response:
+[
+  {
+    "id": 1,
+    "department_code": "CSC",
+    "course_number": 101,
+    "units": 4,
+    "title": "Fundamentals of Computer Science I",
+    "description": "Introduction to programming and problem solving using Python",
+    "is_required": true
+  },
+  {
+    "id": 2,
+    "department_code": "CSC",
+    "course_number": 202,
+    "units": 4,
+    "title": "Data Structures",
+    "description": "Implementation and analysis of fundamental data structures",
+    "is_required": true
+  },
+  {
+    "id": 3,
+    "department_code": "CSC",
+    "course_number": 203,
+    "units": 4,
+    "title": "Project-Based Object-Oriented Programming and Design",
+    "description": "Object-oriented programming and design principles",
+    "is_required": true
+  },
+  {
+    "id": 4,
+    "department_code": "CSC",
+    "course_number": 225,
+    "units": 4,
+    "title": "Computer Organization",
+    "description": "Computer architecture and assembly language programming",
+    "is_required": true
+  },
+  {
+    "id": 5,
+    "department_code": "CSC",
+    "course_number": 248,
+    "units": 4,
+    "title": "Discrete Structures",
+    "description": "Discrete mathematics for computer science",
+    "is_required": true
+  },
+  {
+    "id": 6,
+    "department_code": "CSC",
+    "course_number": 349,
+    "units": 4,
+    "title": "Design and Analysis of Algorithms",
+    "description": "Analysis and design of efficient algorithms",
+    "is_required": true
+  },
+  {
+    "id": 7,
+    "department_code": "CSC",
+    "course_number": 357,
+    "units": 4,
+    "title": "Systems Programming",
+    "description": "Systems programming in C and Unix",
+    "is_required": true
+  },
+  {
+    "id": 8,
+    "department_code": "CSC",
+    "course_number": 430,
+    "units": 4,
+    "title": "Programming Languages",
+    "description": "Study of programming language paradigms and concepts",
+    "is_required": true
+  },
+  {
+    "id": 9,
+    "department_code": "CSC",
+    "course_number": 445,
+    "units": 4,
+    "title": "Software Engineering",
+    "description": "Software development lifecycle and methodologies",
+    "is_required": true
+  },
+  {
+    "id": 10,
+    "department_code": "CSC",
+    "course_number": 491,
+    "units": 2,
+    "title": "Senior Project",
+    "description": "Senior project for Computer Science",
+    "is_required": true
+  }
+]
+ </pre>
+
+## Jack is nervous about meeting new students. He want to see all the people who will also be CS majors. He calls get/majors/{major_id}/students. 
+Get CS students:
+<pre>
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/majors/1/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+</pre>
+
+Response: 
+<pre>
+[
+  {
+    "id": 1,
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "jdoe@calpoly.edu"
+  },
+  {
+    "id": 2,
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jsmith@calpoly.edu"
+  },
+  {
+    "id": 4,
+    "first_name": "john",
+    "last_name": "clm",
+    "email": "john@"
+  },
+  {
+    "id": 5,
+    "first_name": "seema",
+    "last_name": "clm",
+    "email": "seema@"
+  },
+  {
+    "id": 7,
+    "first_name": "Ada",
+    "last_name": "Lovelace",
+    "email": "ada@calpoly.edu"
+  },
+  {
+    "id": 8,
+    "first_name": "Bri",
+    "last_name": "Lona",
+    "email": "brilona@calpoly.edu"
+  },
+  {
+    "id": 11,
+    "first_name": "1",
+    "last_name": "2",
+    "email": "3"
+  },
+  {
+    "id": 12,
+    "first_name": "Bingus",
+    "last_name": "Khan",
+    "email": "bk@globmail.com"
+  },
+  {
+    "id": 13,
+    "first_name": "Jack",
+    "last_name": "Stan",
+    "email": "JS@calpoly.edu"
+  }
+]
+</pre>
+
+## Jack has just finished his first quarter. He checks out his planner with get/planner/create-course_plan. As he gets his class info, he updates his courses taken. He calls post/mark_course_completed. He also decides to take an extra class in winter rather than spring. He calls post/plan_course to update it. 
+
+Get course plan:
+<pre>
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/planner/create_course_plan?student_id=13' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+</pre>
+
+Response: 
+<pre>
+{
+  "quarters": [
+    {
+      "quarter_name": "Fall 2025",
+      "courses": [
+        {
+          "id": 1,
+          "department_code": "CSC",
+          "course_number": 101,
+          "units": 4,
+          "title": "Fundamentals of Computer Science I",
+          "description": "Introduction to programming and problem solving using Python"
+        },
+        {
+          "id": 5,
+          "department_code": "CSC",
+          "course_number": 248,
+          "units": 4,
+          "title": "Discrete Structures",
+          "description": "Discrete mathematics for computer science"
+        },
+        {
+          "id": 9,
+          "department_code": "CSC",
+          "course_number": 445,
+          "units": 4,
+          "title": "Software Engineering",
+          "description": "Software development lifecycle and methodologies"
+        }
+      ]
+    },
+    {
+      "quarter_name": "Winter 2026",
+      "courses": [
+        {
+          "id": 2,
+          "department_code": "CSC",
+          "course_number": 202,
+          "units": 4,
+          "title": "Data Structures",
+          "description": "Implementation and analysis of fundamental data structures"
+        },
+        {
+          "id": 6,
+          "department_code": "CSC",
+          "course_number": 349,
+          "units": 4,
+          "title": "Design and Analysis of Algorithms",
+          "description": "Analysis and design of efficient algorithms"
+        },
+        {
+          "id": 10,
+          "department_code": "CSC",
+          "course_number": 491,
+          "units": 2,
+          "title": "Senior Project",
+          "description": "Senior project for Computer Science"
+        }
+      ]
+    },
+    {
+      "quarter_name": "Spring 2026",
+      "courses": [
+        {
+          "id": 3,
+          "department_code": "CSC",
+          "course_number": 203,
+          "units": 4,
+          "title": "Project-Based Object-Oriented Programming and Design",
+          "description": "Object-oriented programming and design principles"
+        },
+        {
+          "id": 7,
+          "department_code": "CSC",
+          "course_number": 357,
+          "units": 4,
+          "title": "Systems Programming",
+          "description": "Systems programming in C and Unix"
+        }
+      ]
+    },
+    {
+      "quarter_name": "Fall 2026",
+      "courses": [
+        {
+          "id": 4,
+          "department_code": "CSC",
+          "course_number": 225,
+          "units": 4,
+          "title": "Computer Organization",
+          "description": "Computer architecture and assembly language programming"
+        },
+        {
+          "id": 8,
+          "department_code": "CSC",
+          "course_number": 430,
+          "units": 4,
+          "title": "Programming Languages",
+          "description": "Study of programming language paradigms and concepts"
+        }
+      ]
+    }
+  ]
+}
+</pre>
+Update Courses Taken:
+<pre>
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/mark_course_completed?student_id=13' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 1,
+  "grade": "A",
+  "quarter_taken": "Fall 2025"
+}'
+</pre>
+
+Response: 
+<pre> 204 </pre>
+
+Update course_plan:
+<pre>
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=13' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 3,
+  "planned_quarter": "Winter 2026"
+}'
+</pre>
+
+Response:
+<pre> 204 </pre>
+
+====================================================================================================
+
+Issue #14: Product Ideas (Dhvani Goel)
+State: open | Created: 2025-05-20T04:56:01Z | Author: dhvani427
+--------------------------------------------------------------------------------
+**1. POST /planner/custom_plan**
+Right now, the course planner just splits remaining classes evenly across upcoming quarters. But not everyone wants a perfectly balanced schedule — some students may want to skip Spring entirely, take fewer classes during internships, or overload in Fall to graduate early. This endpoint would let users pass in custom preferences like:
+- skip_quarters: ["Spring 2026"]
+- preferred_quarter_loads: { "Fall 2025": 4, "Winter 2026": 2 }
+- max_courses_per_quarter: 3
+
+**2. POST /students/{student_id}/earliest_graduation**
+This would calculate the soonest quarter a student can graduate, based on how many required courses are left and how many they can take each term. You could let users pass in optional preferences like course load or quarters to skip, and the system would return the first possible graduation date. Super useful for long-term planning.
+
+**3. GET /students/{student_id}/degree_audit**
+This endpoint would return a quick summary of a student’s academic progress — something like:
+- Courses completed
+- Courses still required
+- Percent of degree done
+- Units remaining
+====================================================================================================
+
+Issue #13: Test Results (Dhvani Goel)
+State: open | Created: 2025-05-20T04:52:11Z | Author: dhvani427
+--------------------------------------------------------------------------------
+### Test 1: Add Planned Course That Doesn’t Exist
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=4' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 88,
+  "planned_quarter": "Fall 2025"
+}'
+
+
+Error: response status is 404
+
+{
+  "detail": "Course not found"
+}
+
+### Test 2: Mark Course As Completed and Then Plan It Again
+
+**POST /mark_course_completed**
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/mark_course_completed?student_id=4' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 1,
+  "grade": "A",
+  "quarter_taken": "Winter 2025"
+}'
+
+
+204	Successful Response
+
+**POST /plan_course**
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=4' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 1,
+  "planned_quarter": "Fall 2025"
+}'
+
+
+204	Successful Response
+
+**GET /students/{student_id}**
+
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/students/4' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+
+{
+  "id": 4,
+  "first_name": "john",
+  "last_name": "clm",
+  "email": "john@",
+  "major_id": 1,
+  "completed_courses": [
+    {
+      "id": 1,
+      "department_code": "CSC",
+      "course_number": 101,
+      "units": 4,
+      "title": "Fundamentals of Computer Science I",
+      "grade": "A",
+      "quarter_taken": "Winter 2025"
+    }
+  ],
+  "planned_courses": [
+    {
+      "id": 1,
+      "department_code": "CSC",
+      "course_number": 101,
+      "units": 4,
+      "title": "Fundamentals of Computer Science I",
+      "planned_quarter": "Fall 2025"
+    }
+  ]
+}
+
+### Create Student With Major ID That Doesn’t Exist
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "first_name": "Sam",
+  "last_name": "Pam",
+  "email": "sampam@calpoly.edu",
+  "major_id": 123456,
+  "password": "sampam"
+}'
+
+
+Error: response status is 500
+Internal Server Error
+====================================================================================================
+
+Issue #12: Schema/API Design (Dhvani Goel)
+State: open | Created: 2025-05-20T04:39:39Z | Author: dhvani427
+--------------------------------------------------------------------------------
+1. Right now, /courses/major/{major_id} only works if you know the major's ID, but users usually know the major name (like CSC). It would be more user-friendly if we could also get courses by major name.
+2. The route /courses/major/{major_id} feels a bit out of place. Since it’s about a major’s courses, it might be better as /majors/{major_id}/courses, just like how /majors/{major_id}/students works. That would keep the structure more consistent.
+3. The /courses/code/{department_code}/{course_number} route works, but the word "code" feels unnecessary. It might be cleaner as /courses/{department_code}/{course_number}.
+4. I am able to mark a course as completed and also plan it again for the future, which shouldn’t be the case. Maybe add a check to prevent adding a planned course that’s already completed.
+5. Routes like /mark_course_completed and /plan_course are based on a specific student, but they’re not under a student-based route. It should be /students/{student_id}/mark_course_completed and /students/{student_id}/plan_course
+6. The user gets a generated plan, but there’s no way to pass preferences like "I want 3 courses per quarter" or "skip Spring 2026”, maybe make this more flexible by adding optional query params.
+7. Creating a student with a nonexistent major currently crashes the server. The API check that major_id exists before insert and if validation fails, return a proper 400 Bad Request instead of a 500
+8. In /mark_course_completed, I’m able to enter random text like "banana" for the grade, and it still accepts it. This should be restricted to valid grade formats like "A", "B+", etc.
+9. For the quarter_taken field, I can type anything like "orange" and it still goes through. Add validation to only allow proper formats like "Fall 2025", "Winter 2026", etc.
+10. Remove /hi/ testpoint which you probably had initially for testing, but don't need it now
+11. Instead of /login/{username} say /login/{email}, since when we create an account we specify our email not a username, which may cause confusion.
+12. The /courses endpoint supports pagination with skip and limit, but there’s no total count of available courses returned. It would be helpful to include a total field in the response and display things like “showing 10 of 73 courses.”
+====================================================================================================
+
+Issue #11: Code Review (Dhvani Goel)
+State: open | Created: 2025-05-20T04:25:22Z | Author: dhvani427
+--------------------------------------------------------------------------------
+1. You have bottler.py, carts.py etc., that is not being used, so I would suggest  removing those files for clarity
+2. In courses.py, all routes return raw dictionaries, even though the Course model is defined. Adding response_model=Course or List[Course] would help structure the data
+3. The /code/{department_code}/{course_number} endpoint currently returns "Course not found" even if the department itself doesn't exist. Consider explicitly checking whether the department exists first and returning a more helpful error like "Department not found" vs "Course not found in this department"
+4. Even though the Major model is defined, it isn’t used as a response_model. Adding it to /majors and /majors/{id} would improve and validate responses
+5. In create_student(), you’re accepting email: str, but since you import EmailStr from Pydantic, you can use email: EmailStr to get free validation that the email is correctly formatted.
+6. In create_student(), you specify response_model=Student, but you return a manually built dict instead of a response with Student. Returning a real Pydantic object would ensure it matches the schema exactly and reduce errors.
+7. You're repeating the same SQL checks in multiple endpoints (mark_course_completed, plan_course, etc.) to see if a student or course exists. Maybe you can make a helper function like validate_student() or validate_course() to avoid repetition. 
+8.  Take lowercase into account, csc should also work to get major specific details, instead of just CSC
+9. If a major doesn’t have any required courses defined, the planner returns an empty plan. It might be helpful to return a warning or message saying "No major requirements found."
+10. The grade and quarter_taken fields on the CompletedCourse model can be literally anything. You could restrict grades to "A", "B+", etc. and add validation for quarters e.g., "Fall 2024".
+11. The mark_course_completed and plan_course endpoints just return a blank 204. Returning { "message": "Course marked as completed" } would be more helpful, especially when testing.
+12. For logging in, it would be helpful to be specific about whether it is the username that’s wrong or the password, instead of returning "Incorrect username or password”.
+====================================================================================================
+
+Issue #10: Schema/API Design comments (Uriel)
+State: open | Created: 2025-05-20T02:44:05Z | Author: RmaUriel
+--------------------------------------------------------------------------------
+_students.py_
+1.  In /login/{username} description change username for email. In your code it mentions that login is with email, so same comment should apply here.
+2.  You could add {student_id} in /mark_course_completed since a student_id is used as a parameter. Also adds clarity that marking course complete for that student. 
+3. You can also do the above  in /plan_course
+4. In get_student you can change router to only return vital student info. name, last, email, major
+> @router.get("/students/{student_id}", response_model = Student)
+5. If get_student is separated, you can return a list of planned and completed courses. 
+>  @router/"students/{student_id}, response_model = List[CompletedCourses] ) 
+6. Change post to patch ion mark-course_completed since a previous course  can be updated
+
+_majors.py_
+7.   In get_majors as a response model return  List[Major]. Rerturns a cleaner list
+
+_courses.py_
+8.  @router.get("/", response_model =List(Course).  Ensures all return values are a valid course
+9.  Returning a course in most functions. Add the response-model depending on function for clarity and proper check. 
+
+_planner.py_
+10. Change get to post in /planner/create-course_plan. You're creating a planner not getting an active one, according to description given.
+11.  in get_requirement add {student_id} to match parameter in function. Also helps clarify that it's requirements for that student.
+12. Remove hi. Not useful 
+
+====================================================================================================
+
+Issue #9: Product Ideas (Madison Lopez)
+State: open | Created: 2025-05-20T02:16:21Z | Author: Munamused
+--------------------------------------------------------------------------------
+**GET /planner/optimized_path_to_graduation**
+
+Generates an optimized course schedule that helps a student graduate in the shortest time possible, based on completed and planned courses, prerequisites, course offerings, and user preferences.
+
+Inputs:
+
+* `student_id`
+* Optional query params:
+
+  * `max_courses_per_quarter`
+  * `preferred_terms` (e.g. Fall, Winter)
+  * `avoid_days` (e.g. \["Mon", "Fri"])
+  * `include_electives` (true/false)
+
+Returns:
+
+* A list of quarters with recommended courses
+* Warnings if graduation isn’t possible under current constraints
+* Alternate paths with suggestions
+
+
+**POST /schedule/conflict_checker**
+
+Checks a set of planned courses for any issues, including time conflicts, unmet prerequisites, unit overloads, or unavailable courses.
+
+Inputs:
+
+* `student_id`
+* `planned_courses`: list of course IDs
+* Optional: `term`
+
+Returns:
+
+* Report of:
+
+  * Time conflicts
+  * Prerequisite issues
+  * Unit overloads
+  * Courses not offered in the selected term
+
+
+====================================================================================================
+
+Issue #8: Code Review Comments (Uriel)
+State: open | Created: 2025-05-20T02:14:56Z | Author: RmaUriel
+--------------------------------------------------------------------------------
+_Students.py_
+1.  In StudentBase, I would add constrainst to first, last, and email.  A min length, max length, and characters only for names. For email, a required @. I was able to create a student using "1", "2", "3", 1, "1" as my inputs. 
+2. In CompletedCourse, I would constraint grade to A, B, C, D, F, P, NP, W and quarter_taken to Fall, Spring, Winter, Summer.  Enum over it and if a user attempts to enter something other than that throw an exception. "Invalid Grade/Quarter". I would also not make them optional, since to complete a course it must have been graded and taken during some quarter. 
+3. I would rename, username for email in login. The is no mention that email is username anywhere outside of comment on code. If there was no access to code, this would cause confusion.
+4. I would separate get_student. It returns student info, completed courses, and planned courses. I'd separate it into get_student, get_completed_courses, get_planned_courses. It can get messy as it returns info and 2 separate lists. The code is already there, I would just separate it for clarity. 
+
+_Courses.py_
+5.  In get_major_courses, the major check seems reduntant. if not major could be if not courses. It can be done in one query. 
+
+_majors.py_
+6.  get_major seems reduntant. Since there's only 3 majors, getting 1 independent won't make a difference. I would remove it unless count of majors is high. 
+7.  I would not fetchall in get_major_student. Run the loop inside the query and append to some list. A list of Student objects . Cleaner return that [{}, {}]
+> name = []
+> for student in students:
+>      name.append(Student( id = student.id), 
+>   ....
+> return name
+
+_planner.py_
+8. Add similar constrainst to the classes in this file as the ones in student.py
+9. Remove the int = 1 from create_course_plan. If I were to test locally, it would not be found since there's not a student with that id yet. An unnecessary addition, since you already check for if not student.
+10.  quarters = [...] are hardcoded here. Conflicts with students plan_course where we can insert some string for quarter. 
+
+====================================================================================================
+
+Issue #7: Test Results (Madison Lopez)
+State: open | Created: 2025-05-20T02:13:14Z | Author: Munamused
+--------------------------------------------------------------------------------
+**1. Create Student**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/students' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -H 'Content-Type: application/json' \
+>   -d '{
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "password": "string"
+> }'
+
+response:
+
+> {
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "id": 12
+> }
+
+**2. Login**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/login/bk%40globmail.com?password=string' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -d ''
+
+response:
+
+> {
+>   "id": 12,
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "completed_courses": [
+>     {
+>       "id": 1,
+>       "department_code": "CSC",
+>       "course_number": 101,
+>       "units": 4,
+>       "title": "Fundamentals of Computer Science I",
+>       "grade": "A+",
+>       "quarter_taken": "Fall 2025"
+>     }
+>   ]
+> }
+
+**3. Get Student**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/students/12' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> {
+>   "id": 12,
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "completed_courses": [
+>     {
+>       "id": 1,
+>       "department_code": "CSC",
+>       "course_number": 101,
+>       "units": 4,
+>       "title": "Fundamentals of Computer Science I",
+>       "grade": "A+",
+>       "quarter_taken": "Fall 2025"
+>     }
+>   ],
+>   "planned_courses": []
+> }
+
+**4. Mark Course Completed**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/mark_course_completed?student_id=12' \
+>   -H 'accept: */*' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -H 'Content-Type: application/json' \
+>   -d '{
+>   "course_id": 1,
+>   "grade": "A+",
+>   "quarter_taken": "Fall 2025"
+> }'
+
+response:
+
+> 204 | Successful Response
+
+**5. Plan Course**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/plan_course?student_id=12' \
+>   -H 'accept: */*' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -H 'Content-Type: application/json' \
+>   -d '{
+>   "course_id": 2,
+>   "planned_quarter": "Winter 2026"
+> }'
+
+response:
+
+> 204 | Successful Response
+
+**6. Get Courses**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/?skip=0&limit=3' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> [
+>   {
+>     "id": 1,
+>     "department_code": "CSC",
+>     "course_number": 101,
+>     "units": 4,
+>     "title": "Fundamentals of Computer Science I",
+>     "description": "Introduction to programming and problem solving using Python"
+>   },
+>   {
+>     "id": 2,
+>     "department_code": "CSC",
+>     "course_number": 202,
+>     "units": 4,
+>     "title": "Data Structures",
+>     "description": "Implementation and analysis of fundamental data structures"
+>   },
+>   {
+>     "id": 3,
+>     "department_code": "CSC",
+>     "course_number": 203,
+>     "units": 4,
+>     "title": "Project-Based Object-Oriented Programming and Design",
+>     "description": "Object-oriented programming and design principles"
+>   }
+> ]
+
+**7. Get Course by Id**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/9' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> {
+>   "id": 9,
+>   "department_code": "CSC",
+>   "course_number": 445,
+>   "units": 4,
+>   "title": "Software Engineering",
+>   "description": "Software development lifecycle and methodologies"
+> }
+
+**8. Get Course by code**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/code/csc/101' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> Error: response status is 404
+> {
+>   "detail": "Course not found"
+> }
+
+**9. Get courses by Major**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/major/2' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> []
+
+**10. Get majors**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/majors/' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> [
+>   {
+>     "id": 1,
+>     "name": "Computer Science",
+>     "description": "Bachelor of Science in Computer Science"
+>   },
+>   {
+>     "id": 2,
+>     "name": "Software Engineering",
+>     "description": "Bachelor of Science in Software Engineering"
+>   },
+>   {
+>     "id": 3,
+>     "name": "Computer Engineering",
+>     "description": "Bachelor of Science in Computer Engineering"
+>   }
+> ]
+
+**11. Get Major by Id**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/majors/1' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> 
+> {
+>   "id": 1,
+>   "name": "Computer Science",
+>   "description": "Bachelor of Science in Computer Science"
+> }
+
+**12. Get Major Students**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/majors/2/students' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> [
+>   {
+>     "id": 3,
+>     "first_name": "Alex",
+>     "last_name": "Johnson",
+>     "email": "ajohnson@calpoly.edu"
+>   }
+> ]
+
+**13. Create Course Plan**
+
+> 
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/planner/create_course_plan?student_id=12' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> {
+>   "quarters": [
+>     {
+>       "quarter_name": "Fall 2025",
+>       "courses": [
+>         {
+>           "id": 2,
+>           "department_code": "CSC",
+>           "course_number": 202,
+>           "units": 4,
+>           "title": "Data Structures",
+>           "description": "Implementation and analysis of fundamental data structures"
+>         },
+>         {
+>           "id": 6,
+>           "department_code": "CSC",
+>           "course_number": 349,
+>           "units": 4,
+>           "title": "Design and Analysis of Algorithms",
+>           "description": "Analysis and design of efficient algorithms"
+>         },
+>         {
+>           "id": 10,
+>           "department_code": "CSC",
+>           "course_number": 491,
+>           "units": 2,
+>           "title": "Senior Project",
+>           "description": "Senior project for Computer Science"
+>         }
+>       ]
+>     },
+>     {
+>       "quarter_name": "Winter 2026",
+>       "courses": [
+>         {
+>           "id": 3,
+>           "department_code": "CSC",
+>           "course_number": 203,
+>           "units": 4,
+>           "title": "Project-Based Object-Oriented Programming and Design",
+>           "description": "Object-oriented programming and design principles"
+>         },
+>         {
+>           "id": 7,
+>           "department_code": "CSC",
+>           "course_number": 357,
+>           "units": 4,
+>           "title": "Systems Programming",
+>           "description": "Systems programming in C and Unix"
+>         }
+>       ]
+>     },
+>     {
+>       "quarter_name": "Spring 2026",
+>       "courses": [
+>         {
+>           "id": 4,
+>           "department_code": "CSC",
+>           "course_number": 225,
+>           "units": 4,
+>           "title": "Computer Organization",
+>           "description": "Computer architecture and assembly language programming"
+>         },
+>         {
+>           "id": 8,
+>           "department_code": "CSC",
+>           "course_number": 430,
+>           "units": 4,
+>           "title": "Programming Languages",
+>           "description": "Study of programming language paradigms and concepts"
+>         }
+>       ]
+>     },
+>     {
+>       "quarter_name": "Fall 2026",
+>       "courses": [
+>         {
+>           "id": 5,
+>           "department_code": "CSC",
+>           "course_number": 248,
+>           "units": 4,
+>           "title": "Discrete Structures",
+>           "description": "Discrete mathematics for computer science"
+>         },
+>         {
+>           "id": 9,
+>           "department_code": "CSC",
+>           "course_number": 445,
+>           "units": 4,
+>           "title": "Software Engineering",
+>           "description": "Software development lifecycle and methodologies"
+>         }
+>       ]
+>     }
+>   ]
+> }
+
+**14. Get Requirements**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/planner/requirements?student_id=12' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+> 
+
+response:
+
+> [
+>   {
+>     "id": 2,
+>     "department_code": "CSC",
+>     "course_number": 202,
+>     "units": 4,
+>     "title": "Data Structures",
+>     "description": "Implementation and analysis of fundamental data structures"
+>   },
+>   {
+>     "id": 3,
+>     "department_code": "CSC",
+>     "course_number": 203,
+>     "units": 4,
+>     "title": "Project-Based Object-Oriented Programming and Design",
+>     "description": "Object-oriented programming and design principles"
+>   },
+>   {
+>     "id": 4,
+>     "department_code": "CSC",
+>     "course_number": 225,
+>     "units": 4,
+>     "title": "Computer Organization",
+>     "description": "Computer architecture and assembly language programming"
+>   },
+>   {
+>     "id": 5,
+>     "department_code": "CSC",
+>     "course_number": 248,
+>     "units": 4,
+>     "title": "Discrete Structures",
+>     "description": "Discrete mathematics for computer science"
+>   },
+>   {
+>     "id": 6,
+>     "department_code": "CSC",
+>     "course_number": 349,
+>     "units": 4,
+>     "title": "Design and Analysis of Algorithms",
+>     "description": "Analysis and design of efficient algorithms"
+>   },
+>   {
+>     "id": 7,
+>     "department_code": "CSC",
+>     "course_number": 357,
+>     "units": 4,
+>     "title": "Systems Programming",
+>     "description": "Systems programming in C and Unix"
+>   },
+>   {
+>     "id": 8,
+>     "department_code": "CSC",
+>     "course_number": 430,
+>     "units": 4,
+>     "title": "Programming Languages",
+>     "description": "Study of programming language paradigms and concepts"
+>   },
+>   {
+>     "id": 9,
+>     "department_code": "CSC",
+>     "course_number": 445,
+>     "units": 4,
+>     "title": "Software Engineering",
+>     "description": "Software development lifecycle and methodologies"
+>   },
+>   {
+>     "id": 10,
+>     "department_code": "CSC",
+>     "course_number": 491,
+>     "units": 2,
+>     "title": "Senior Project",
+>     "description": "Senior project for Computer Science"
+>   }
+> ]
+
+
+
+====================================================================================================
+
+Issue #6: Schema/API Design comments (Madison Lopez)
+State: open | Created: 2025-05-20T01:33:32Z | Author: Munamused
+--------------------------------------------------------------------------------
+1. On your APIspec document, maybe fix the markdown format to be more readable and easier to follow.
+
+2. The `department_code` field in `courses` is a free-form string, but it's tied to a finite set of known values ("CSC", "MATH", etc). You might want to use an `Enum` or even a lookup table for department codes to avoid typos and make joins easier later.
+
+3. You don't store term information (like "Fall 2024") directly in the `courses` table, but the ER diagram suggests a `Term_id` field and `Terms_offered` table. The current schema you're using doesn’t have that — maybe useful for future-proofing quarter-based planning.
+
+4. You have a `description` field in both `majors` and `courses`, which is great, but `description` in `completed_courses` or `planned_courses` might also help if students want to annotate their entries with notes.
+
+5. Passwords are stored as strings in the `students` table — just double check you’re hashing them (which you probably are based on the bcrypt-looking hash, but might be worth calling out in comments).
+
+6. There's a unique constraint on `email`, which is good, but no index on it. Since logins rely on email lookup, might be worth indexing `email` explicitly if performance ever becomes a concern.
+
+7. `completed_courses` and `planned_courses` both have their own ID columns as primary keys, but you could just use a composite primary key of `(student_id, course_id)` in both tables. Saves space and reflects the natural uniqueness of those entries.
+
+8. You have a `planned_quarter` field, but no validation on format. Is it always `YYYY-TERM`? If so, maybe standardize that with a check constraint or structured term model.
+
+9. API routes like `/add_future_course/{courseID}` and `/mark_course_completed/{grade}` use path parameters for data that might be better in the body — especially for POSTs. Body data is easier to expand later (e.g., adding metadata like quarter or transcript ID).
+
+10. There’s no `/courses/{id}` route in the sample API spec — you might want a route that just returns a specific course, or lets users look one up by code and number (e.g., `/courses/CSC/101`).
+
+11. Your sample flows assume GE requirements and preferences are part of the planning logic, but there’s no schema support for GE areas, GWR, USCP, or time blocks in the schema you’re using. Might be worth stubbing out even if not fully implemented yet.
+
+12. In the seed data for `major_requirements`, you always set `is_required = true`. If everything is required, you might not need this column until you support electives or category-based requirements.
+
+13. The sample API has `/add_completed_course/{courseID}` and `/mark_course_completed/{grade}`, but it’s not clear how those two differ. Maybe those should be combined, or clarified so one adds the record and the other updates it.
+====================================================================================================
+
+Issue #5: Code Review Comments (Madison Lopez)
+State: open | Created: 2025-05-20T00:32:25Z | Author: Munamused
+--------------------------------------------------------------------------------
+1. In courses.py, "get_course(course_id)" uses .first(), getting the first row that pops up when querying for course by course_id. But since course_id is a primary key shouldn't there only be one row or no row that is returned? Would .one_or_none() be a better choice for readability? This continues to all functions in src/api, which use .first(), where you dont actually want the first row but the only row.
+
+2. Picky naming convention, you call "CSC" a department code but its more of an abbreviation, I feel like with "code" you expect numbers not a string. 
+
+3. Following up on the department code, you can use an enum type instead of a string to limit the field more.
+
+4. In majors.py, "get_major_students(major_id)", you can probably remove the first query of checking if the major exists, because if you just check for the students, and find none you can error with something like "No students in major found". Because what if the major exists, but there are no students in it?
+
+5. None of the route functions have return type hints. Adding them (e.g., -> List[Course] or -> dict) improves clarity and tooling support.
+
+6. The query in get_courses doesn't have an ORDER BY clause. It might be nice to order by course number.
+
+7. When adding planned or completed courses, there’s no enforcement on prerequisites or duplicates. Will dupes be just merged on conflicts to avoid erroring to the user? Should you error to the user if they're adding a class they completed without having completed the prereq?
+
+8. A lot of logic is repeated in functions on different files (get_by_id, add_to_list, remove_from_list). It would be easy to abstract them into helper functions.
+
+9. In some functions you have raise errors with HTTPException(status_code=404, detail="...") and sometimes you just return None or an empty list. You might want to pick a way to consistently handle errors and empty lists.
+
+10. Also, you raise errors but have no logs or print statements for debugging, those would be helpful.
+
+11. Generally add more comments to your logic parts of your planner.
+
+12. If someone queries .../csc/101 instead of .../CSC/101, they might get a 404. Probably standardize the case on input or in the database query: WHERE UPPER(department_code) = UPPER(:department_code)
+====================================================================================================
+
+Issue #4: Product ideas (Briana Lonappan)
+State: open | Created: 2025-05-19T05:49:14Z | Author: brianalona
+--------------------------------------------------------------------------------
+Here are two endpoint ideas I think would add helpful features to this project:
+
+---
+
+1. GET /students/{id}/schedule
+
+This would generate a student's course schedule by quarter, based on the classes they’ve already completed, what they’ve planned, and what’s still required.
+
+Why it would help:  
+It gives students a better idea of how close they are to finishing their major and helps them see what their next few quarters could look like. Could also help with advising or planning tools.
+
+Possible extras:
+- quarters=n (limit how many quarters to show)
+- include_completed=false (hide completed classes in the output)
+
+---
+
+2. GET /majors/popularity
+
+This would return a list of majors ranked by how many students are currently enrolled in them.
+
+Why it would help:  
+It could be useful for showing trends or for visualizations in a dashboard. It also helps highlight what the most common majors are.
+
+Example output:
+[
+  { "major": "Computer Science", "students": 150 },
+  { "major": "Software Engineering", "students": 120 }
+]
+
+====================================================================================================
+
+Issue #3: Test Results (Briana Lonappan)
+State: open | Created: 2025-05-19T05:46:33Z | Author: brianalona
+--------------------------------------------------------------------------------
+1. POST/students
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "first_name": "Bri",
+    "last_name": "Lona",
+    "email": "brilona@calpoly.edu",
+    "major_id": 1,
+    "password": "securepassword123"
+}'
+
+**Response:**
+{
+  "first_name": "Bri",
+  "last_name": "Lona",
+  "email": "brilona@calpoly.edu",
+  "major_id": 1,
+  "id": 8
+}
+
+Status Code: 200 OK
+
+2. POST /plan_course
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=1' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "course_id": 101,
+    "planned_quarter": "Fall 2025"
+}'
+
+**Response:**
+{
+  "detail": "Course not found"
+}
+
+Status Code: 404 Not Found
+
+3. GET /courses/code/{department_code}/{course_number}
+**Request:**
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/courses/code/CSC/365' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+**Response:**
+{
+  "detail": "Course not found"
+}
+
+Status Code: 404 Not Found
+
+4.  POST /plan_course
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=1' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 101,
+  "planned_quarter": "Fall 2025"
+}
+'
+**Response:**
+{
+  "detail": "Course not found"
+}
+
+Status Code: 404 Not Found
+
+5. POST /login/{username} (with wrong password)
+**Request:**
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/login/brilona%40calpoly.edu?password=wrongpass' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -d ''
+
+**Response:**
+{
+  "detail": "Incorrect username or password"
+}
+
+Status Code: 401 Unauthorized
+
+6. GET /courses/major/{major_id} (invalid major)
+**Request:**
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/courses/major/9999' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+**Response:**
+{
+  "detail": "Major not found"
+}
+
+Status Code: 404 Not Found
+====================================================================================================
+
+Issue #2: Schema/API Design comments (Briana Lonappan)
+State: open | Created: 2025-05-19T05:25:45Z | Author: brianalona
+--------------------------------------------------------------------------------
+1. Most of the routes don’t use FastAPI’s `response_model`. Adding these would help with validation and generate clearer documentation in Swagger.
+
+2. Passwords are being stored directly as strings. There should be hashing (like with bcrypt) both in the schema and logic to make the app more secure.
+
+3. The login endpoint uses path/query parameters for credentials. It would be better design-wise and security-wise to switch to a POST endpoint that takes a JSON body with username and password.
+
+4. Some Pydantic schemas define ID fields separately from the base schema. That creates extra repetition in routes. Consider using a consistent structure with inherited models like `CourseBase` and `Course`.
+
+5. It would be helpful if some routes accepted filters. For example, `/courses` could allow filtering by major or number of units so students can more easily find what they’re looking for.
+
+6. A few schema fields like `course_number`, `units`, or `student_id` should probably have validation constraints like `gt=0` or a max length. That would help catch bad inputs before hitting the database.
+
+7. The route `/courses/code/{department_code}/{course_number}` is very specific. I’d recommend switching this to a query string format like `/courses?department=CSC&number=365` to keep it REST-friendly.
+
+8. The models don’t include descriptions or metadata for docs. Adding `Field(..., description="...")` in Pydantic models would improve Swagger output and help users understand each field.
+
+9. The API structure is closely tied to raw SQL. It might help long term to separate models from queries by using ORM or at least putting SQL in separate service files.
+
+10. The responses from `/students/{id}` include course info, but it’s all manually built dictionaries. It would be cleaner to define nested Pydantic models for completed and planned courses.
+
+11. The project doesn’t use any API versioning (like `/v1/students`). Adding this now could make future updates easier and avoid breaking existing clients.
+
+12. There are some inconsistencies in naming. For example, some endpoints use underscores (`/plan_course`) while others follow REST paths (`/students/{id}`). It’d be good to choose one naming convention and stick with it across the whole API.
+====================================================================================================
+
+Issue #1: Code Review Comments (Briana Lonappan)
+State: open | Created: 2025-05-19T05:21:15Z | Author: brianalona
+--------------------------------------------------------------------------------
+1. Insecure Password Storage (students.py):
+   Student passwords are stored in plain text. A secure hashing mechanism such as bcrypt or passlib should be used to protect user credentials.
+
+2. Missing Response Models in Endpoints:
+   Most endpoints, including those in students.py, courses.py, and majors.py, do not use FastAPI’s response_model parameter. Using response models improves validation, documentation, and consistency of API responses.
+
+3. No POST/PUT/DELETE Support in majors.py:
+   The majors router only supports GET requests. For full CRUD support and administrative functionality, additional endpoints for creating, updating, and deleting majors should be included.
+
+4. Repeated SQL Query Logic:
+   Code that checks for the existence of students and courses is repeated in several files. These checks should be refactored into reusable helper functions to reduce redundancy and improve maintainability.
+
+5. Lack of Input Validation for Parameters:
+   Many route parameters (e.g., student_id, course_id) lack validation constraints such as greater-than-zero checks or string length limits. These should be validated using Pydantic or FastAPI's Query/Path tools to prevent invalid or malicious inputs.
+
+6. Incomplete Admin Reset Function (admin.py):
+   The `/admin/reset` endpoint is not implemented beyond resetting gold and contains a placeholder `pass` statement. Either complete the intended functionality or remove the incomplete route to maintain code integrity.
+
+7. Hardcoded Quarter Values in planner.py:
+   Quarter names are hardcoded in a list, which reduces flexibility and scalability. Consider deriving these dynamically from a schedule table or generating them based on term logic.
+
+8. Misuse of Path Parameters for Sensitive Data:
+   The `/login/{username}` route uses a GET-like path to send login credentials, which is insecure and non-standard. A proper POST endpoint using a request body should be used for authentication to avoid exposing sensitive information.
+
+9. All SQL Queries Are Inline:
+   All queries are written as raw SQL within route functions. For better separation of concerns, these should be moved to a dedicated data access layer or abstracted with SQLAlchemy ORM or repository classes.
+
+10. No Pagination on Potentially Large Responses:
+    Endpoints like `/courses` and `/majors/{id}/students` can return large datasets without pagination. Adding optional `limit` and `offset` query parameters will improve performance and client-side control.
+
+11. No Unit or Integration Tests Provided:
+    There are no tests included in the project for any endpoints. Tests are critical for validating functionality and preventing regressions, and should be included for all major features.
+
+12. No use of environment variables for configuration:
+    Configuration values such as database connections or debug flags are not abstracted into environment variables. Best practice is to use a .env file with a config loader (e.g., using pydantic's BaseSettings) to separate code from environment-specific values.
+
+
+====================================================================================================
+

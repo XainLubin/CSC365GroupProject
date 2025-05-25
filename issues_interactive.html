@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive To-Do List</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; max-width: 900px; margin: auto; }
+    h1, h2, h3 { margin-top: 1.5em; }
+    label { display: block; margin: 0.4em 0; }
+    .author { font-style: italic; color: #555; margin-left: 1.5em; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+
+<h1>To-Do List by Issue Type</h1>
+
+<h2>Code Review</h2>
+
+<h3>General Code Quality</h3>
+<label><input type="checkbox"> Remove unused files (e.g., bottler.py, carts.py) <span class="author">– Dhvani Goel</span></label>
+<label><input type="checkbox"> Add return type hints to route functions (e.g., -> List[Course]) <span class="author">– Madison Lopez</span></label>
+<label><input type="checkbox"> Add logging and comments to logic-heavy parts of the planner <span class="author">– Madison Lopez</span></label>
+
+<h3>Schema & Model Use</h3>
+<label><input type="checkbox"> Use response_model=... in all endpoints <span class="author">– Briana Lonappan, Dhvani Goel</span></label>
+<label><input type="checkbox"> Replace manually built dicts with Pydantic model instances <span class="author">– Dhvani Goel, Briana Lonappan</span></label>
+<label><input type="checkbox"> Validate email field using EmailStr <span class="author">– Dhvani Goel</span></label>
+
+<h3>Validation & Reusability</h3>
+<label><input type="checkbox"> Restrict grade, quarter_taken fields with enums <span class="author">– Uriel, Dhvani Goel, Madison Lopez</span></label>
+<label><input type="checkbox"> Create helper functions (e.g., validate_student()) to avoid duplication <span class="author">– Briana Lonappan, Dhvani Goel</span></label>
+<label><input type="checkbox"> Split get_student into separate routes for planned and completed courses <span class="author">– Uriel, Dhvani Goel</span></label>
+
+<h2>Schema / API Design</h2>
+
+<h3>Route Naming & Structure</h3>
+<label><input type="checkbox"> Rename /login/{username} → /login/{email} <span class="author">– Briana Lonappan, Dhvani Goel, Uriel</span></label>
+<label><input type="checkbox"> Move /plan_course and /mark_course_completed under /students/{id}/... <span class="author">– All three authors</span></label>
+<label><input type="checkbox"> Rename /courses/major/{id} → /majors/{id}/courses <span class="author">– Dhvani Goel</span></label>
+<label><input type="checkbox"> Remove test route /hi <span class="author">– Dhvani Goel, Uriel</span></label>
+
+<h3>Data Modeling Improvements</h3>
+<label><input type="checkbox"> Convert department_code to Enum or use lookup table <span class="author">– Madison Lopez</span></label>
+<label><input type="checkbox"> Add constraints for fields like planned_quarter, grades, etc. <span class="author">– All authors</span></label>
+<label><input type="checkbox"> Use composite keys (student_id, course_id) for course records <span class="author">– Madison Lopez</span></label>
+<label><input type="checkbox"> Use consistent model inheritance for cleaner schema (CourseBase, etc.) <span class="author">– Briana Lonappan</span></label>
+
+<h3>Validation / Security</h3>
+<label><input type="checkbox"> Use POST with JSON body for login instead of path/query params <span class="author">– All authors</span></label>
+<label><input type="checkbox"> Ensure passwords are hashed (e.g., bcrypt) <span class="author">– Briana Lonappan, Madison Lopez</span></label>
+<label><input type="checkbox"> Add index on email field for faster logins <span class="author">– Madison Lopez</span></label>
+
+<h2>Test Results & Bugs</h2>
+
+<h3>Planning / Enrollment Logic</h3>
+<label><input type="checkbox"> Prevent planning of a course that is already completed <span class="author">– Dhvani Goel</span></label>
+<label><input type="checkbox"> Validate major_id and course_id to avoid server errors <span class="author">– Briana Lonappan, Dhvani Goel</span></label>
+<label><input type="checkbox"> Normalize casing of department codes (e.g., accept csc, CSC) <span class="author">– All authors</span></label>
+<label><input type="checkbox"> Restrict grade, quarter_taken to valid values only <span class="author">– Uriel, Dhvani Goel, Madison Lopez</span></label>
+
+<h3>Endpoint Failures</h3>
+<label><input type="checkbox"> Handle 404s for invalid majors/courses with clear error messages <span class="author">– All authors</span></label>
+<label><input type="checkbox"> Avoid 500 errors during student creation with invalid major <span class="author">– Dhvani Goel</span></label>
+
+<h2>Product Ideas</h2>
+
+<h3>Graduation & Course Planning</h3>
+<label><input type="checkbox"> Graduation Audit – GET /students/{id}/grad_status <span class="author">– Uriel</span></label>
+<label><input type="checkbox"> Custom Planner – POST /planner/custom_plan <span class="author">– Dhvani Goel</span></label>
+<label><input type="checkbox"> Optimized Path to Graduation – GET /planner/optimized_path_to_graduation <span class="author">– Madison Lopez</span></label>
+<label><input type="checkbox"> Earliest Graduation Prediction – POST /students/{id}/earliest_graduation <span class="author">– Dhvani Goel</span></label>
+<label><input type="checkbox"> Schedule Conflict Checker – POST /schedule/conflict_checker <span class="author">– Madison Lopez</span></label>
+
+<h3>Additional Helpful Endpoints</h3>
+<label><input type="checkbox"> View students in same major – GET /majors/{id}/students <span class="author">– Uriel</span></label>
+<label><input type="checkbox"> Degree audit overview – GET /students/{id}/degree_audit <span class="author">– Dhvani Goel</span></label>
+<label><input type="checkbox"> Student schedule summary – GET /students/{id}/schedule <span class="author">– Briana Lonappan</span></label>
+<label><input type="checkbox"> List popular majors – GET /majors/popularity <span class="author">– Briana Lonappan</span></label>
+
+<script>
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    cb.checked = localStorage.getItem('cb_' + i) === 'true';
+    cb.addEventListener('change', () => {
+      localStorage.setItem('cb_' + i, cb.checked);
+    });
+  });
+</script>
+
+
+<button id="saveBtn">Download Updated Copy</button>
+
+<script>
+  // Restore checkbox state from localStorage
+  document.querySelectorAll('input[type="checkbox"]').forEach((cb, i) => {
+    cb.checked = localStorage.getItem('cb_' + i) === 'true';
+    cb.addEventListener('change', () => {
+      localStorage.setItem('cb_' + i, cb.checked);
+    });
+  });
+
+  // Save updated HTML with checked boxes
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    const clone = document.documentElement.cloneNode(true);
+    const checkboxes = clone.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach((cb, i) => {
+      if (localStorage.getItem('cb_' + i) === 'true') {
+        cb.setAttribute('checked', '');
+      } else {
+        cb.removeAttribute('checked');
+      }
+    });
+
+    // Remove the save button (optional)
+    clone.querySelector('#saveBtn').remove();
+
+    const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'issues_updated.html';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+Title: Test Results (Dhvani Goel)
+State: open
+Created: 2025-05-20T04:52:11Z
+Updated: 2025-05-20T04:52:11Z
+Author: dhvani427
+
+### Test 1: Add Planned Course That Doesn’t Exist
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=4' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 88,
+  "planned_quarter": "Fall 2025"
+}'
+
+
+Error: response status is 404
+
+{
+  "detail": "Course not found"
+}
+
+### Test 2: Mark Course As Completed and Then Plan It Again
+
+**POST /mark_course_completed**
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/mark_course_completed?student_id=4' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 1,
+  "grade": "A",
+  "quarter_taken": "Winter 2025"
+}'
+
+
+204	Successful Response
+
+**POST /plan_course**
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=4' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 1,
+  "planned_quarter": "Fall 2025"
+}'
+
+
+204	Successful Response
+
+**GET /students/{student_id}**
+
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/students/4' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+
+{
+  "id": 4,
+  "first_name": "john",
+  "last_name": "clm",
+  "email": "john@",
+  "major_id": 1,
+  "completed_courses": [
+    {
+      "id": 1,
+      "department_code": "CSC",
+      "course_number": 101,
+      "units": 4,
+      "title": "Fundamentals of Computer Science I",
+      "grade": "A",
+      "quarter_taken": "Winter 2025"
+    }
+  ],
+  "planned_courses": [
+    {
+      "id": 1,
+      "department_code": "CSC",
+      "course_number": 101,
+      "units": 4,
+      "title": "Fundamentals of Computer Science I",
+      "planned_quarter": "Fall 2025"
+    }
+  ]
+}
+
+### Create Student With Major ID That Doesn’t Exist
+
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "first_name": "Sam",
+  "last_name": "Pam",
+  "email": "sampam@calpoly.edu",
+  "major_id": 123456,
+  "password": "sampam"
+}'
+
+
+Error: response status is 500
+Internal Server Error

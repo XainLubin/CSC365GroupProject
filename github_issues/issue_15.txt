@@ -1,0 +1,352 @@
+Title: Test Results (Uriel)
+State: open
+Created: 2025-05-20T06:00:34Z
+Updated: 2025-05-20T06:00:34Z
+Author: RmaUriel
+
+## Jack is an incoming CS student. post/students.   He want to see all the major courses he has to take as a CS student.  He calls  courses/major/{major_id}. As he sees them, he wants to plan out his future schedule. He calls Get/planner/create_course_plan
+Create a student named Jack: 
+<pre> 
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "first_name": "Jack",
+  "last_name": "Stan",
+  "email": "JS@calpoly.edu",
+  "major_id": 1,
+  "password": "BOB"
+}'
+ </pre>
+Response: 
+<pre> 
+{
+  "first_name": "Jack",
+  "last_name": "Stan",
+  "email": "JS@calpoly.edu",
+  "major_id": 1,
+  "id": 13
+}
+</pre>
+
+Get CS courses: 
+ <pre>
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/courses/major/1' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+Response:
+[
+  {
+    "id": 1,
+    "department_code": "CSC",
+    "course_number": 101,
+    "units": 4,
+    "title": "Fundamentals of Computer Science I",
+    "description": "Introduction to programming and problem solving using Python",
+    "is_required": true
+  },
+  {
+    "id": 2,
+    "department_code": "CSC",
+    "course_number": 202,
+    "units": 4,
+    "title": "Data Structures",
+    "description": "Implementation and analysis of fundamental data structures",
+    "is_required": true
+  },
+  {
+    "id": 3,
+    "department_code": "CSC",
+    "course_number": 203,
+    "units": 4,
+    "title": "Project-Based Object-Oriented Programming and Design",
+    "description": "Object-oriented programming and design principles",
+    "is_required": true
+  },
+  {
+    "id": 4,
+    "department_code": "CSC",
+    "course_number": 225,
+    "units": 4,
+    "title": "Computer Organization",
+    "description": "Computer architecture and assembly language programming",
+    "is_required": true
+  },
+  {
+    "id": 5,
+    "department_code": "CSC",
+    "course_number": 248,
+    "units": 4,
+    "title": "Discrete Structures",
+    "description": "Discrete mathematics for computer science",
+    "is_required": true
+  },
+  {
+    "id": 6,
+    "department_code": "CSC",
+    "course_number": 349,
+    "units": 4,
+    "title": "Design and Analysis of Algorithms",
+    "description": "Analysis and design of efficient algorithms",
+    "is_required": true
+  },
+  {
+    "id": 7,
+    "department_code": "CSC",
+    "course_number": 357,
+    "units": 4,
+    "title": "Systems Programming",
+    "description": "Systems programming in C and Unix",
+    "is_required": true
+  },
+  {
+    "id": 8,
+    "department_code": "CSC",
+    "course_number": 430,
+    "units": 4,
+    "title": "Programming Languages",
+    "description": "Study of programming language paradigms and concepts",
+    "is_required": true
+  },
+  {
+    "id": 9,
+    "department_code": "CSC",
+    "course_number": 445,
+    "units": 4,
+    "title": "Software Engineering",
+    "description": "Software development lifecycle and methodologies",
+    "is_required": true
+  },
+  {
+    "id": 10,
+    "department_code": "CSC",
+    "course_number": 491,
+    "units": 2,
+    "title": "Senior Project",
+    "description": "Senior project for Computer Science",
+    "is_required": true
+  }
+]
+ </pre>
+
+## Jack is nervous about meeting new students. He want to see all the people who will also be CS majors. He calls get/majors/{major_id}/students. 
+Get CS students:
+<pre>
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/majors/1/students' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+</pre>
+
+Response: 
+<pre>
+[
+  {
+    "id": 1,
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "jdoe@calpoly.edu"
+  },
+  {
+    "id": 2,
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "jsmith@calpoly.edu"
+  },
+  {
+    "id": 4,
+    "first_name": "john",
+    "last_name": "clm",
+    "email": "john@"
+  },
+  {
+    "id": 5,
+    "first_name": "seema",
+    "last_name": "clm",
+    "email": "seema@"
+  },
+  {
+    "id": 7,
+    "first_name": "Ada",
+    "last_name": "Lovelace",
+    "email": "ada@calpoly.edu"
+  },
+  {
+    "id": 8,
+    "first_name": "Bri",
+    "last_name": "Lona",
+    "email": "brilona@calpoly.edu"
+  },
+  {
+    "id": 11,
+    "first_name": "1",
+    "last_name": "2",
+    "email": "3"
+  },
+  {
+    "id": 12,
+    "first_name": "Bingus",
+    "last_name": "Khan",
+    "email": "bk@globmail.com"
+  },
+  {
+    "id": 13,
+    "first_name": "Jack",
+    "last_name": "Stan",
+    "email": "JS@calpoly.edu"
+  }
+]
+</pre>
+
+## Jack has just finished his first quarter. He checks out his planner with get/planner/create-course_plan. As he gets his class info, he updates his courses taken. He calls post/mark_course_completed. He also decides to take an extra class in winter rather than spring. He calls post/plan_course to update it. 
+
+Get course plan:
+<pre>
+curl -X 'GET' \
+  'https://group-project-365-iq6d.onrender.com/planner/create_course_plan?student_id=13' \
+  -H 'accept: application/json' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+</pre>
+
+Response: 
+<pre>
+{
+  "quarters": [
+    {
+      "quarter_name": "Fall 2025",
+      "courses": [
+        {
+          "id": 1,
+          "department_code": "CSC",
+          "course_number": 101,
+          "units": 4,
+          "title": "Fundamentals of Computer Science I",
+          "description": "Introduction to programming and problem solving using Python"
+        },
+        {
+          "id": 5,
+          "department_code": "CSC",
+          "course_number": 248,
+          "units": 4,
+          "title": "Discrete Structures",
+          "description": "Discrete mathematics for computer science"
+        },
+        {
+          "id": 9,
+          "department_code": "CSC",
+          "course_number": 445,
+          "units": 4,
+          "title": "Software Engineering",
+          "description": "Software development lifecycle and methodologies"
+        }
+      ]
+    },
+    {
+      "quarter_name": "Winter 2026",
+      "courses": [
+        {
+          "id": 2,
+          "department_code": "CSC",
+          "course_number": 202,
+          "units": 4,
+          "title": "Data Structures",
+          "description": "Implementation and analysis of fundamental data structures"
+        },
+        {
+          "id": 6,
+          "department_code": "CSC",
+          "course_number": 349,
+          "units": 4,
+          "title": "Design and Analysis of Algorithms",
+          "description": "Analysis and design of efficient algorithms"
+        },
+        {
+          "id": 10,
+          "department_code": "CSC",
+          "course_number": 491,
+          "units": 2,
+          "title": "Senior Project",
+          "description": "Senior project for Computer Science"
+        }
+      ]
+    },
+    {
+      "quarter_name": "Spring 2026",
+      "courses": [
+        {
+          "id": 3,
+          "department_code": "CSC",
+          "course_number": 203,
+          "units": 4,
+          "title": "Project-Based Object-Oriented Programming and Design",
+          "description": "Object-oriented programming and design principles"
+        },
+        {
+          "id": 7,
+          "department_code": "CSC",
+          "course_number": 357,
+          "units": 4,
+          "title": "Systems Programming",
+          "description": "Systems programming in C and Unix"
+        }
+      ]
+    },
+    {
+      "quarter_name": "Fall 2026",
+      "courses": [
+        {
+          "id": 4,
+          "department_code": "CSC",
+          "course_number": 225,
+          "units": 4,
+          "title": "Computer Organization",
+          "description": "Computer architecture and assembly language programming"
+        },
+        {
+          "id": 8,
+          "department_code": "CSC",
+          "course_number": 430,
+          "units": 4,
+          "title": "Programming Languages",
+          "description": "Study of programming language paradigms and concepts"
+        }
+      ]
+    }
+  ]
+}
+</pre>
+Update Courses Taken:
+<pre>
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/mark_course_completed?student_id=13' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 1,
+  "grade": "A",
+  "quarter_taken": "Fall 2025"
+}'
+</pre>
+
+Response: 
+<pre> 204 </pre>
+
+Update course_plan:
+<pre>
+curl -X 'POST' \
+  'https://group-project-365-iq6d.onrender.com/plan_course?student_id=13' \
+  -H 'accept: */*' \
+  -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "course_id": 3,
+  "planned_quarter": "Winter 2026"
+}'
+</pre>
+
+Response:
+<pre> 204 </pre>

@@ -1,0 +1,18 @@
+Title: Schema/API Design (Dhvani Goel)
+State: open
+Created: 2025-05-20T04:39:39Z
+Updated: 2025-05-20T04:39:39Z
+Author: dhvani427
+
+1. Right now, /courses/major/{major_id} only works if you know the major's ID, but users usually know the major name (like CSC). It would be more user-friendly if we could also get courses by major name.
+2. The route /courses/major/{major_id} feels a bit out of place. Since it’s about a major’s courses, it might be better as /majors/{major_id}/courses, just like how /majors/{major_id}/students works. That would keep the structure more consistent.
+3. The /courses/code/{department_code}/{course_number} route works, but the word "code" feels unnecessary. It might be cleaner as /courses/{department_code}/{course_number}.
+4. I am able to mark a course as completed and also plan it again for the future, which shouldn’t be the case. Maybe add a check to prevent adding a planned course that’s already completed.
+5. Routes like /mark_course_completed and /plan_course are based on a specific student, but they’re not under a student-based route. It should be /students/{student_id}/mark_course_completed and /students/{student_id}/plan_course
+6. The user gets a generated plan, but there’s no way to pass preferences like "I want 3 courses per quarter" or "skip Spring 2026”, maybe make this more flexible by adding optional query params.
+7. Creating a student with a nonexistent major currently crashes the server. The API check that major_id exists before insert and if validation fails, return a proper 400 Bad Request instead of a 500
+8. In /mark_course_completed, I’m able to enter random text like "banana" for the grade, and it still accepts it. This should be restricted to valid grade formats like "A", "B+", etc.
+9. For the quarter_taken field, I can type anything like "orange" and it still goes through. Add validation to only allow proper formats like "Fall 2025", "Winter 2026", etc.
+10. Remove /hi/ testpoint which you probably had initially for testing, but don't need it now
+11. Instead of /login/{username} say /login/{email}, since when we create an account we specify our email not a username, which may cause confusion.
+12. The /courses endpoint supports pagination with skip and limit, but there’s no total count of available courses returned. It would be helpful to include a total field in the response and display things like “showing 10 of 73 courses.”

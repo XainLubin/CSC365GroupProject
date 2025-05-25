@@ -1,0 +1,18 @@
+Title: Code Review (Dhvani Goel)
+State: open
+Created: 2025-05-20T04:25:22Z
+Updated: 2025-05-20T04:25:22Z
+Author: dhvani427
+
+1. You have bottler.py, carts.py etc., that is not being used, so I would suggest  removing those files for clarity
+2. In courses.py, all routes return raw dictionaries, even though the Course model is defined. Adding response_model=Course or List[Course] would help structure the data
+3. The /code/{department_code}/{course_number} endpoint currently returns "Course not found" even if the department itself doesn't exist. Consider explicitly checking whether the department exists first and returning a more helpful error like "Department not found" vs "Course not found in this department"
+4. Even though the Major model is defined, it isn’t used as a response_model. Adding it to /majors and /majors/{id} would improve and validate responses
+5. In create_student(), you’re accepting email: str, but since you import EmailStr from Pydantic, you can use email: EmailStr to get free validation that the email is correctly formatted.
+6. In create_student(), you specify response_model=Student, but you return a manually built dict instead of a response with Student. Returning a real Pydantic object would ensure it matches the schema exactly and reduce errors.
+7. You're repeating the same SQL checks in multiple endpoints (mark_course_completed, plan_course, etc.) to see if a student or course exists. Maybe you can make a helper function like validate_student() or validate_course() to avoid repetition. 
+8.  Take lowercase into account, csc should also work to get major specific details, instead of just CSC
+9. If a major doesn’t have any required courses defined, the planner returns an empty plan. It might be helpful to return a warning or message saying "No major requirements found."
+10. The grade and quarter_taken fields on the CompletedCourse model can be literally anything. You could restrict grades to "A", "B+", etc. and add validation for quarters e.g., "Fall 2024".
+11. The mark_course_completed and plan_course endpoints just return a blank 204. Returning { "message": "Course marked as completed" } would be more helpful, especially when testing.
+12. For logging in, it would be helpful to be specific about whether it is the username that’s wrong or the password, instead of returning "Incorrect username or password”.

@@ -10,7 +10,6 @@ tags_metadata = [
     {"name": "courses", "description": "Operations with courses."},
     {"name": "majors", "description": "Operations with majors and degrees."},
     {"name": "planner", "description": "Course plan generation."},
-    {"name": "hi", "description": "Hello world test endpoint."},
 ]
 
 app = FastAPI(
@@ -35,7 +34,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(hi.router)
 app.include_router(students.router)
 app.include_router(courses.router)
 app.include_router(majors.router)

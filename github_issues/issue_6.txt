@@ -1,0 +1,31 @@
+Title: Schema/API Design comments (Madison Lopez)
+State: open
+Created: 2025-05-20T01:33:32Z
+Updated: 2025-05-20T01:52:56Z
+Author: Munamused
+
+1. On your APIspec document, maybe fix the markdown format to be more readable and easier to follow.
+
+2. The `department_code` field in `courses` is a free-form string, but it's tied to a finite set of known values ("CSC", "MATH", etc). You might want to use an `Enum` or even a lookup table for department codes to avoid typos and make joins easier later.
+
+3. You don't store term information (like "Fall 2024") directly in the `courses` table, but the ER diagram suggests a `Term_id` field and `Terms_offered` table. The current schema you're using doesn’t have that — maybe useful for future-proofing quarter-based planning.
+
+4. You have a `description` field in both `majors` and `courses`, which is great, but `description` in `completed_courses` or `planned_courses` might also help if students want to annotate their entries with notes.
+
+5. Passwords are stored as strings in the `students` table — just double check you’re hashing them (which you probably are based on the bcrypt-looking hash, but might be worth calling out in comments).
+
+6. There's a unique constraint on `email`, which is good, but no index on it. Since logins rely on email lookup, might be worth indexing `email` explicitly if performance ever becomes a concern.
+
+7. `completed_courses` and `planned_courses` both have their own ID columns as primary keys, but you could just use a composite primary key of `(student_id, course_id)` in both tables. Saves space and reflects the natural uniqueness of those entries.
+
+8. You have a `planned_quarter` field, but no validation on format. Is it always `YYYY-TERM`? If so, maybe standardize that with a check constraint or structured term model.
+
+9. API routes like `/add_future_course/{courseID}` and `/mark_course_completed/{grade}` use path parameters for data that might be better in the body — especially for POSTs. Body data is easier to expand later (e.g., adding metadata like quarter or transcript ID).
+
+10. There’s no `/courses/{id}` route in the sample API spec — you might want a route that just returns a specific course, or lets users look one up by code and number (e.g., `/courses/CSC/101`).
+
+11. Your sample flows assume GE requirements and preferences are part of the planning logic, but there’s no schema support for GE areas, GWR, USCP, or time blocks in the schema you’re using. Might be worth stubbing out even if not fully implemented yet.
+
+12. In the seed data for `major_requirements`, you always set `is_required = true`. If everything is required, you might not need this column until you support electives or category-based requirements.
+
+13. The sample API has `/add_completed_course/{courseID}` and `/mark_course_completed/{grade}`, but it’s not clear how those two differ. Maybe those should be combined, or clarified so one adds the record and the other updates it.

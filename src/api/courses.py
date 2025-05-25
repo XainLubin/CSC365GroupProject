@@ -22,8 +22,27 @@ class CourseBase(BaseModel):
 class Course(CourseBase):
     id: int
 
-@router.get("/")
-def get_courses(skip: int = 0, limit: int = 100):
+def course_from_row(row) -> Course:
+    """
+    Helper function to convert a database row to a Course model.
+    """
+    return Course(
+        id=row.id,
+        department_code=row.department_code,
+        course_number=row.course_number,
+        units=row.units,
+        title=row.title,
+        description=row.description
+    )
+def course_list_from_rows(rows) -> List[Course]:
+    """
+    Helper function to convert a list of database rows to a list of Course models.
+    """
+    return [course_from_row(row) for row in rows]
+
+
+@router.get("/", response_model=List[Course])
+def get_courses(skip: int = 0, limit: int = 100) -> List[Course]:
     """
     Get all courses, with optional pagination.
     """
@@ -40,18 +59,19 @@ def get_courses(skip: int = 0, limit: int = 100):
         ).fetchall()
         
         return [
-            {
-                "id": course.id,
-                "department_code": course.department_code,
-                "course_number": course.course_number,
-                "units": course.units,
-                "title": course.title,
-                "description": course.description
-            } for course in courses
+            Course(
+                id=course.id,
+                department_code=course.department_code,
+                course_number=course.course_number,
+                units=course.units,
+                title=course.title,
+                description=course.description
+            ) 
+            for course in courses
         ]
 
-@router.get("/{course_id}")
-def get_course(course_id: int):
+@router.get("/{course_id}", response_model=Course)
+def get_course(course_id: int) -> Course:
     """
     Get a specific course by ID.
     """
@@ -70,17 +90,18 @@ def get_course(course_id: int):
         if not course:
             raise HTTPException(status_code=404, detail="Course not found")
         
-        return {
-            "id": course.id,
-            "department_code": course.department_code,
-            "course_number": course.course_number,
-            "units": course.units,
-            "title": course.title,
-            "description": course.description
-        }
+        return Course(
+            id=course.id,
+            department_code=course.department_code,
+            course_number=course.course_number,
+            units=course.units,
+            title=course.title,
+            description=course.description
+        )
 
-@router.get("/code/{department_code}/{course_number}")
-def get_course_by_code(department_code: str, course_number: int):
+
+@router.get("/code/{department_code}/{course_number}", response_model=Course)
+def get_course_by_code(department_code: str, course_number: int) -> Course:
     """
     Get a specific course by department code and course number.
     """
@@ -99,17 +120,17 @@ def get_course_by_code(department_code: str, course_number: int):
         if not course:
             raise HTTPException(status_code=404, detail="Course not found")
         
-        return {
-            "id": course.id,
-            "department_code": course.department_code,
-            "course_number": course.course_number,
-            "units": course.units,
-            "title": course.title,
-            "description": course.description
-        }
+        return Course(
+            id=course.id,
+            department_code=course.department_code,
+            course_number=course.course_number,
+            units=course.units,
+            title=course.title,
+            description=course.description
+        )
 
-@router.get("/major/{major_id}")
-def get_major_courses(major_id: int):
+@router.get("/by_major_id/{major_id}", response_model=List[Course])
+def get_major_courses(major_id: int) -> List[Course]:
     """
     Get all courses required for a specific major.
     """
@@ -139,13 +160,13 @@ def get_major_courses(major_id: int):
         ).fetchall()
         
         return [
-            {
-                "id": course.id,
-                "department_code": course.department_code,
-                "course_number": course.course_number,
-                "units": course.units,
-                "title": course.title,
-                "description": course.description,
-                "is_required": course.is_required
-            } for course in courses
+            Course(
+                id=course.id,
+                department_code=course.department_code,
+                course_number=course.course_number,
+                units=course.units,
+                title=course.title,
+                description=course.description
+            ) 
+            for course in courses
         ]

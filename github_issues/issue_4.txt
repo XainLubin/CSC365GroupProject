@@ -1,0 +1,35 @@
+Title: Product ideas (Briana Lonappan)
+State: open
+Created: 2025-05-19T05:49:14Z
+Updated: 2025-05-19T05:49:14Z
+Author: brianalona
+
+Here are two endpoint ideas I think would add helpful features to this project:
+
+---
+
+1. GET /students/{id}/schedule
+
+This would generate a student's course schedule by quarter, based on the classes they’ve already completed, what they’ve planned, and what’s still required.
+
+Why it would help:  
+It gives students a better idea of how close they are to finishing their major and helps them see what their next few quarters could look like. Could also help with advising or planning tools.
+
+Possible extras:
+- quarters=n (limit how many quarters to show)
+- include_completed=false (hide completed classes in the output)
+
+---
+
+2. GET /majors/popularity
+
+This would return a list of majors ranked by how many students are currently enrolled in them.
+
+Why it would help:  
+It could be useful for showing trends or for visualizations in a dashboard. It also helps highlight what the most common majors are.
+
+Example output:
+[
+  { "major": "Computer Science", "students": 150 },
+  { "major": "Software Engineering", "students": 120 }
+]

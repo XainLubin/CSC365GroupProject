@@ -1,0 +1,29 @@
+Title: Schema/API Design comments (Briana Lonappan)
+State: open
+Created: 2025-05-19T05:25:45Z
+Updated: 2025-05-19T05:25:45Z
+Author: brianalona
+
+1. Most of the routes don’t use FastAPI’s `response_model`. Adding these would help with validation and generate clearer documentation in Swagger.
+
+2. Passwords are being stored directly as strings. There should be hashing (like with bcrypt) both in the schema and logic to make the app more secure.
+
+3. The login endpoint uses path/query parameters for credentials. It would be better design-wise and security-wise to switch to a POST endpoint that takes a JSON body with username and password.
+
+4. Some Pydantic schemas define ID fields separately from the base schema. That creates extra repetition in routes. Consider using a consistent structure with inherited models like `CourseBase` and `Course`.
+
+5. It would be helpful if some routes accepted filters. For example, `/courses` could allow filtering by major or number of units so students can more easily find what they’re looking for.
+
+6. A few schema fields like `course_number`, `units`, or `student_id` should probably have validation constraints like `gt=0` or a max length. That would help catch bad inputs before hitting the database.
+
+7. The route `/courses/code/{department_code}/{course_number}` is very specific. I’d recommend switching this to a query string format like `/courses?department=CSC&number=365` to keep it REST-friendly.
+
+8. The models don’t include descriptions or metadata for docs. Adding `Field(..., description="...")` in Pydantic models would improve Swagger output and help users understand each field.
+
+9. The API structure is closely tied to raw SQL. It might help long term to separate models from queries by using ORM or at least putting SQL in separate service files.
+
+10. The responses from `/students/{id}` include course info, but it’s all manually built dictionaries. It would be cleaner to define nested Pydantic models for completed and planned courses.
+
+11. The project doesn’t use any API versioning (like `/v1/students`). Adding this now could make future updates easier and avoid breaking existing clients.
+
+12. There are some inconsistencies in naming. For example, some endpoints use underscores (`/plan_course`) while others follow REST paths (`/students/{id}`). It’d be good to choose one naming convention and stick with it across the whole API.

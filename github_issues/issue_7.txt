@@ -1,0 +1,455 @@
+Title: Test Results (Madison Lopez)
+State: open
+Created: 2025-05-20T02:13:14Z
+Updated: 2025-05-20T02:13:14Z
+Author: Munamused
+
+**1. Create Student**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/students' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -H 'Content-Type: application/json' \
+>   -d '{
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "password": "string"
+> }'
+
+response:
+
+> {
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "id": 12
+> }
+
+**2. Login**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/login/bk%40globmail.com?password=string' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -d ''
+
+response:
+
+> {
+>   "id": 12,
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "completed_courses": [
+>     {
+>       "id": 1,
+>       "department_code": "CSC",
+>       "course_number": 101,
+>       "units": 4,
+>       "title": "Fundamentals of Computer Science I",
+>       "grade": "A+",
+>       "quarter_taken": "Fall 2025"
+>     }
+>   ]
+> }
+
+**3. Get Student**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/students/12' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> {
+>   "id": 12,
+>   "first_name": "Bingus",
+>   "last_name": "Khan",
+>   "email": "bk@globmail.com",
+>   "major_id": 1,
+>   "completed_courses": [
+>     {
+>       "id": 1,
+>       "department_code": "CSC",
+>       "course_number": 101,
+>       "units": 4,
+>       "title": "Fundamentals of Computer Science I",
+>       "grade": "A+",
+>       "quarter_taken": "Fall 2025"
+>     }
+>   ],
+>   "planned_courses": []
+> }
+
+**4. Mark Course Completed**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/mark_course_completed?student_id=12' \
+>   -H 'accept: */*' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -H 'Content-Type: application/json' \
+>   -d '{
+>   "course_id": 1,
+>   "grade": "A+",
+>   "quarter_taken": "Fall 2025"
+> }'
+
+response:
+
+> 204 | Successful Response
+
+**5. Plan Course**
+
+> curl -X 'POST' \
+>   'https://group-project-365-iq6d.onrender.com/plan_course?student_id=12' \
+>   -H 'accept: */*' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af' \
+>   -H 'Content-Type: application/json' \
+>   -d '{
+>   "course_id": 2,
+>   "planned_quarter": "Winter 2026"
+> }'
+
+response:
+
+> 204 | Successful Response
+
+**6. Get Courses**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/?skip=0&limit=3' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> [
+>   {
+>     "id": 1,
+>     "department_code": "CSC",
+>     "course_number": 101,
+>     "units": 4,
+>     "title": "Fundamentals of Computer Science I",
+>     "description": "Introduction to programming and problem solving using Python"
+>   },
+>   {
+>     "id": 2,
+>     "department_code": "CSC",
+>     "course_number": 202,
+>     "units": 4,
+>     "title": "Data Structures",
+>     "description": "Implementation and analysis of fundamental data structures"
+>   },
+>   {
+>     "id": 3,
+>     "department_code": "CSC",
+>     "course_number": 203,
+>     "units": 4,
+>     "title": "Project-Based Object-Oriented Programming and Design",
+>     "description": "Object-oriented programming and design principles"
+>   }
+> ]
+
+**7. Get Course by Id**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/9' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> {
+>   "id": 9,
+>   "department_code": "CSC",
+>   "course_number": 445,
+>   "units": 4,
+>   "title": "Software Engineering",
+>   "description": "Software development lifecycle and methodologies"
+> }
+
+**8. Get Course by code**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/code/csc/101' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> Error: response status is 404
+> {
+>   "detail": "Course not found"
+> }
+
+**9. Get courses by Major**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/courses/major/2' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> []
+
+**10. Get majors**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/majors/' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> [
+>   {
+>     "id": 1,
+>     "name": "Computer Science",
+>     "description": "Bachelor of Science in Computer Science"
+>   },
+>   {
+>     "id": 2,
+>     "name": "Software Engineering",
+>     "description": "Bachelor of Science in Software Engineering"
+>   },
+>   {
+>     "id": 3,
+>     "name": "Computer Engineering",
+>     "description": "Bachelor of Science in Computer Engineering"
+>   }
+> ]
+
+**11. Get Major by Id**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/majors/1' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> 
+> {
+>   "id": 1,
+>   "name": "Computer Science",
+>   "description": "Bachelor of Science in Computer Science"
+> }
+
+**12. Get Major Students**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/majors/2/students' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> [
+>   {
+>     "id": 3,
+>     "first_name": "Alex",
+>     "last_name": "Johnson",
+>     "email": "ajohnson@calpoly.edu"
+>   }
+> ]
+
+**13. Create Course Plan**
+
+> 
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/planner/create_course_plan?student_id=12' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+
+response:
+
+> {
+>   "quarters": [
+>     {
+>       "quarter_name": "Fall 2025",
+>       "courses": [
+>         {
+>           "id": 2,
+>           "department_code": "CSC",
+>           "course_number": 202,
+>           "units": 4,
+>           "title": "Data Structures",
+>           "description": "Implementation and analysis of fundamental data structures"
+>         },
+>         {
+>           "id": 6,
+>           "department_code": "CSC",
+>           "course_number": 349,
+>           "units": 4,
+>           "title": "Design and Analysis of Algorithms",
+>           "description": "Analysis and design of efficient algorithms"
+>         },
+>         {
+>           "id": 10,
+>           "department_code": "CSC",
+>           "course_number": 491,
+>           "units": 2,
+>           "title": "Senior Project",
+>           "description": "Senior project for Computer Science"
+>         }
+>       ]
+>     },
+>     {
+>       "quarter_name": "Winter 2026",
+>       "courses": [
+>         {
+>           "id": 3,
+>           "department_code": "CSC",
+>           "course_number": 203,
+>           "units": 4,
+>           "title": "Project-Based Object-Oriented Programming and Design",
+>           "description": "Object-oriented programming and design principles"
+>         },
+>         {
+>           "id": 7,
+>           "department_code": "CSC",
+>           "course_number": 357,
+>           "units": 4,
+>           "title": "Systems Programming",
+>           "description": "Systems programming in C and Unix"
+>         }
+>       ]
+>     },
+>     {
+>       "quarter_name": "Spring 2026",
+>       "courses": [
+>         {
+>           "id": 4,
+>           "department_code": "CSC",
+>           "course_number": 225,
+>           "units": 4,
+>           "title": "Computer Organization",
+>           "description": "Computer architecture and assembly language programming"
+>         },
+>         {
+>           "id": 8,
+>           "department_code": "CSC",
+>           "course_number": 430,
+>           "units": 4,
+>           "title": "Programming Languages",
+>           "description": "Study of programming language paradigms and concepts"
+>         }
+>       ]
+>     },
+>     {
+>       "quarter_name": "Fall 2026",
+>       "courses": [
+>         {
+>           "id": 5,
+>           "department_code": "CSC",
+>           "course_number": 248,
+>           "units": 4,
+>           "title": "Discrete Structures",
+>           "description": "Discrete mathematics for computer science"
+>         },
+>         {
+>           "id": 9,
+>           "department_code": "CSC",
+>           "course_number": 445,
+>           "units": 4,
+>           "title": "Software Engineering",
+>           "description": "Software development lifecycle and methodologies"
+>         }
+>       ]
+>     }
+>   ]
+> }
+
+**14. Get Requirements**
+
+> curl -X 'GET' \
+>   'https://group-project-365-iq6d.onrender.com/planner/requirements?student_id=12' \
+>   -H 'accept: application/json' \
+>   -H 'access_token: ec1586c96d616d3cc66297ae09ef12af'
+> 
+
+response:
+
+> [
+>   {
+>     "id": 2,
+>     "department_code": "CSC",
+>     "course_number": 202,
+>     "units": 4,
+>     "title": "Data Structures",
+>     "description": "Implementation and analysis of fundamental data structures"
+>   },
+>   {
+>     "id": 3,
+>     "department_code": "CSC",
+>     "course_number": 203,
+>     "units": 4,
+>     "title": "Project-Based Object-Oriented Programming and Design",
+>     "description": "Object-oriented programming and design principles"
+>   },
+>   {
+>     "id": 4,
+>     "department_code": "CSC",
+>     "course_number": 225,
+>     "units": 4,
+>     "title": "Computer Organization",
+>     "description": "Computer architecture and assembly language programming"
+>   },
+>   {
+>     "id": 5,
+>     "department_code": "CSC",
+>     "course_number": 248,
+>     "units": 4,
+>     "title": "Discrete Structures",
+>     "description": "Discrete mathematics for computer science"
+>   },
+>   {
+>     "id": 6,
+>     "department_code": "CSC",
+>     "course_number": 349,
+>     "units": 4,
+>     "title": "Design and Analysis of Algorithms",
+>     "description": "Analysis and design of efficient algorithms"
+>   },
+>   {
+>     "id": 7,
+>     "department_code": "CSC",
+>     "course_number": 357,
+>     "units": 4,
+>     "title": "Systems Programming",
+>     "description": "Systems programming in C and Unix"
+>   },
+>   {
+>     "id": 8,
+>     "department_code": "CSC",
+>     "course_number": 430,
+>     "units": 4,
+>     "title": "Programming Languages",
+>     "description": "Study of programming language paradigms and concepts"
+>   },
+>   {
+>     "id": 9,
+>     "department_code": "CSC",
+>     "course_number": 445,
+>     "units": 4,
+>     "title": "Software Engineering",
+>     "description": "Software development lifecycle and methodologies"
+>   },
+>   {
+>     "id": 10,
+>     "department_code": "CSC",
+>     "course_number": 491,
+>     "units": 2,
+>     "title": "Senior Project",
+>     "description": "Senior project for Computer Science"
+>   }
+> ]
+
+

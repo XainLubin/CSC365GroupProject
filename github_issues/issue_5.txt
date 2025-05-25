@@ -1,0 +1,29 @@
+Title: Code Review Comments (Madison Lopez)
+State: open
+Created: 2025-05-20T00:32:25Z
+Updated: 2025-05-20T01:32:02Z
+Author: Munamused
+
+1. In courses.py, "get_course(course_id)" uses .first(), getting the first row that pops up when querying for course by course_id. But since course_id is a primary key shouldn't there only be one row or no row that is returned? Would .one_or_none() be a better choice for readability? This continues to all functions in src/api, which use .first(), where you dont actually want the first row but the only row.
+
+2. Picky naming convention, you call "CSC" a department code but its more of an abbreviation, I feel like with "code" you expect numbers not a string. 
+
+3. Following up on the department code, you can use an enum type instead of a string to limit the field more.
+
+4. In majors.py, "get_major_students(major_id)", you can probably remove the first query of checking if the major exists, because if you just check for the students, and find none you can error with something like "No students in major found". Because what if the major exists, but there are no students in it?
+
+5. None of the route functions have return type hints. Adding them (e.g., -> List[Course] or -> dict) improves clarity and tooling support.
+
+6. The query in get_courses doesn't have an ORDER BY clause. It might be nice to order by course number.
+
+7. When adding planned or completed courses, there’s no enforcement on prerequisites or duplicates. Will dupes be just merged on conflicts to avoid erroring to the user? Should you error to the user if they're adding a class they completed without having completed the prereq?
+
+8. A lot of logic is repeated in functions on different files (get_by_id, add_to_list, remove_from_list). It would be easy to abstract them into helper functions.
+
+9. In some functions you have raise errors with HTTPException(status_code=404, detail="...") and sometimes you just return None or an empty list. You might want to pick a way to consistently handle errors and empty lists.
+
+10. Also, you raise errors but have no logs or print statements for debugging, those would be helpful.
+
+11. Generally add more comments to your logic parts of your planner.
+
+12. If someone queries .../csc/101 instead of .../CSC/101, they might get a 404. Probably standardize the case on input or in the database query: WHERE UPPER(department_code) = UPPER(:department_code)

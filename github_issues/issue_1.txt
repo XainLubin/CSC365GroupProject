@@ -1,0 +1,42 @@
+Title: Code Review Comments (Briana Lonappan)
+State: open
+Created: 2025-05-19T05:21:15Z
+Updated: 2025-05-19T05:21:15Z
+Author: brianalona
+
+1. Insecure Password Storage (students.py):
+   Student passwords are stored in plain text. A secure hashing mechanism such as bcrypt or passlib should be used to protect user credentials.
+
+2. Missing Response Models in Endpoints:
+   Most endpoints, including those in students.py, courses.py, and majors.py, do not use FastAPI’s response_model parameter. Using response models improves validation, documentation, and consistency of API responses.
+
+3. No POST/PUT/DELETE Support in majors.py:
+   The majors router only supports GET requests. For full CRUD support and administrative functionality, additional endpoints for creating, updating, and deleting majors should be included.
+
+4. Repeated SQL Query Logic:
+   Code that checks for the existence of students and courses is repeated in several files. These checks should be refactored into reusable helper functions to reduce redundancy and improve maintainability.
+
+5. Lack of Input Validation for Parameters:
+   Many route parameters (e.g., student_id, course_id) lack validation constraints such as greater-than-zero checks or string length limits. These should be validated using Pydantic or FastAPI's Query/Path tools to prevent invalid or malicious inputs.
+
+6. Incomplete Admin Reset Function (admin.py):
+   The `/admin/reset` endpoint is not implemented beyond resetting gold and contains a placeholder `pass` statement. Either complete the intended functionality or remove the incomplete route to maintain code integrity.
+
+7. Hardcoded Quarter Values in planner.py:
+   Quarter names are hardcoded in a list, which reduces flexibility and scalability. Consider deriving these dynamically from a schedule table or generating them based on term logic.
+
+8. Misuse of Path Parameters for Sensitive Data:
+   The `/login/{username}` route uses a GET-like path to send login credentials, which is insecure and non-standard. A proper POST endpoint using a request body should be used for authentication to avoid exposing sensitive information.
+
+9. All SQL Queries Are Inline:
+   All queries are written as raw SQL within route functions. For better separation of concerns, these should be moved to a dedicated data access layer or abstracted with SQLAlchemy ORM or repository classes.
+
+10. No Pagination on Potentially Large Responses:
+    Endpoints like `/courses` and `/majors/{id}/students` can return large datasets without pagination. Adding optional `limit` and `offset` query parameters will improve performance and client-side control.
+
+11. No Unit or Integration Tests Provided:
+    There are no tests included in the project for any endpoints. Tests are critical for validating functionality and preventing regressions, and should be included for all major features.
+
+12. No use of environment variables for configuration:
+    Configuration values such as database connections or debug flags are not abstracted into environment variables. Best practice is to use a .env file with a config loader (e.g., using pydantic's BaseSettings) to separate code from environment-specific values.
+

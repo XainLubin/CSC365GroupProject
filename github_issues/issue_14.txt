@@ -1,0 +1,21 @@
+Title: Product Ideas (Dhvani Goel)
+State: open
+Created: 2025-05-20T04:56:01Z
+Updated: 2025-05-20T04:56:01Z
+Author: dhvani427
+
+**1. POST /planner/custom_plan**
+Right now, the course planner just splits remaining classes evenly across upcoming quarters. But not everyone wants a perfectly balanced schedule — some students may want to skip Spring entirely, take fewer classes during internships, or overload in Fall to graduate early. This endpoint would let users pass in custom preferences like:
+- skip_quarters: ["Spring 2026"]
+- preferred_quarter_loads: { "Fall 2025": 4, "Winter 2026": 2 }
+- max_courses_per_quarter: 3
+
+**2. POST /students/{student_id}/earliest_graduation**
+This would calculate the soonest quarter a student can graduate, based on how many required courses are left and how many they can take each term. You could let users pass in optional preferences like course load or quarters to skip, and the system would return the first possible graduation date. Super useful for long-term planning.
+
+**3. GET /students/{student_id}/degree_audit**
+This endpoint would return a quick summary of a student’s academic progress — something like:
+- Courses completed
+- Courses still required
+- Percent of degree done
+- Units remaining

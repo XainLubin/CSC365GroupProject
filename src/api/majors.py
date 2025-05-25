@@ -18,9 +18,17 @@ class MajorBase(BaseModel):
 
 class Major(MajorBase):
     id: int
+def major_from_row(row) -> Major:
+    return Major(
+        id=row.id,
+        name=row.name,
+        description=row.description
+    )
+def major_list_from_rows(rows) -> List[Major]:
+    return [major_from_row(row) for row in rows]
 
-@router.get("/")
-def get_majors():
+@router.get("/", response_model=List[Major])
+def get_majors() -> List[Major]:
     """
     Get all majors.
     """
@@ -32,17 +40,11 @@ def get_majors():
                 """
             )
         ).fetchall()
+    return major_list_from_rows(majors)
         
-        return [
-            {
-                "id": major.id,
-                "name": major.name,
-                "description": major.description
-            } for major in majors
-        ]
 
-@router.get("/{major_id}")
-def get_major(major_id: int):
+@router.get("/{major_id}", response_model=Major)
+def get_major(major_id: int) -> Major:
     """
     Get a specific major by ID.
     """
@@ -59,14 +61,10 @@ def get_major(major_id: int):
         if not major:
             raise HTTPException(status_code=404, detail="Major not found")
         
-        return {
-            "id": major.id,
-            "name": major.name,
-            "description": major.description
-        }
+    return major_from_row(major)
 
-@router.get("/{major_id}/students")
-def get_major_students(major_id: int):
+@router.get("/{major_id}/students", response_model=List[Major])
+def get_major_students(major_id: int) -> List[Major]:
     """
     Get all students in a specific major.
     """
@@ -94,11 +92,4 @@ def get_major_students(major_id: int):
             {"major_id": major_id}
         ).fetchall()
         
-        return [
-            {
-                "id": student.id,
-                "first_name": student.first_name,
-                "last_name": student.last_name,
-                "email": student.email
-            } for student in students
-        ]
+    return major_list_from_rows(students)

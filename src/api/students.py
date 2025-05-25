@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Form, Body
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional
-from src.api import auth
+from src.api import auth, courses
 from src.database import engine
 import sqlalchemy
 from sqlalchemy import text
@@ -15,7 +15,7 @@ router = APIRouter(
 class StudentBase(BaseModel):
     first_name: str
     last_name: str
-    email: str
+    email: EmailStr
     major_id: Optional[int] = None
 
 class StudentCreate(StudentBase):
@@ -23,6 +23,17 @@ class StudentCreate(StudentBase):
 
 class Student(StudentBase):
     id: int
+def student_from_row(row) -> Student:
+    """
+    Helper function to convert a database row to a Student model.
+    """
+    return Student(
+        id=row.id,
+        first_name=row.first_name,
+        last_name=row.last_name,
+        email=row.email,
+        major_id=row.major_id
+    )
 
 class CompletedCourse(BaseModel):
     course_id: int
@@ -33,8 +44,10 @@ class PlannedCourse(BaseModel):
     course_id: int
     planned_quarter: Optional[str] = None
 
+
+
 @router.post("/students", response_model=Student)
-def create_student(student: StudentCreate):
+def create_student(student: StudentCreate) -> Student:
     """
     Create a new student.
     """
@@ -71,16 +84,10 @@ def create_student(student: StudentCreate):
             }
         ).first()
         
-        return {
-            "id": result.id,
-            "first_name": student.first_name,
-            "last_name": student.last_name,
-            "email": student.email,
-            "major_id": student.major_id
-        }
+        return student_from_row(result)
 
-@router.post("/login/{username}")
-def login(username: str, password: str):
+@router.post("/login/{email}", response_model=Student)
+def login(email: str, password: str) -> Student:
     """
     Login a student with username and password.
     """
@@ -94,7 +101,7 @@ def login(username: str, password: str):
                 WHERE email = :email AND password = :password
                 """
             ),
-            {"email": username, "password": password}
+            {"email": email, "password": password}
         ).first()
         
         if not result:
@@ -102,42 +109,11 @@ def login(username: str, password: str):
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Incorrect username or password"
             )
-        
-        courses = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT c.id, c.department_code, c.course_number, c.units, c.title, cc.grade, cc.quarter_taken
-                FROM completed_courses cc
-                JOIN courses c ON cc.course_id = c.id
-                WHERE cc.student_id = :student_id
-                """
-            ),
-            {"student_id": result.id}
-        ).fetchall()
-        
-        completed_courses = []
-        for course in courses:
-            completed_courses.append({
-                "id": course.id,
-                "department_code": course.department_code,
-                "course_number": course.course_number,
-                "units": course.units,
-                "title": course.title,
-                "grade": course.grade,
-                "quarter_taken": course.quarter_taken
-            })
-        
-        return {
-            "id": result.id, 
-            "first_name": result.first_name, 
-            "last_name": result.last_name, 
-            "email": result.email, 
-            "major_id": result.major_id,
-            "completed_courses": completed_courses
-        }
+         
+        return student_from_row(result)
 
-@router.get("/students/{student_id}")
-def get_student(student_id: int):
+@router.get("/students/{student_id}", response_model=Student)
+def get_student(student_id: int) -> Student:
     """
     Get student details by ID.
     """
@@ -155,59 +131,10 @@ def get_student(student_id: int):
         
         if not student:
             raise HTTPException(status_code=404, detail="Student not found")
+
+    return student_from_row(student)
         
-        completed_courses = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT c.id, c.department_code, c.course_number, c.units, c.title, cc.grade, cc.quarter_taken
-                FROM completed_courses cc
-                JOIN courses c ON cc.course_id = c.id
-                WHERE cc.student_id = :student_id
-                """
-            ),
-            {"student_id": student_id}
-        ).fetchall()
         
-        planned_courses = connection.execute(
-            sqlalchemy.text(
-                """
-                SELECT c.id, c.department_code, c.course_number, c.units, c.title, pc.planned_quarter
-                FROM planned_courses pc
-                JOIN courses c ON pc.course_id = c.id
-                WHERE pc.student_id = :student_id
-                """
-            ),
-            {"student_id": student_id}
-        ).fetchall()
-        
-        return {
-            "id": student.id,
-            "first_name": student.first_name,
-            "last_name": student.last_name,
-            "email": student.email,
-            "major_id": student.major_id,
-            "completed_courses": [
-                {
-                    "id": course.id,
-                    "department_code": course.department_code,
-                    "course_number": course.course_number,
-                    "units": course.units,
-                    "title": course.title,
-                    "grade": course.grade,
-                    "quarter_taken": course.quarter_taken
-                } for course in completed_courses
-            ],
-            "planned_courses": [
-                {
-                    "id": course.id,
-                    "department_code": course.department_code,
-                    "course_number": course.course_number,
-                    "units": course.units,
-                    "title": course.title,
-                    "planned_quarter": course.planned_quarter
-                } for course in planned_courses
-            ]
-        }
 
 @router.post("/mark_course_completed", status_code=status.HTTP_204_NO_CONTENT)
 def mark_course_completed(course: CompletedCourse, student_id: int):

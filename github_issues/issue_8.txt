@@ -1,0 +1,28 @@
+Title: Code Review Comments (Uriel)
+State: open
+Created: 2025-05-20T02:14:56Z
+Updated: 2025-05-20T02:14:56Z
+Author: RmaUriel
+
+_Students.py_
+1.  In StudentBase, I would add constrainst to first, last, and email.  A min length, max length, and characters only for names. For email, a required @. I was able to create a student using "1", "2", "3", 1, "1" as my inputs. 
+2. In CompletedCourse, I would constraint grade to A, B, C, D, F, P, NP, W and quarter_taken to Fall, Spring, Winter, Summer.  Enum over it and if a user attempts to enter something other than that throw an exception. "Invalid Grade/Quarter". I would also not make them optional, since to complete a course it must have been graded and taken during some quarter. 
+3. I would rename, username for email in login. The is no mention that email is username anywhere outside of comment on code. If there was no access to code, this would cause confusion.
+4. I would separate get_student. It returns student info, completed courses, and planned courses. I'd separate it into get_student, get_completed_courses, get_planned_courses. It can get messy as it returns info and 2 separate lists. The code is already there, I would just separate it for clarity. 
+
+_Courses.py_
+5.  In get_major_courses, the major check seems reduntant. if not major could be if not courses. It can be done in one query. 
+
+_majors.py_
+6.  get_major seems reduntant. Since there's only 3 majors, getting 1 independent won't make a difference. I would remove it unless count of majors is high. 
+7.  I would not fetchall in get_major_student. Run the loop inside the query and append to some list. A list of Student objects . Cleaner return that [{}, {}]
+> name = []
+> for student in students:
+>      name.append(Student( id = student.id), 
+>   ....
+> return name
+
+_planner.py_
+8. Add similar constrainst to the classes in this file as the ones in student.py
+9. Remove the int = 1 from create_course_plan. If I were to test locally, it would not be found since there's not a student with that id yet. An unnecessary addition, since you already check for if not student.
+10.  quarters = [...] are hardcoded here. Conflicts with students plan_course where we can insert some string for quarter. 

@@ -1,34 +1,24 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from src.api import auth
+from src.api import auth, courses
 from src.database import engine
 import sqlalchemy
 from sqlalchemy import text
 
 router = APIRouter(
-    prefix="/planner",
+    prefix="/students/{student_id}/planner",
     tags=["planner"],
     dependencies=[Depends(auth.get_api_key)],
 )
 
-class CourseBase(BaseModel):
-    id: int
-    department_code: str
-    course_number: int
-    units: int
-    title: str
-    description: Optional[str] = None
-
 class QuarterPlan(BaseModel):
     quarter_name: str
-    courses: List[CourseBase]
+    courses: List[courses.Course]
 
-class CoursePlan(BaseModel):
-    quarters: List[QuarterPlan]
 
-@router.get("/create_course_plan")
-def create_course_plan(student_id: int = 1):
+@router.get("/create_course_plan", response_model=List[QuarterPlan])
+def create_course_plan(student_id: int = 1) -> List[QuarterPlan]:
     with engine.begin() as connection:
         student = connection.execute(
             sqlalchemy.text(
@@ -83,14 +73,7 @@ def create_course_plan(student_id: int = 1):
             ).fetchall()
         
         remaining_courses = [
-            {
-                "id": course.id,
-                "department_code": course.department_code,
-                "course_number": course.course_number,
-                "units": course.units,
-                "title": course.title,
-                "description": course.description
-            }
+            courses.course_from_row(course)
             for course in required_courses 
             if course.id not in completed_course_ids
         ]
@@ -100,14 +83,7 @@ def create_course_plan(student_id: int = 1):
         quarter_plans = []
         for quarter_name in quarters:
             quarter_courses = [
-                {
-                    "id": course.id,
-                    "department_code": course.department_code,
-                    "course_number": course.course_number,
-                    "units": course.units,
-                    "title": course.title,
-                    "description": course.description
-                }
+            courses.course_from_row(course)
                 for course in planned_courses 
                 if course.planned_quarter == quarter_name
             ]
@@ -119,15 +95,15 @@ def create_course_plan(student_id: int = 1):
         
         current_quarter = 0
         for course in remaining_courses:
-            if any(course["id"] in [c["id"] for c in qp["courses"]] for qp in quarter_plans):
+            if any(course.id in [c.id for c in qp.courses] for qp in quarter_plans):
                 continue
                 
-            quarter_plans[current_quarter]["courses"].append(course)
+            quarter_plans[current_quarter].courses.append(course)
             current_quarter = (current_quarter + 1) % len(quarters)
         
-        return {"quarters": quarter_plans}
+        return quarter_plans
 
-@router.get("/requirements")
+@router.get("/requirements", response_model=List[courses.Course])
 def get_requirements(student_id: int = 1):
     with engine.begin() as connection:
         student = connection.execute(
@@ -171,14 +147,7 @@ def get_requirements(student_id: int = 1):
             ).fetchall()
         
         remaining_courses = [
-            {
-                "id": course.id,
-                "department_code": course.department_code,
-                "course_number": course.course_number,
-                "units": course.units,
-                "title": course.title,
-                "description": course.description
-            }
+            courses.course_from_row(course)
             for course in required_courses 
             if course.id not in completed_course_ids
         ]

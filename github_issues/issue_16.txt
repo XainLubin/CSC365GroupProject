@@ -1,0 +1,11 @@
+Title: Product ideas (Uriel)
+State: open
+Created: 2025-05-20T06:14:48Z
+Updated: 2025-05-20T06:14:48Z
+Author: RmaUriel
+
+## 1.  Add a graduation audit  GET/students/{student_id}/grad_status
+As major courses are being completed, a student should be able to check their graduation status. A student ready to graduate should have completed all their major courses with a grade of "C" or higher.  At any point a student can check on their progress by calling the API above. 
+
+## 2.  Students should be able to change major PATCH/students/{student_id}/new_major/{major_id}
+A student should be able to switch their major. If they switch their major, their info should update to the new major courses. If they switch back, their courses taken should still be there. 

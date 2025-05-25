@@ -1,0 +1,46 @@
+Title: Product Ideas (Madison Lopez)
+State: open
+Created: 2025-05-20T02:16:21Z
+Updated: 2025-05-20T02:16:21Z
+Author: Munamused
+
+**GET /planner/optimized_path_to_graduation**
+
+Generates an optimized course schedule that helps a student graduate in the shortest time possible, based on completed and planned courses, prerequisites, course offerings, and user preferences.
+
+Inputs:
+
+* `student_id`
+* Optional query params:
+
+  * `max_courses_per_quarter`
+  * `preferred_terms` (e.g. Fall, Winter)
+  * `avoid_days` (e.g. \["Mon", "Fri"])
+  * `include_electives` (true/false)
+
+Returns:
+
+* A list of quarters with recommended courses
+* Warnings if graduation isn’t possible under current constraints
+* Alternate paths with suggestions
+
+
+**POST /schedule/conflict_checker**
+
+Checks a set of planned courses for any issues, including time conflicts, unmet prerequisites, unit overloads, or unavailable courses.
+
+Inputs:
+
+* `student_id`
+* `planned_courses`: list of course IDs
+* Optional: `term`
+
+Returns:
+
+* Report of:
+
+  * Time conflicts
+  * Prerequisite issues
+  * Unit overloads
+  * Courses not offered in the selected term
+

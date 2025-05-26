@@ -6,8 +6,14 @@ annotated-types==0.7.0
     # via pydantic
 anyio==4.9.0
     # via starlette
+bcrypt==4.3.0
+    # via centralcoastcauldrons (pyproject.toml)
 click==8.1.8
     # via uvicorn
+colorama==0.4.6
+    # via
+    #   click
+    #   pytest
 dnspython==2.7.0
     # via email-validator
 email-validator==2.2.0
@@ -61,11 +67,15 @@ starlette==0.46.1
 typing-extensions==4.12.2
     # via
     #   alembic
+    #   anyio
     #   fastapi
     #   mypy
+    #   psycopg
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
+tzdata==2025.2
+    # via psycopg
 uv==0.6.11
     # via centralcoastcauldrons (pyproject.toml)
 uvicorn==0.34.0

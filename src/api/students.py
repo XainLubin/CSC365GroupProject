@@ -470,6 +470,7 @@ def calculate_gpa_and_standing(student_id: int = Depends(auth.validate_key)) -> 
                 FROM completed_courses cc
                 JOIN courses c ON cc.course_id = c.id
                 LEFT JOIN major_requirements mr ON c.id = mr.course_id AND mr.major_id = :major_id
+                WHERE cc.student_id = :student_id
             """),
             {"student_id": student_id, "major_id": student.major_id}
         ).fetchall()

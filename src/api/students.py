@@ -272,9 +272,9 @@ def schedule_courses_intelligent(
     This endpoint:
     1. Reads student data, completed courses, and planned courses
     2. Checks for scheduling conflicts (unit overload, already completed, already planned courses)
-    3. VALIDATES course prerequisites against completed courses
-    4. WRITES valid courses to planned_courses table
-    5. RETURNS detailed scheduling results with conflict information
+    3. Validates course prerequisites against completed courses
+    4. Writes valid courses to planned_courses table
+    5. Returns scheduling results with conflict information
     """
     with engine.begin() as connection:
         # Get student information
@@ -462,7 +462,7 @@ def calculate_gpa_and_standing(student_id: int = Depends(auth.validate_key)) -> 
         if not student:
             raise HTTPException(status_code=404, detail="Student not found")
         
-        # Get all completed courses with associated grade
+        # Get all completed courses with associated grades and major
         completed_courses = connection.execute(
             text("""
                 SELECT cc.grade, cc.quarter_taken, c.units, c.id as course_id,
@@ -523,7 +523,7 @@ def calculate_gpa_and_standing(student_id: int = Depends(auth.validate_key)) -> 
         else:
             academic_standing += " (Freshman)" # Freshman standing
         
-        # WRITE: Save academic record for historical tracking
+        # Save academic record for historical tracking
         connection.execute(
             text("""
                 INSERT INTO academic_records (
@@ -543,7 +543,7 @@ def calculate_gpa_and_standing(student_id: int = Depends(auth.validate_key)) -> 
                 "quarters_completed": quarters_completed
             }
         )
-        
+
         return GPACalculation(
             overall_gpa=round(overall_gpa, 3),
             major_gpa=round(major_gpa, 3),

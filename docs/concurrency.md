@@ -117,8 +117,8 @@ Course Planning (T1)           Database              Concurrent Planning (T2)
      |<-- 12 units ---------------|                              |
      |                            |                              |
      |    Check if we can add     |                              |
-     |    CSC 430 (4 units)      |                              |
-     |   12 + 4 = 16 units -> OK  |                               |
+     |    CSC 430 (4 units)       |                              |
+     |   12 + 4 = 16 units -> OK  |                              |
      |                            |                              |
      |                            |<-- INSERT planned_courses ---|
      |                            |    (student_id=1,            |
@@ -160,6 +160,7 @@ Final state: Student has 20 units planned (exceeds 16-unit limit)
 ### Alternatively: Advisory Locks
 
 Advisory locks would allow us to prevent concurrent access on a per student basis rather than utilizing full transaction isolation. This would allow:
-     - Each student's course planning would be protected from concurrent modifications
-     - Other students could still plan courses simultaneously without blocking each other
-     - Better performance than utilizing SERIALIZABLE
+
+- Each student's course planning would be protected from concurrent modifications
+- Other students could still plan courses simultaneously without blocking each other
+- Better performance than utilizing SERIALIZABLE

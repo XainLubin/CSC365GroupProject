@@ -1,0 +1,236 @@
+id,department_code,course_number,title,units,gwr,uscp,notes
+1,AERO,310,Air and Space,4,FALSE,FALSE,Note: Junior standing
+2,AG,315,Principles of Organic Crop Production,4,FALSE,FALSE,Note: Junior standing; Sustainability Focused
+3,ANT,201,Cultural Anthropology,4,FALSE,FALSE,
+4,ANT,250,Biological Anthropology,4,FALSE,FALSE,
+5,ANT,330,Indigenous South Americans,4,FALSE,FALSE,Note: Junior standing
+6,ARCE,260,History of Structures,4,FALSE,FALSE,
+7,ARCE,360,Equilibrium Without Statics,4,FALSE,FALSE,Note: Junior standing.
+8,ARCH,201,Architecture Design Studio for Non-Majors,4,FALSE,FALSE,
+9,ART,101,Fundamentals of Drawing,4,FALSE,FALSE,
+10,ART,182,Foundation in Digital Art I,4,FALSE,FALSE,
+11,ART,183,Foundation in Digital Art II,4,FALSE,FALSE,
+12,ART,376,The Art of Mixed Reality,4,FALSE,FALSE,
+13,ART,384,Digital 3D Modeling and Design,4,FALSE,FALSE,
+14,ART,388,Interaction Design II,4,FALSE,FALSE,
+15,ASCI,112,Principles of Animal Science,4,FALSE,FALSE,Note: Sustainability Related; Sustainability Related
+16,BIO,111,General Biology,4,FALSE,FALSE,
+17,BIO,114,Plant Diversity and Ecology,4,FALSE,FALSE,
+18,BIO,123,Biology of Sex,4,FALSE,FALSE,
+19,BIO,150,Diversity and History of Life,4,FALSE,FALSE,
+20,BIO,161,Introduction to Cell and Molecular Biology,4,FALSE,FALSE,
+21,BIO,213,Life Science for Engineers,2,FALSE,FALSE,
+22,BIO,222,Biodiversity of California,4,FALSE,FALSE,
+23,BIO,227,Wildlife Conservation Biology,4,FALSE,FALSE,Note: Sustainability Focused; Sustainability Focused
+24,BIO,302,Human Genetics,4,FALSE,FALSE,Note: Junior standing
+25,BIO,305,Biology of Cancer,4,FALSE,FALSE,Note: Junior standing
+26,BIO,308,Genetic Engineering Technology,4,FALSE,FALSE,Note: Junior standing
+27,BRAE,340,Irrigation Water Management,4,FALSE,FALSE,Note: Sustainability Focused; Sustainability Focused
+28,BRAE,348,Energy for a Sustainable Society,4,FALSE,FALSE,Note: Junior standing; Sustainability Focused; Sustainability Focused
+29,BRAE,349,Water for a Sustainable Society,4,FALSE,FALSE,Note: Junior standing; Course offered online only.
+30,BOT,121,General Botany,4,FALSE,FALSE,
+31,BOT,311,"Plants, People and Civilization",4,FALSE,FALSE,Note: Sustainability Focused; Junior standing; Sustainability Focused
+32,BUS,204,Financial Literacy,4,FALSE,FALSE,
+33,BUS,311,Managing Technology in the International Legal Environment,4,FALSE,FALSE,
+34,CHEM,110,World of Chemistry,4,FALSE,FALSE,
+35,CHEM,124,General Chemistry for Physical Science and Engineering I,4,FALSE,FALSE,
+36,CHEM,125,General Chemistry for Physical Science and Engineering II,4,FALSE,FALSE,
+37,CHEM,126,General Chemistry for Physical Science and Engineering III,4,FALSE,FALSE,
+38,CHEM,308,Genetic Engineering Technology,4,FALSE,FALSE,Note: Junior standing
+39,CHEM,349,Chemical and Biological Warfare,4,FALSE,FALSE,Note: Junior standing
+40,CM,317,Sustainability and the Built Environment,4,FALSE,FALSE,Note: Junior standing; Sustainability Focused; Sustainability Focused
+41,CM,318,Housing and Communities,4,FALSE,FALSE,Note: Junior standing; Sustainability Related; Sustainability Related
+42,COMS,101,Public Speaking,4,FALSE,FALSE,
+43,COMS,126,Argument and Advocacy,4,FALSE,FALSE,
+44,COMS,208,"Performance, Literature, and Culture",4,FALSE,FALSE,
+45,COMS,211,Interpersonal Communication,4,FALSE,FALSE,
+46,COMS,308,Group Performance of Literature,4,FALSE,FALSE,Note: Junior standing
+47,COMS,316,Intercultural Communication,4,FALSE,TRUE,Note: Junior standing
+48,COMS,404,Video Games & Society,4,FALSE,FALSE,Note: Junior standing
+49,CPE,100,Computer Engineering Orientation,1,FALSE,FALSE,
+50,CPE,101,Fundamentals of Computer Science,4,FALSE,FALSE,
+51,CPE,123,Introduction to Computing,4,FALSE,FALSE,
+52,CPE,133,Digital Design,4,FALSE,FALSE,
+53,CPE,200,Special Problems for Undergraduates,2,FALSE,FALSE,"Note: Consent of instructor; Note: Total credit limited to 4 units, with a maximum of 2 units per quarter."
+54,CPE,202,Data Structures,4,FALSE,FALSE,
+55,CPE,203,Project-Based Object-Oriented Programming and Design,4,FALSE,FALSE,
+56,CPE,225,Introduction to Computer Organization,4,FALSE,FALSE,
+57,CPE,233,Computer Design and Assembly Language Programming,4,FALSE,FALSE,
+58,CPE,290,Selected Topics,4,FALSE,FALSE,Note: Open to undergraduate students and consent of instructor; Total credit limited to 8 units.
+59,CPE,315,Computer Architecture,4,FALSE,FALSE,
+60,CPE,316,Microcontrollers and Embedded Applications,4,FALSE,FALSE,
+61,CPE,321,Introduction to Computer Security,4,FALSE,FALSE,
+62,CPE,327,Digital Signals and Systems,4,FALSE,FALSE,
+63,CPE,336,Microprocessor System Design,4,FALSE,FALSE,
+64,CPE,345,Quantum Computing,4,FALSE,FALSE,
+65,CPE,350,Capstone I,4,FALSE,FALSE,
+66,CPE,357,Systems Programming,4,FALSE,FALSE,Course may be offered in classroom-based or online format.
+67,CPE,367,Digital Signals and Systems Laboratory,4,FALSE,FALSE,
+68,CPE,400,Special Problems for Undergraduates,2,FALSE,FALSE,
+69,CPE,414,Robotic Systems Integration,4,FALSE,FALSE,
+70,CPE,416,Autonomous Mobile Robotics,4,FALSE,FALSE,
+71,CPE,419,Applied Parallel Computing,4,FALSE,FALSE,
+72,CPE,425,Wireless Security,4,FALSE,FALSE,
+73,CPE,426,Introduction to Hardware Security,4,FALSE,FALSE,
+74,CPE,428,Computer Vision,4,FALSE,FALSE,
+75,CPE,431,Compiler Construction,4,FALSE,FALSE,
+76,CPE,439,Introduction to Real-Time Operating Systems,4,FALSE,FALSE,
+77,CPE,442,Real Time Embedded Systems,4,FALSE,FALSE,
+78,CPE,446,Design of Fault-Tolerant Digital Systems,4,FALSE,FALSE,
+79,CPE,447,"Stringed Musical Instrument Acoustics, Mechanics, and Transducer Design",4,FALSE,FALSE,
+80,CPE,450,Capstone II,3,FALSE,FALSE,
+81,CPE,453,Introduction to Operating Systems,4,FALSE,FALSE,
+82,CPE,454,Implementation of Operating Systems,4,FALSE,FALSE,
+83,CPE,458,Current Topics in Computer Systems,4,FALSE,FALSE,Total credit limited to 8 units.
+84,CPE,461,Senior Project I,2,FALSE,FALSE,
+85,CPE,462,Senior Project II,2,FALSE,FALSE,
+86,CPE,464,Introduction to Computer Networks,4,FALSE,FALSE,
+87,CPE,465,Advanced Computer Networks,4,FALSE,FALSE,
+88,CPE,469,Distributed Systems,4,FALSE,FALSE,
+89,CPE,470,Selected Advanced Topics,4,FALSE,FALSE,Total credit limited to 8 units.
+90,CPE,471,Introduction to Computer Graphics,4,FALSE,FALSE,
+91,CPE,472,Digital Control Systems Laboratory,1,FALSE,FALSE,
+92,CPE,476,Real-Time 3D Computer Graphics Software,4,FALSE,FALSE,
+93,CPE,479,Selected Advanced Laboratory,4,FALSE,FALSE,Note: Consent of instructor; Total credit limited to 8 units.
+94,CPE,493,Cooperative Education Experience,2,FALSE,FALSE,Note: Sophomore standing and consent of instructor; Credit/No Credit grading only; No major credit allowed; Total credit limited to 6 units.
+95,CPE,494,Cooperative Education Experience,6,FALSE,FALSE,Note: Sophomore standing and consent of instructor; Credit/No Credit grading only; No major credit allowed; Total credit limited to 18 units.
+96,CPE,495,Cooperative Education Experience,12,FALSE,FALSE,Note: Sophomore standing and consent of instructor; Credit/No Credit grading only; No major credit allowed; Total credit limited to 24 units.
+97,CRP,215,Planning for and with Multiple Publics,4,FALSE,TRUE,
+98,CSC,101,Fundamentals of Computer Science,4,FALSE,FALSE,
+99,CSC,123,Introduction to Computing,4,FALSE,FALSE,
+100,CSC,202,Data Structures,4,FALSE,FALSE,
+101,CSC,203,Project-Based Object-Oriented Programming and Design,4,FALSE,FALSE,
+102,CSC,225,Introduction to Computer Organization,4,FALSE,FALSE,
+103,CSC,248,Discrete Structures,4,FALSE,FALSE,
+104,CSC,300,Professional Responsibilities,4,FALSE,FALSE,Note: Junior standing.
+105,CSC,305,Individual Software Design and Development,4,FALSE,FALSE,
+106,CSC,307,Introduction to Software Engineering,4,FALSE,FALSE,
+107,CSC,308,Software Engineering I,4,FALSE,FALSE,
+108,CSC,309,Software Engineering II,4,FALSE,FALSE,
+109,CSC,313,Teaching Computing,4,FALSE,FALSE,
+110,CSC,321,Introduction to Computer Security,4,FALSE,FALSE,
+111,CSC,323,Cryptography Engineering,4,FALSE,FALSE,
+112,CSC,325,Introduction to Privacy: Policy and Technology,4,FALSE,FALSE,
+113,CSC,344,Music Programming,4,FALSE,FALSE,
+114,CSC,349,Design and Analysis of Algorithms,4,FALSE,FALSE,
+115,CSC,350,Computing for Interactive Arts Capstone I,2,FALSE,FALSE,Note: Junior standing.
+116,CSC,357,Systems Programming,4,FALSE,FALSE,
+117,CSC,364,"Introduction to Networked, Distributed, and Parallel Computing",4,FALSE,FALSE,
+118,CSC,365,Introduction to Database Systems,4,FALSE,FALSE,
+119,CSC,366,"Database Modeling, Design and Implementation",4,FALSE,FALSE,
+120,CSC,371,Game Design,4,FALSE,FALSE,
+121,CSC,377,Introduction to Mixed Reality,4,FALSE,FALSE,
+122,CSC,378,Interactive Entertainment Engineering,4,FALSE,FALSE,
+123,CSC,402,Software Requirements Engineering,4,FALSE,FALSE,
+124,CSC,405,Software Construction,4,FALSE,FALSE,
+125,CSC,406,Senior Project - Software Deployment,4,FALSE,FALSE,
+126,CSC,421,Binary Exploitation: Tools and Techniques,4,FALSE,FALSE,
+127,CSC,422,Network Security,4,FALSE,FALSE,
+128,CSC,424,Software Security,4,FALSE,FALSE,
+129,CSC,425,Wireless Security,4,FALSE,FALSE,
+130,CSC,429,Current Topics in Computer Security,4,FALSE,FALSE,Note: Total credit limited to 8 units
+131,CSC,430,Programming Languages,4,FALSE,FALSE,
+132,CSC,436,Mobile Application Development,4,FALSE,FALSE,
+133,CSC,437,Dynamic Web Development,4,FALSE,FALSE,
+134,CSC,445,Theory of Computation I,4,FALSE,FALSE,
+135,CSC,453,Introduction to Operating Systems,4,FALSE,FALSE,
+136,CSC,466,Knowledge Discovery from Data,4,FALSE,FALSE,
+137,CSC,468,Database Management Systems Implementation,4,FALSE,FALSE,
+138,CSC,469,Distributed Systems,4,FALSE,FALSE,
+139,CSC,471,Introduction to Computer Graphics,4,FALSE,FALSE,
+140,CSC,473,Advanced Rendering Techniques,4,FALSE,FALSE,
+141,CSC,474,Computer Animation,4,FALSE,FALSE,
+142,CSC,476,Real-Time 3D Computer Graphics Software,4,FALSE,FALSE,
+143,CSC,480,Artificial Intelligence,4,FALSE,FALSE,
+144,CSC,481,Knowledge Based Systems,4,FALSE,FALSE,
+145,CSC,482,Speech and Language Processing,4,FALSE,FALSE,
+146,CSC,484,User-Centered Interface Design and Development,4,FALSE,FALSE,
+147,CSC,487,Deep Learning,4,FALSE,FALSE,
+148,CSC,490,Selected Advanced Topics,4,FALSE,FALSE,Note: Consent of instructor.; Note: Total credit limited to 8 units
+149,CSC,491,Senior Project I,2,FALSE,FALSE,Note: Consent of instructor.
+150,CSC,492,Senior Project II,2,FALSE,FALSE,Note: Consent of instructor.
+151,CSC,497,Research Senior Project I,2,FALSE,FALSE,Note: Consent of instructor.
+152,CSC,498,Research Senior Project II,2,FALSE,FALSE,Note: Consent of instructor.
+153,DANC,210,Active Wellness,4,FALSE,FALSE,
+154,DANC,221,Dance Appreciation,4,FALSE,FALSE,Course may be offered in classroom-based or online format.
+155,DANC,321,Cultural Influence on Dance in America,4,FALSE,TRUE,Note: Junior standing
+156,DATA,100,Data Science for All I,4,FALSE,FALSE,
+157,DSCI,229,General Dairy Manufacturing,4,FALSE,FALSE,
+158,ECON,201,Survey of Economics,4,FALSE,FALSE,
+159,ECON,222,Macroeconomics,4,FALSE,FALSE,
+160,ECON,303,"Economics of Poverty, Discrimination and Immigration",4,FALSE,TRUE,Note: Junior standing
+161,ECON,304,Comparative Economic Systems,4,FALSE,FALSE,Note: Junior standing
+162,EDES,123,Principles of Environmental Design,4,FALSE,FALSE,Note: Sustainability Related
+163,EE,115,Electrical and Electronic Circuits I,3,FALSE,FALSE,
+164,EE,133,Digital Design,4,FALSE,FALSE,
+165,EE,145,Electrical and Electronic Circuits I Laboratory,1,FALSE,FALSE,
+166,EE,215,Electrical and Electronic Circuits II,3,FALSE,FALSE,
+167,EE,233,Computer Design and Assembly Language Programming,4,FALSE,FALSE,
+168,EE,245,Electrical and Electronic Circuits II Laboratory,1,FALSE,FALSE,
+169,EE,315,Electrical and Electronic Circuits III,4,FALSE,FALSE,
+170,EE,327,Digital Signals and Systems,3,FALSE,FALSE,
+171,EE,336,Microprocessor System Design,4,FALSE,FALSE,
+172,EE,367,Digital Signals and Systems Laboratory,1,FALSE,FALSE,
+173,EE,414,Robotic Systems Integration,4,FALSE,FALSE,
+174,EE,428,Computer Vision,4,FALSE,FALSE,
+175,EE,431,Computer-Aided Design of VLSI Devices,4,FALSE,FALSE,
+176,EE,439,Introduction to Real-Time Operating Systems,4,FALSE,FALSE,
+177,EE,442,Real Time Embedded Systems,4,FALSE,FALSE,
+178,EE,446,Design of Fault-Tolerant Digital Systems,4,FALSE,FALSE,
+179,EE,447,"Stringed Musical Instrument Acoustics, Mechanics, and Transducer Design",4,FALSE,FALSE,
+180,EE,472,Digital Control Systems Laboratory,1,FALSE,FALSE,
+181,ENGL,133,Multilingual Writing and Rhetoric,4,FALSE,FALSE,
+182,ENGL,134,Writing and Rhetoric,4,FALSE,FALSE,
+183,ES,112,"Race, Culture, and Politics in the United States",4,FALSE,TRUE,
+184,ES,134,Writing & Rhetoric,4,FALSE,FALSE,
+185,ES,145,"Reasoning, Argumentation, & Writing",4,FALSE,FALSE,
+186,ES,252,Global Origins of Race in the U.S.,4,FALSE,FALSE,
+187,ES,308,Fire and Society,4,FALSE,FALSE,Note: Junior standing
+188,ES,324,Chicana/o Film,4,FALSE,TRUE,Note: Junior standing.
+189,ES,350,"Gender, Race, Culture, Science & Technology.",4,FALSE,TRUE,Note: Junior standing.
+190,FSN,250,Food and Nutrition: Culture and Customs,4,FALSE,TRUE,Note: Sustainability Related
+191,FSN,305,Nutrition & Exercise for Health & Disease Prevention,4,FALSE,FALSE,Note: Junior standing
+192,GEOG,150,Human Geography,4,FALSE,FALSE,Note: Sustainability Related
+193,GEOG,308,Global Geography,4,FALSE,FALSE,Note: Junior standing
+194,GEOL,203,The Geologic Record: Fossils and the History of Life,4,FALSE,FALSE,
+195,GEOL,305,Seismology and Earth Structure,4,FALSE,FALSE,Note: Junior standing
+196,HIST,201,United States History to 1865,4,FALSE,TRUE,
+197,HIST,210,World History to 1800,4,FALSE,FALSE,
+198,HIST,350,"The Scientific Revolution, c. 1500-1800",4,FALSE,FALSE,Note: Junior standing or History major
+199,HLTH,260,Women's Health Issues,4,FALSE,TRUE,
+200,IME,315,Financial Decision Making for Engineers,3,FALSE,FALSE,
+201,IME,320,Human Factors and Technology,4,FALSE,FALSE,Note: Junior standing
+202,ISLA,123,Introduction to Arts and Humanities,4,FALSE,FALSE,Note: Sustainability Focused
+203,ISLA,320,"Topics in Values, Media, and Culture",4,FALSE,FALSE,Note: Junior standing
+204,ISLA,350,The Global Environment,4,FALSE,FALSE,Note: Junior standing; Sustainability Focused
+205,KINE,323,Sport and Gender,4,FALSE,TRUE,Note: Junior standing
+206,MATH,141,Calculus I,4,FALSE,FALSE,
+207,MATH,142,Calculus II,4,FALSE,FALSE,
+208,MATH,143,Calculus III,4,FALSE,FALSE,
+209,MATH,241,Calculus IV,4,FALSE,FALSE,
+210,MATH,242,Differential Equations I,4,FALSE,FALSE,
+211,MATH,244,Linear Analysis I,4,FALSE,FALSE,
+212,MATH,248,Methods of Proof in Mathematics,4,FALSE,FALSE,
+213,MATH,334,Combinatorial Math,4,FALSE,FALSE,Note: Junior standing or Mathematics major.
+214,MATH,335,Graph Theory,4,FALSE,FALSE,Note: Junior standing
+215,PHIL,230,Philosophical Classics: Knowledge and Reality,4,FALSE,FALSE,
+216,PHIL,323,"Ethics, Science and Technology",4,FALSE,FALSE,Note: Junior standing; Sustainability Focused
+217,PHYS,141,General Physics I,4,FALSE,FALSE,
+218,PHYS,142,General Physics II,4,FALSE,FALSE,
+219,PHYS,143,General Physics III,4,FALSE,FALSE,
+220,PHYS,211,Modern Physics I,4,FALSE,FALSE,
+221,PHYS,305,Classical Mechanics I,4,FALSE,FALSE,Note: Junior standing
+222,PSY,202,General Psychology,4,FALSE,FALSE,
+223,PSY,311,Environmental Psychology,4,FALSE,FALSE,Note: Junior standing; Sustainability Focused
+224,PSY,340,Biopsychology,4,FALSE,FALSE,Note: Junior standing
+225,PSY,350,Teamwork,4,FALSE,FALSE,
+226,SPAN,101,Elementary Spanish I,4,FALSE,FALSE,
+227,SPAN,102,Elementary Spanish II,4,FALSE,FALSE,
+228,SPAN,103,Elementary Spanish III,4,FALSE,FALSE,
+229,SPAN,201,Intermediate Spanish I,4,FALSE,FALSE,
+230,SPAN,202,Intermediate Spanish II,4,FALSE,FALSE,
+231,SPAN,203,Intermediate Spanish III,4,FALSE,FALSE,
+232,STAT,312,Statistical Methods for Engineers,4,FALSE,FALSE,"Note: Junior standing or one of the following majors: CPE, CSC, EE, GENE, IE, MATE, MFGE, or SE."
+233,STAT,334,Applied Linear Models,4,FALSE,FALSE,
+234,STAT,350,Probability and Random Processes for Engineers,4,FALSE,FALSE,Note: Junior standing
+235,UNIV,401,Graduation Writing Requirement Portfolio,4,TRUE,FALSE,Note: Junior standing

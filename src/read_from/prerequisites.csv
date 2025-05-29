@@ -1,0 +1,91 @@
+id,prerequisite
+0,This course has no prerequisites
+1,Completion of GE Areas A1
+2,Completion of GE Area A2
+3,Completion of GE Area A3
+4,Completion of GE Area B1
+5,Completion of GE Area B2
+6,Completion of at least one course in GE Area B4
+7,Completion of GE Area B4
+8,Completion of at least one CHEM course in GE Area B1
+9,Completion of a BIO course in GE Area B2
+10,Completion of at least one course in GE Area B
+11,Completion of GE Area C1
+12,Completion of GE Area C2
+13,Completion of at least one course in GE Area C
+14,Completion of GE Area D1
+15,Completion of GE Area D2
+16,Completion of one course in either GE Area D1 or D2
+17,Completion of at least two courses in either GE Area D1 or D2
+18,Completion of GE Area E
+19,Completion of ART 182
+20,Completion of ART 376
+21,Completion of at least one BIO course
+22,Completion of one of the following courses: ASCI 112/BIO 111/BIO 123/BIO 161/BIO 213/BOT 121
+23,Completion of one of the following: BIO 114/BIO 150/BOT 121
+24,Completion of CHEM 124
+25,Completion of CHEM 125
+26,Completion of CPE 100
+27,Completion of CPE 101 or CSC 101
+28,Completion of CPE 123 or CSC 123
+29,Completion of CPE 133
+30,Completion of CPE 202 or CSC 202
+31,Completion of CPE 203 or CSC 203
+32,Completion of one of the following: CPE 225/CSC 225/CPE 233/EE 233
+33,Completion of CPE 233 or EE 233
+34,Completion of CPE 315
+35,Completion of CPE 316
+36,Completion of CPE 321 or CSC 321
+37,Completion of CPE 327 or EE 327
+38,Completion of one of the following: CPE 327/EE 327/CPE 357/CSC 357
+39,Completion of one of the following: CPE 316/CPE 336/EE 336
+40,Completion of CPE 357 or CSC 357
+41,Completion of CPE 464 or CSC 364
+42,Completion of CPE 350
+43,Completion of CPE 450
+44,Completion of CPE 453 or CSC 453
+45,Completion of CPE 471 or CSC 471
+46,Completion of CPE 316 or (CPE 315 and (CPE 357 or CSC 357))
+47,Completion of CSC 248
+48,Completion of CSC 248 or MATH 248
+49,Completion of CSC 248 or ((CPE 202 or CSC 202) and (CPE 203 or CSC 203) and MATH 248)
+50,Completion of CSC 300 or PHIL 323
+51,Completion of CSC 305
+52,Completion of CSC 307 or CSC 308
+53,Completion of CSC 307 or CSC 309
+54,Completion of CSC 349
+55,Completion of CSC 365
+56,Completion of CSC 402
+57,Completion of CSC 405
+58,Completion of CSC 466 or CSC 480
+59,Completion of CSC 480
+60,Completion of CSC 491
+61,Completion of CSC 497
+62,Completion of CSC 430
+63,Completion of ECON 201 or ECON 222
+64,Completion of EE 115
+65,Completion of EE 215
+66,"Completion of EE 307, EE 347, EE 308, and EE 348"
+67,Completion of EE 245
+68,Completion of CSC 308
+69,Completion of MATH 141
+70,Completion of MATH 142
+71,Completion of MATH 143
+72,Completion of MATH 241
+73,Completion of MATH 242 or MATH 244
+74,Completion of MATH 244
+75,Completion of MATH 248
+76,Completion of PHYS 141
+77,Completion of PHYS 142
+78,Completion of PHYS 143
+79,Completion of PHYS 211
+80,Completion of PSY 202
+81,Completion of SPAN 101
+82,Completion of SPAN 102
+83,Completion of SPAN 103
+84,Completion of SPAN 201
+85,Completion of SPAN 202
+86,Completion of STAT 312
+87,Completion of STAT 312 or STAT 350
+88,Completion of STAT 350
+89,Completion of BOT 121

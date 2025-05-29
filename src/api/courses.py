@@ -30,8 +30,8 @@ def course_from_row(row) -> Course:
         id=row.id,
         department_code=row.department_code,
         course_number=row.course_number,
-        units=row.units,
         title=row.title,
+        units=row.units,
         description=row.description
     )
 def course_list_from_rows(rows) -> List[Course]:

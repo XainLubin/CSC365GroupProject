@@ -1,0 +1,4 @@
+degree_id,major_related_units,concentration_units,tech_elective_units,ge_area_a1,ge_area_a2,ge_area_a3,ge_area_b1,ge_area_b2,ge_area_b4,upper_div_b,ge_b_elective,ge_area_C1,ge_area_C2,ge_c_elective,upper_div_c,ge_area_d1,ge_area_d2,upper_div_d,ge_area_e,ge_area_f
+1,132,0,19,4,4,4,0,4,0,0,0,4,0,4,0,4,-1,-1,4,4
+2,116,24,0,4,4,4,0,0,0,0,0,4,0,4,4,4,-1,-1,4,4
+3,132,0,16,4,4,4,0,0,0,0,0,4,0,4,4,4,-1,-1,0,4

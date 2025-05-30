@@ -32,7 +32,9 @@ tables_and_files = {
     'concentration_courses': 'concentration_courses.csv',
     'course_terms': 'course_terms.csv',
     'technical_electives': 'technical_electives.csv',
-    'crosslisted_courses': 'crosslisted_courses.csv'
+    'crosslisted_courses': 'crosslisted_courses.csv',
+    'ge_prerequisites': 'ge_prerequisites.csv',
+    'prerequisite_courses': 'prerequisite_courses.csv'
 }
 
 def upgrade():
@@ -140,7 +142,6 @@ def upgrade():
         sa.Column('ge_area_b2', sa.Integer),
         sa.Column('ge_area_b4', sa.Integer),
         sa.Column('upper_div_b', sa.Integer),
-        sa.Column('ge_b_elective', sa.Integer),
         sa.Column('ge_area_c1', sa.Integer),
         sa.Column('ge_area_c2', sa.Integer),
         sa.Column('ge_c_elective', sa.Integer),
@@ -200,6 +201,20 @@ def upgrade():
         'crosslisted_courses',
         sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
         sa.Column('crosslisted_course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True)
+    )
+    
+    # 19. ge_prerequisites
+    op.create_table(
+        'ge_prerequisites',
+        sa.Column('prerequisite_id', sa.Integer, sa.ForeignKey('prerequisites.id'), primary_key=True),
+        sa.Column('ge_area_id', sa.Integer, sa.ForeignKey('ge_areas.id'), primary_key=True)
+    )
+
+    # 20. prerequisite_courses
+    op.create_table(
+        'prerequisite_courses',
+        sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
+        sa.Column('prerequisite_course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True)
     )
     
     populate_tables(table_files=tables_and_files)

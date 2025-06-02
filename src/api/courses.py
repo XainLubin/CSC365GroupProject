@@ -9,40 +9,23 @@ from sqlalchemy import text
 router = APIRouter(
     prefix="/courses",
     tags=["courses"],
-    dependencies=[],
+    dependencies=[Depends(auth.get_api_key)],
 )
 
 class CourseBase(BaseModel):
     department_code: str
     course_number: int
-    units: int
     title: str
-    description: Optional[str] = None
+    units: int
+    gwr: bool
+    uscp: bool
+    notes: Optional[str] = None
 
 class Course(CourseBase):
     id: int
 
-def course_from_row(row) -> Course:
-    """
-    Helper function to convert a database row to a Course model.
-    """
-    return Course(
-        id=row.id,
-        department_code=row.department_code,
-        course_number=row.course_number,
-        title=row.title,
-        units=row.units,
-        description=row.description
-    )
-def course_list_from_rows(rows) -> List[Course]:
-    """
-    Helper function to convert a list of database rows to a list of Course models.
-    """
-    return [course_from_row(row) for row in rows]
-
-
-@router.get("/", response_model=List[Course])
-def get_courses(skip: int = 0, limit: int = 100) -> List[Course]:
+@router.get("/")
+def get_courses(skip: int = 0, limit: int = 100):
     """
     Get all courses, with optional pagination.
     """
@@ -59,19 +42,18 @@ def get_courses(skip: int = 0, limit: int = 100) -> List[Course]:
         ).fetchall()
         
         return [
-            Course(
-                id=course.id,
-                department_code=course.department_code,
-                course_number=course.course_number,
-                units=course.units,
-                title=course.title,
-                description=course.description
-            ) 
-            for course in courses
+            {
+                "id": course.id,
+                "department_code": course.department_code,
+                "course_number": course.course_number,
+                "units": course.units,
+                "title": course.title,
+                "description": course.description
+            } for course in courses
         ]
 
-@router.get("/{course_id}", response_model=Course)
-def get_course(course_id: int) -> Course:
+@router.get("/{course_id}")
+def get_course(course_id: int):
     """
     Get a specific course by ID.
     """
@@ -90,18 +72,17 @@ def get_course(course_id: int) -> Course:
         if not course:
             raise HTTPException(status_code=404, detail="Course not found")
         
-        return Course(
-            id=course.id,
-            department_code=course.department_code,
-            course_number=course.course_number,
-            units=course.units,
-            title=course.title,
-            description=course.description
-        )
+        return {
+            "id": course.id,
+            "department_code": course.department_code,
+            "course_number": course.course_number,
+            "units": course.units,
+            "title": course.title,
+            "description": course.description
+        }
 
-
-@router.get("/code/{department_code}/{course_number}", response_model=Course)
-def get_course_by_code(department_code: str, course_number: int) -> Course:
+@router.get("/code/{department_code}/{course_number}")
+def get_course_by_code(department_code: str, course_number: int):
     """
     Get a specific course by department code and course number.
     """
@@ -120,12 +101,53 @@ def get_course_by_code(department_code: str, course_number: int) -> Course:
         if not course:
             raise HTTPException(status_code=404, detail="Course not found")
         
-        return Course(
-            id=course.id,
-            department_code=course.department_code,
-            course_number=course.course_number,
-            units=course.units,
-            title=course.title,
-            description=course.description
-        )
+        return {
+            "id": course.id,
+            "department_code": course.department_code,
+            "course_number": course.course_number,
+            "units": course.units,
+            "title": course.title,
+            "description": course.description
+        }
 
+@router.get("/major/{major_id}")
+def get_major_courses(major_id: int):
+    """
+    Get all courses required for a specific major.
+    """
+    with engine.begin() as connection:
+        major = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT id FROM majors WHERE id = :major_id
+                """
+            ),
+            {"major_id": major_id}
+        ).first()
+        
+        if not major:
+            raise HTTPException(status_code=404, detail="Major not found")
+        
+        courses = connection.execute(
+            sqlalchemy.text(
+                """
+                SELECT c.id, c.department_code, c.course_number, c.units, c.title, c.description, mr.is_required
+                FROM major_requirements mr
+                JOIN courses c ON mr.course_id = c.id
+                WHERE mr.major_id = :major_id
+                """
+            ),
+            {"major_id": major_id}
+        ).fetchall()
+        
+        return [
+            {
+                "id": course.id,
+                "department_code": course.department_code,
+                "course_number": course.course_number,
+                "units": course.units,
+                "title": course.title,
+                "description": course.description,
+                "is_required": course.is_required
+            } for course in courses
+        ]

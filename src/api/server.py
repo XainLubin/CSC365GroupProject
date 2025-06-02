@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.api import auth, students, courses, majors, planner
+from src.api import hi, auth, students, courses, majors, planner, prerequisites, transcripts
 from starlette.middleware.cors import CORSMiddleware
 
 description = """
@@ -10,7 +10,7 @@ tags_metadata = [
     {"name": "courses", "description": "Operations with courses."},
     {"name": "majors", "description": "Operations with majors and degrees."},
     {"name": "planner", "description": "Course plan generation."},
-    {"name": "auth", "description": "Authentication and authorization."},
+    {"name": "hi", "description": "Hello world test endpoint."},
 ]
 
 app = FastAPI(
@@ -35,11 +35,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(hi.router)
 app.include_router(students.router)
 app.include_router(courses.router)
 app.include_router(majors.router)
 app.include_router(planner.router)
-app.include_router(auth.router)
+app.include_router(prerequisites.router)
+app.include_router(transcripts.router)
 
 @app.get("/")
 async def root():

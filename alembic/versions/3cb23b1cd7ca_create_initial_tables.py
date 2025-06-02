@@ -23,7 +23,7 @@ def upgrade():
         'majors',
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('name', sa.String(), nullable=False),
-        sa.Column('description', sa.String(), nullable=True),
+        sa.Column('description', sa.String(), nullable=False),
         sa.PrimaryKeyConstraint('id')
     )
 
@@ -34,7 +34,7 @@ def upgrade():
         sa.Column('course_number', sa.Integer(), nullable=False),
         sa.Column('title', sa.String(), nullable=False),
         sa.Column('units', sa.Integer(), nullable=False),
-        sa.Column('description', sa.String(), nullable=True),
+        sa.Column('description', sa.String(), nullable=False),
         sa.PrimaryKeyConstraint('id')
     )
 

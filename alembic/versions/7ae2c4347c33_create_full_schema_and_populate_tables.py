@@ -1,8 +1,8 @@
-"""Create populated schema
+"""Create full schema and populate tables
 
-Revision ID: f39d70fedc34
-Revises: 51506c0cddee
-Create Date: 2025-05-28 20:42:40.801068
+Revision ID: 7ae2c4347c33
+Revises: be52df6f06f1
+Create Date: 2025-05-28 16:13:26.055438
 
 """
 from typing import Sequence, Union
@@ -12,12 +12,12 @@ import sqlalchemy as sa
 import os
 import csv
 
+
 # revision identifiers, used by Alembic.
-revision: str = 'f39d70fedc34'
-down_revision: Union[str, None] = '51506c0cddee'
+revision: str = '7ae2c4347c33'
+down_revision: Union[str, None] = 'be52df6f06f1'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
-
 
 tables_and_files = {
     'majors': 'majors.csv',
@@ -54,8 +54,24 @@ def upgrade():
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('title', sa.String, nullable=False)
     )
+    
+    # 2. degrees
+    op.create_table(
+        'degrees',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('title', sa.String, nullable=False),
+        sa.Column('major_id', sa.Integer, sa.ForeignKey('majors.id'))
+    )
+    
+    # 3. concentrations
+    op.create_table(
+        'concentrations',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('title', sa.String, nullable=False),
+        sa.Column('degree_id', sa.Integer, sa.ForeignKey('degrees.id'))
+    )
 
-    # 2. students
+    # 4. students
     op.create_table(
         'students',
         sa.Column('id', sa.Integer, primary_key=True),
@@ -63,10 +79,10 @@ def upgrade():
         sa.Column('last_name', sa.String, nullable=False),
         sa.Column('email', sa.String, nullable=False),
         sa.Column('password', sa.String, nullable=False),
-        sa.Column('major_id', sa.Integer, sa.ForeignKey('majors.id'))
+        sa.Column('concentration_id', sa.Integer, sa.ForeignKey('concentrations.id'))
     )
 
-    # 3. courses
+    # 5. courses
     op.create_table(
         'courses',
         sa.Column('id', sa.Integer, primary_key=True),
@@ -79,57 +95,54 @@ def upgrade():
         sa.Column('notes', sa.String)
     )
 
-    # 4. planned_courses
+    # 6. planned_courses
     op.create_table(
         'planned_courses',
         sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
-        sa.Column('student_id', sa.Integer, sa.ForeignKey('students.id'), primary_key=True)
+        sa.Column('student_id', sa.Integer, sa.ForeignKey('students.id'), primary_key=True),
+        sa.Column('quarter', sa.String, nullable=False)
     )
 
-    # 5. transcripts
+    # 7. transcripts
     op.create_table(
         'transcripts',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('student_id', sa.Integer, sa.ForeignKey('students.id'))
     )
 
-    # 6. completed_courses
+    # 8. completed_courses
     op.create_table(
         'completed_courses',
         sa.Column('transcript_id', sa.Integer, sa.ForeignKey('transcripts.id'), primary_key=True),
-        sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True)
+        sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
+        sa.Column('quarter', sa.String, nullable=False)
+        
     )
 
-    # 7. prerequisites
+    # 9. prerequisites
     op.create_table(
         'prerequisites',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('prerequisite', sa.String, nullable=False)
     )
 
-    # 8. course_prerequisites
+    # 10. course_prerequisites
     op.create_table(
         'course_prerequisites',
         sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
         sa.Column('prerequisite_id', sa.Integer, sa.ForeignKey('prerequisites.id'), primary_key=True)
     )
 
-    # 9. course_terms
+    # 11. course_terms
     op.create_table(
         'course_terms',
         sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
         sa.Column('term', sa.String, primary_key=True)
     )
 
-    # 10. degrees
-    op.create_table(
-        'degrees',
-        sa.Column('id', sa.Integer, primary_key=True),
-        sa.Column('title', sa.String, nullable=False),
-        sa.Column('major_id', sa.Integer, sa.ForeignKey('majors.id'))
-    )
+    
 
-    # 11. degree_requirements
+    # 12. degree_requirements
     op.create_table(
         'degree_requirements',
         sa.Column('degree_id', sa.Integer, sa.ForeignKey('degrees.id'), primary_key=True),
@@ -143,6 +156,7 @@ def upgrade():
         sa.Column('ge_area_b2', sa.Integer),
         sa.Column('ge_area_b4', sa.Integer),
         sa.Column('upper_div_b', sa.Integer),
+        sa.Column('ge_b_elective', sa.Integer),
         sa.Column('ge_area_c1', sa.Integer),
         sa.Column('ge_area_c2', sa.Integer),
         sa.Column('ge_c_elective', sa.Integer),
@@ -154,13 +168,7 @@ def upgrade():
         sa.Column('ge_area_f', sa.Integer)
     )
 
-    # 12. concentrations
-    op.create_table(
-        'concentrations',
-        sa.Column('id', sa.Integer, primary_key=True),
-        sa.Column('title', sa.String, nullable=False),
-        sa.Column('degree_id', sa.Integer, sa.ForeignKey('degrees.id'))
-    )
+    
 
     # 13. degree_courses
     op.create_table(
@@ -214,7 +222,7 @@ def upgrade():
     # 20. prerequisite_courses
     op.create_table(
         'prerequisite_courses',
-        sa.Column('course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
+        sa.Column('prerequisite_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True),
         sa.Column('prerequisite_course_id', sa.Integer, sa.ForeignKey('courses.id'), primary_key=True)
     )
     
@@ -268,7 +276,7 @@ def format_sql_value(value: str) -> str:
 
 def downgrade():
     for table in [
-        'crosslisted_courses', 'technical_electives', 'GE_area_courses', 'GE_areas',
+        'prerequisite_courses', 'ge_prerequisites', 'crosslisted_courses', 'technical_electives', 'ge_area_courses', 'ge_areas',
         'concentration_courses', 'degree_courses', 'concentrations', 'degree_requirements', 'degrees',
         'course_terms', 'course_prerequisites', 'prerequisites', 'completed_courses', 'transcripts',
         'planned_courses', 'courses', 'students', 'majors'
@@ -399,4 +407,3 @@ def downgrade():
         (2, 5, '2024-SPRING'),
         (2, 6, '2024-FALL')
     """)
-
